@@ -5,7 +5,7 @@ type Props = {};
 const Filters = (props: Props) => {
 	return (
 		<div
-			className={`absolute top-0 right-0 h-4/5 w-1/5 bg-cyan-500 p-2 font-bold text-white transition-all md:sticky md:top-14 md:min-h-full 2xl:top-16`}
+			className={`absolute top-0 right-full h-4/5 w-1/5 bg-cyan-500 p-2 font-bold text-white transition-all md:sticky md:right-0 md:top-14 md:min-h-full 2xl:top-16`}
 		>
 			<div>item 1</div>
 			<div>item 2</div>

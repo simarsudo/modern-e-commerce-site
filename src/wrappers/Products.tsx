@@ -1,9 +1,24 @@
 import React from "react";
+import Product from "../components/Product";
 
 const Products = () => {
 	return (
-		<div className="h-[200vh] flex-auto bg-teal-500 p-2 font-bold text-white">
-			Products
+		<div className="grid w-full grid-cols-2 gap-4 bg-teal-500 p-4 font-bold text-white md:grid-cols-3 lg:grid-cols-4">
+			<Product />
+			<Product />
+			<Product />
+			<Product />
+			<Product />
+			<Product />
+			<Product />
+			<Product />
+			<Product />
+			<Product />
+			<Product />
+			<Product />
+			<Product />
+			<Product />
+			<Product />
 		</div>
 	);
 };
