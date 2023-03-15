@@ -5,33 +5,33 @@ type Props = {};
 const Filters = (props: Props) => {
 	return (
 		<div
-			className={`absolute top-0 right-full h-4/5 w-1/5 bg-cyan-500 p-2 font-bold text-white transition-all md:sticky md:right-0 md:top-14 md:min-h-full 2xl:top-16`}
+			className={`absolute top-0 right-full h-4/5 w-1/5 border border-b-0 border-l-0 border-gray-300 p-2 font-bold text-gray-500 transition-all md:sticky md:right-0 md:top-14 md:min-h-full 2xl:top-16`}
 		>
-			<div>item 1</div>
-			<div>item 2</div>
-			<div>item 3</div>
-			<div>item 4</div>
-			<div>item 5</div>
-			<div>item 6</div>
-			<div>item 7</div>
-			<div>item 8</div>
-			<div>item 9</div>
-			<div>item 10</div>
-			<div>item 11</div>
-			<div>item 12</div>
-			<div>item 13</div>
-			<div>item 14</div>
-			<div>item 15</div>
-			<div>item 16</div>
-			<div>item 17</div>
-			<div>item 18</div>
-			<div>item 19</div>
-			<div>item 20</div>
-			<div>item 21</div>
-			<div>item 22</div>
-			<div>item 23</div>
-			<div>item 24</div>
-			<div>item 25</div>
+			<div>
+				<h3 className="text-lg text-gray-600">Type</h3>
+				<div className="ml-1 mt-1 flex flex-col gap-1">
+					<div className="input-wrappers">
+						<input type="checkbox" name="Shirt" id="Shirt" />
+						<span>Shirt</span>
+					</div>
+					<div className="input-wrappers">
+						<input type="checkbox" name="T-Shirt" id="T-Shirt" />
+						<span>T-Shirt</span>
+					</div>
+					<div className="input-wrappers">
+						<input type="checkbox" name="Pants" id="Pants" />
+						<span>Pants</span>
+					</div>
+					<div className="input-wrappers">
+						<input type="checkbox" name="Joggers" id="Joggers" />
+						<span>Joggers</span>
+					</div>
+					<div className="input-wrappers">
+						<input type="checkbox" name="Jeans" id="Jeans" />
+						<span>Jeans</span>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };

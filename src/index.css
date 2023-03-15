@@ -7,4 +7,12 @@
 		margin-top: 3rem;
 		min-height: calc(100vh - 3rem);
 	}
+
+	.input-wrappers {
+		@apply flex items-center gap-3;
+	}
+
+	.input-wrappers > input {
+		@apply h-5 w-5;
+	}
 }
