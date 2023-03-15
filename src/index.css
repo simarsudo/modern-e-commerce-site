@@ -2,6 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+	[type="text"],
+	[type="password"],
+	[type="email"],
+	[type="number"],
+	[type="url"],
+	[type="date"],
+	[type="datetime-local"],
+	[type="month"],
+	[type="week"],
+	[type="time"],
+	[type="search"],
+	[type="select"],
+	[type="tel"],
+	[multiple],
+	textarea,
+	select {
+		@apply h-12 w-full rounded border-gray-400 bg-gray-100 shadow-md shadow-gray-500/30 transition-all focus:border-indigo-500 focus:shadow-indigo-500/30;
+	}
+	[type="checkbox"],
+	[type="radio"] {
+		@apply h-5 w-5 rounded-sm border-violet-500 text-violet-500 focus:ring-violet-500;
+	}
+}
+
 @layer components {
 	.content-wrapper {
 		margin-top: 3rem;
@@ -10,9 +35,5 @@
 
 	.input-wrappers {
 		@apply flex items-center gap-3;
-	}
-
-	.input-wrappers > input {
-		@apply h-5 w-5;
 	}
 }
