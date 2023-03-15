@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.content-wrapper {
+		margin-top: 3rem;
+		min-height: calc(100vh - 3rem);
+	}
+}
