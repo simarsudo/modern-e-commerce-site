@@ -10,7 +10,7 @@ const Product = (props: Props) => {
 				<h2 className="truncate text-ellipsis border-b pb-1">
 					Product Name which is long
 				</h2>
-				<p className="text-sm font-extralight text-gray-400">Product Type</p>
+				<p className="text-sm font-normal text-gray-400">Product Type</p>
 				<p className="text-sm font-extrabold">&#8377; 500</p>
 			</div>
 		</div>
