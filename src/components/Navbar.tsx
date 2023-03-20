@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
 	Bars4Icon,
 	HeartIcon,
 	UserIcon,
 	ShoppingBagIcon,
+	AdjustmentsHorizontalIcon,
 } from "@heroicons/react/24/solid";
 import NavItem from "./NavItem";
+
+type Props = {
+	isMobileFilterOn: boolean;
+	setMobileFilters: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 const hoverStyles = {
 	color: "#08D9D6",
@@ -16,20 +22,39 @@ const hoverTimings = {
 	duration: 0.05,
 };
 
-const Navbar = () => {
+const Navbar = (props: Props) => {
 	const [mobileNavOn, setMobileNavOn] = useState(false);
+	const location = useLocation();
 
 	return (
-		<div className="fixed top-0 left-0 z-40 flex h-14 w-full flex-col items-center justify-between bg-bg-dark font-bold text-white shadow shadow-gray-400 md:flex-row">
+		<div className="fixed top-0 left-0 z-40 flex h-14 w-full flex-col items-center justify-between border-b bg-bg-dark font-bold text-white shadow shadow-gray-400 md:flex-row">
 			<div className="flex h-full min-h-[3.5rem] w-full items-center justify-between px-4">
 				<Link to="/" className="text-xl">
 					Navbar
 				</Link>
-				<div
-					className="flex h-8 w-8 md:hidden"
-					onClick={() => setMobileNavOn(!mobileNavOn)}
-				>
-					<Bars4Icon />
+				<div className="flex gap-4">
+					{location.pathname === "/" ? (
+						<div
+							className={`flex h-8 w-8 transition-colors md:hidden ${
+								props.isMobileFilterOn ? "text-text" : ""
+							}`}
+							onClick={() => {
+								props.setMobileFilters(!props.isMobileFilterOn);
+							}}
+						>
+							<AdjustmentsHorizontalIcon />
+						</div>
+					) : (
+						""
+					)}
+					<div
+						className={`flex h-8 w-8 transition-colors md:hidden ${
+							mobileNavOn ? "text-text" : ""
+						}`}
+						onClick={() => setMobileNavOn(!mobileNavOn)}
+					>
+						<Bars4Icon />
+					</div>
 				</div>
 			</div>
 			<div
