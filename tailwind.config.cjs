@@ -8,6 +8,9 @@ module.exports = {
 				"bg-dark": "#252A34",
 				text: "#08D9D6",
 			},
+			spacing: {
+				18: "4.5rem",
+			},
 		},
 	},
 	plugins: [require("@tailwindcss/forms")],

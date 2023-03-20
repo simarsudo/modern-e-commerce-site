@@ -9,7 +9,7 @@ const Filters = (props: Props) => {
 	const [droppedFilter, setDroppedFilter] = useState("Type");
 
 	return (
-		<div className="absolute top-0 right-full flex h-4/5 w-1/5 min-w-[12rem] flex-col gap-2 border border-b-0 border-l-0 border-gray-300 bg-bg-dark p-2 pb-4 font-bold text-white transition-all md:sticky md:right-0 md:top-14 md:min-h-full 2xl:top-16">
+		<div className="absolute top-0 right-full flex h-4/5 w-1/5 min-w-[12rem] flex-col gap-2 border border-b-0 border-l-0 border-gray-300 bg-bg-dark p-2 font-bold text-white transition-all md:sticky md:right-0 md:top-16 md:min-h-full 2xl:top-18 2xl:pb-4">
 			<div className="filters-wrapper">
 				<div
 					className="relative"
