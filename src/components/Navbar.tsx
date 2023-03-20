@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
 	Bars4Icon,
 	HeartIcon,
 	UserIcon,
 	ShoppingBagIcon,
 } from "@heroicons/react/24/solid";
+import NavItem from "./NavItem";
 
 const hoverStyles = {
 	color: "#08D9D6",
@@ -40,69 +40,32 @@ const Navbar = () => {
 				} origin-top transition-all md:scale-y-100 md:opacity-100`}
 			>
 				<ul className="flex flex-col flex-nowrap gap-4 overflow-hidden md:flex-row">
-					<motion.li whileHover={hoverStyles} transition={hoverTimings}>
-						<NavLink
-							to="wishlist"
-							className="flex flex-nowrap justify-between gap-1 transition-colors "
-						>
-							{({ isActive }) => (
-								<>
-									<span
-										className={
-											isActive
-												? "underline decoration-text decoration-2 underline-offset-4"
-												: ""
-										}
-									>
-										Wishlist
-									</span>
-									<HeartIcon className="h-6 w-6" />
-								</>
-							)}
-						</NavLink>
-					</motion.li>
-					<motion.li whileHover={hoverStyles} transition={hoverTimings}>
-						<NavLink
-							to="cart"
-							className="flex flex-nowrap justify-between gap-1 transition-colors "
-						>
-							{({ isActive }) => (
-								<>
-									<span
-										className={
-											isActive
-												? "underline decoration-text decoration-2 underline-offset-4"
-												: ""
-										}
-									>
-										Cart
-									</span>
-									<ShoppingBagIcon className="h-6 w-6" />
-								</>
-							)}
-						</NavLink>
-					</motion.li>
-					<motion.li whileHover={hoverStyles} transition={hoverTimings}>
-						<NavLink
-							to="login"
-							className="flex flex-nowrap justify-between gap-1 transition-colors "
-						>
-							{({ isActive }) => (
-								<>
-									<span
-										className={
-											isActive
-												? "underline decoration-text decoration-2 underline-offset-4"
-												: ""
-										}
-									>
-										Login
-									</span>
-									<UserIcon className="h-6 w-6" />
-								</>
-							)}
-						</NavLink>
-					</motion.li>
+					<NavItem
+						hoverStyles={hoverStyles}
+						hoverTimings={hoverTimings}
+						linkName="Wishlist"
+						linkTo="wishlist"
+					>
+						<HeartIcon className="h-6 w-6" />
+					</NavItem>
+
+					<NavItem
+						hoverStyles={hoverStyles}
+						hoverTimings={hoverTimings}
+						linkName="Cart"
+						linkTo="cart"
+					>
+						<ShoppingBagIcon className="h-6 w-6" />
+					</NavItem>
+
+					<NavItem
+						hoverStyles={hoverStyles}
+						hoverTimings={hoverTimings}
+						linkName="Login"
+						linkTo="login"
+					>
+						<UserIcon className="h-6 w-6" />
+					</NavItem>
 				</ul>
 			</div>
 		</div>
