@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+	* {
+		font-family: "Montserrat", sans-serif;
+	}
+
 	[type="text"],
 	[type="password"],
 	[type="email"],
