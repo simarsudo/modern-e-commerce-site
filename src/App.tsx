@@ -1,17 +1,20 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Filters from "./components/Filters";
-import Products from "./wrappers/Products";
 import Footer from "./components/Footer";
+import MainPage from "./pages/MainPage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 
 function App() {
 	return (
 		<div className="relative flex flex-col gap-4 bg-bg-light">
 			<Navbar />
-			<div className="content-wrapper flex h-full flex-col gap-4 border-t text-rose-400 md:flex-row md:p-2 2xl:p-4">
-				<Filters />
-				<Products />
-			</div>
+			<Routes>
+				<Route index element={<MainPage />} />
+				<Route path="/login" element={<LoginPage />} />
+				<Route path="/signup" element={<SignupPage />} />
+			</Routes>
 			<Footer />
 		</div>
 	);
