@@ -70,7 +70,7 @@ const Filters = (props: Props) => {
 					<RadioComponents name="Low" />
 				</div>
 			</div>
-			<div className="flex flex-col gap-3 p-2 xl:gap-5">
+			<div className="flex flex-col gap-3 p-2 xl:gap-4">
 				<button className="filter-btn">Search</button>
 				<button className="filter-btn">Reset</button>
 			</div>
