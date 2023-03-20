@@ -9,7 +9,7 @@ const Product = (props: Props) => {
 				<img src="https://picsum.photos/300/350" />
 			</div>
 			<div className="flex flex-col gap-1 py-1 px-2 pb-2">
-				<h2 className="truncate text-ellipsis border-b pb-1 tracking-wider ">
+				<h2 className="truncate text-ellipsis border-b border-text pb-1 tracking-wider ">
 					Product Name which is long
 				</h2>
 				<p className="text-sm font-normal text-gray-400">Product Type</p>
