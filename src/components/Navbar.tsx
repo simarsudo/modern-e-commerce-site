@@ -1,6 +1,11 @@
-import { Bars4Icon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+	Bars4Icon,
+	HeartIcon,
+	UserIcon,
+	ShoppingBagIcon,
+} from "@heroicons/react/24/solid";
 
 const Navbar = () => {
 	const [mobileNavOn, setMobileNavOn] = useState(false);
@@ -19,18 +24,39 @@ const Navbar = () => {
 				</div>
 			</div>
 			<div
-				className={`flex w-full justify-end bg-bg-dark py-4 pr-4 md:w-auto ${
+				className={`flex w-full min-w-fit justify-end border-b bg-bg-dark py-4 pr-4 md:w-auto md:border-b-0 md:pt-4 ${
 					mobileNavOn
 						? "scale-y-100 opacity-100"
 						: "origin-top scale-y-0 opacity-0"
 				} origin-top transition-all md:scale-y-100 md:opacity-100`}
 			>
-				<ul className={`flex  flex-col gap-4 overflow-hidden md:flex-row`}>
-					<li className="whitespace-nowrap underline decoration-text/80 decoration-2 underline-offset-4 hover:cursor-pointer hover:decoration-text">
-						<Link to="login">Link 1</Link>
+				<ul className="flex flex-col flex-nowrap gap-4 overflow-hidden md:flex-row">
+					<li>
+						<Link
+							to="wishlist"
+							className="flex flex-nowrap justify-between gap-1 text-white transition-colors hover:text-text"
+						>
+							<span>Wishlist</span>
+							<HeartIcon className="h-6 w-6" />
+						</Link>
 					</li>
-					<li className="whitespace-nowrap underline decoration-text/80 decoration-2 underline-offset-4 hover:cursor-pointer hover:decoration-text">
-						<Link to="signup">Link 2</Link>
+					<li>
+						<Link
+							to="cart"
+							className="flex flex-nowrap justify-between gap-1 text-white transition-colors hover:text-text"
+						>
+							<span>Cart</span>
+							<ShoppingBagIcon className="h-6 w-6" />
+						</Link>
+					</li>
+					<li>
+						<Link
+							to="login"
+							className="flex flex-nowrap justify-between gap-1 text-white transition-colors hover:text-text"
+						>
+							<span>Log In</span>
+							<UserIcon className="h-6 w-6" />
+						</Link>
 					</li>
 				</ul>
 			</div>
