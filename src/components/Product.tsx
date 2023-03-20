@@ -4,10 +4,12 @@ type Props = {};
 
 const Product = (props: Props) => {
 	return (
-		<div className="aspect-[1/1.5] w-full bg-white text-gray-500">
-			<img src="https://picsum.photos/300/400" />
-			<div className="py-1 px-2 md:px-4">
-				<h2 className="truncate text-ellipsis border-b pb-1">
+		<div className="border-highlight aspect-[1/1.2] w-full bg-bg-dark">
+			<div className="min-h-full w-full overflow-hidden md:h-64">
+				<img src="https://picsum.photos/300/350" />
+			</div>
+			<div className="flex flex-col gap-1 py-1 px-2 pb-2">
+				<h2 className="truncate text-ellipsis border-b pb-1 tracking-wider ">
 					Product Name which is long
 				</h2>
 				<p className="text-sm font-normal text-gray-400">Product Type</p>
