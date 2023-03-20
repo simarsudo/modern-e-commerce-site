@@ -1,11 +1,20 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
 	Bars4Icon,
 	HeartIcon,
 	UserIcon,
 	ShoppingBagIcon,
 } from "@heroicons/react/24/solid";
+
+const hoverStyles = {
+	color: "#08D9D6",
+};
+
+const hoverTimings = {
+	duration: 0.05,
+};
 
 const Navbar = () => {
 	const [mobileNavOn, setMobileNavOn] = useState(false);
@@ -31,33 +40,69 @@ const Navbar = () => {
 				} origin-top transition-all md:scale-y-100 md:opacity-100`}
 			>
 				<ul className="flex flex-col flex-nowrap gap-4 overflow-hidden md:flex-row">
-					<li>
-						<Link
+					<motion.li whileHover={hoverStyles} transition={hoverTimings}>
+						<NavLink
 							to="wishlist"
-							className="flex flex-nowrap justify-between gap-1 text-white transition-colors hover:text-text"
+							className="flex flex-nowrap justify-between gap-1 transition-colors "
 						>
-							<span>Wishlist</span>
-							<HeartIcon className="h-6 w-6" />
-						</Link>
-					</li>
-					<li>
-						<Link
+							{({ isActive }) => (
+								<>
+									<span
+										className={
+											isActive
+												? "underline decoration-text decoration-2 underline-offset-4"
+												: ""
+										}
+									>
+										Wishlist
+									</span>
+									<HeartIcon className="h-6 w-6" />
+								</>
+							)}
+						</NavLink>
+					</motion.li>
+					<motion.li whileHover={hoverStyles} transition={hoverTimings}>
+						<NavLink
 							to="cart"
-							className="flex flex-nowrap justify-between gap-1 text-white transition-colors hover:text-text"
+							className="flex flex-nowrap justify-between gap-1 transition-colors "
 						>
-							<span>Cart</span>
-							<ShoppingBagIcon className="h-6 w-6" />
-						</Link>
-					</li>
-					<li>
-						<Link
+							{({ isActive }) => (
+								<>
+									<span
+										className={
+											isActive
+												? "underline decoration-text decoration-2 underline-offset-4"
+												: ""
+										}
+									>
+										Cart
+									</span>
+									<ShoppingBagIcon className="h-6 w-6" />
+								</>
+							)}
+						</NavLink>
+					</motion.li>
+					<motion.li whileHover={hoverStyles} transition={hoverTimings}>
+						<NavLink
 							to="login"
-							className="flex flex-nowrap justify-between gap-1 text-white transition-colors hover:text-text"
+							className="flex flex-nowrap justify-between gap-1 transition-colors "
 						>
-							<span>Log In</span>
-							<UserIcon className="h-6 w-6" />
-						</Link>
-					</li>
+							{({ isActive }) => (
+								<>
+									<span
+										className={
+											isActive
+												? "underline decoration-text decoration-2 underline-offset-4"
+												: ""
+										}
+									>
+										Login
+									</span>
+									<UserIcon className="h-6 w-6" />
+								</>
+							)}
+						</NavLink>
+					</motion.li>
 				</ul>
 			</div>
 		</div>
