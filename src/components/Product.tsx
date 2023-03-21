@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 type Props = {
 	productImgLink: string;
@@ -9,7 +10,10 @@ type Props = {
 
 const Product = (props: Props) => {
 	return (
-		<div className="border-highlight aspect-[1/1.2] w-full bg-bg-dark">
+		<Link
+			to={`/${props.productType}/${props.productName}`}
+			className="border-highlight aspect-[1/1.2] w-full bg-bg-dark shadow shadow-bg-dark transition-all hover:scale-105 hover:shadow-md hover:shadow-bg-dark"
+		>
 			<div className="min-h-full w-full overflow-hidden md:h-64">
 				<img src={props.productImgLink} />
 			</div>
@@ -20,7 +24,7 @@ const Product = (props: Props) => {
 				<p className="text-sm font-normal text-gray-400">{props.productType}</p>
 				<p className="text-sm font-extrabold">&#8377; {props.productPrice}</p>
 			</div>
-		</div>
+		</Link>
 	);
 };
 
