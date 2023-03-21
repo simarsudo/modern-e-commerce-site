@@ -14,8 +14,8 @@ const Product = (props: Props) => {
 			to={`/${props.productType}/${props.productName}`}
 			className="border-highlight aspect-[1/1.2] w-full bg-bg-dark shadow shadow-bg-dark transition-all hover:scale-105 hover:shadow-md hover:shadow-bg-dark"
 		>
-			<div className="min-h-full w-full overflow-hidden md:h-64">
-				<img src={props.productImgLink} />
+			<div className="h-56 min-h-full w-full overflow-hidden md:h-64">
+				<img className="h-auto w-full" src={props.productImgLink} />
 			</div>
 			<div className="flex flex-col gap-1 py-1 px-2 pb-2">
 				<h2 className="truncate text-ellipsis border-b border-text pb-1 tracking-wider ">
