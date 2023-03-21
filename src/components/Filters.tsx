@@ -10,7 +10,7 @@ const Filters = (props: Props) => {
 
 	return (
 		<div
-			className={`absolute top-0 mt-14 origin-top ${
+			className={`fixed top-0 mt-14 origin-top ${
 				props.isMobileFilterOn
 					? "scale-y-100 opacity-100"
 					: "scale-y-0 opacity-0"
