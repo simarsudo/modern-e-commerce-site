@@ -27,7 +27,7 @@ const Navbar = (props: Props) => {
 	const location = useLocation();
 
 	return (
-		<div className="fixed top-0 left-0 z-40 flex h-14 w-full flex-col items-center justify-between border-b bg-bg-dark font-bold text-white shadow shadow-gray-400 md:flex-row">
+		<div className="fixed top-0 left-0 z-40 flex h-14 w-full flex-col items-center justify-between border-b bg-bg-dark font-bold text-white shadow shadow-gray-400 md:flex-row md:border-b-0">
 			<div className="flex h-full min-h-[3.5rem] w-full items-center justify-between px-4">
 				<Link to="/" className="text-xl">
 					Navbar
