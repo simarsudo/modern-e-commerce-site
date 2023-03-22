@@ -4,12 +4,15 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				"bg-light": "#FFF",
+				"bg-light": "#f9f5ed",
 				"bg-dark": "#252A34",
 				text: "#08D9D6",
 			},
 			spacing: {
 				18: "4.5rem",
+			},
+			height: {
+				content: "calc(100vh - 3.5rem)",
 			},
 		},
 	},
