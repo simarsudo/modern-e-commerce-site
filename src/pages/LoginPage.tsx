@@ -57,7 +57,6 @@ const LoginPage = () => {
 				className="col-start-2 col-end-8 row-start-2 row-end-6 flex flex-col rounded bg-bg-dark p-8 md:col-start-2 md:col-end-5"
 			>
 				<h1 className="text-5xl font-bold text-white">Log In</h1>
-				<p className="text-text">Login to buy your lovely goodies.</p>
 				<div className="h-full w-full">
 					<form className="flex h-full flex-col gap-4 py-8">
 						<div>
