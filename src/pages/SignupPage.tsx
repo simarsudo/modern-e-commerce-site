@@ -5,26 +5,26 @@ import { Link } from "react-router-dom";
 const linkVariants = {
 	right: {
 		left: "80%",
-		transition: { ease: [0.8, 0.3, 0.3, 0.8], duration: 1 },
+		transition: { ease: [0.8, 0.3, 0.3, 0.8], duration: 0.7 },
 	},
 	main: {
 		left: "-80%",
-		transition: { ease: [0.8, 0.3, 0.3, 0.8], duration: 1 },
+		transition: { ease: [0.8, 0.3, 0.3, 0.8], duration: 0.7 },
 	},
 	left: {
 		left: "80%",
-		transition: { ease: [0.8, 0.3, 0.3, 0.8], duration: 1 },
+		transition: { ease: [0.8, 0.3, 0.3, 0.8], duration: 0.7 },
 	},
 };
 
 const formVariants = {
 	hidden: {
 		opacity: 0,
-		transition: { delay: 0.5, duration: 1, ease: "easeInOut" },
+		transition: { delay: 0.5, duration: 0.4, ease: "easeIn" },
 	},
 	shown: {
 		opacity: 100,
-		transition: { delay: 0.5, duration: 1, ease: "easeInOut" },
+		transition: { delay: 0.5, duration: 0.4, ease: "easeIn" },
 	},
 };
 
