@@ -29,25 +29,28 @@ const SignupPage = () => {
 	return (
 		<motion.div
 			key="loginPage"
-			className="content-wrapper relative grid grid-cols-8 grid-rows-6"
+			className="content-wrapper relative grid grid-cols-8 grid-rows-6 overflow-hidden"
 		>
 			<motion.div
 				variants={formVariants}
 				initial="hidden"
 				animate="shown"
 				exit="hidden"
-				className="col-start-2 col-end-8 row-start-2 row-end-6 flex flex-col rounded bg-bg-dark p-8 md:col-start-5 md:col-end-8"
+				className="col-start-2 col-end-8 row-start-2 row-end-6 flex flex-col rounded bg-bg-dark py-5 px-8 md:col-start-5 md:col-end-8"
 			>
 				<h1 className="text-5xl font-bold text-white">Sign Up</h1>
-				<p className="text-text">Sign Up to buy your lovely goodies.</p>
 				<div className="h-full w-full">
-					<form className="flex h-full flex-col gap-4 py-8">
+					<form className="flex h-full flex-col gap-3 py-8">
 						<div>
-							<span className="text-white">Username</span>
+							<span className="text-white">Full Name</span>
 							<input type="text" />
 						</div>
 						<div>
 							<span className="text-white">Password</span>
+							<input type="password" />
+						</div>
+						<div>
+							<span className="text-white">Re-enter Password</span>
 							<input type="password" />
 						</div>
 						<div className="flex w-full gap-2 py-2">
