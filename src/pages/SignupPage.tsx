@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { ArrowLeftCircleIcon } from "@heroicons/react/24/solid";
 
 const linkVariants = {
 	right: {
@@ -49,14 +50,16 @@ const SignupPage = () => {
 							<span className="text-white">Password</span>
 							<input type="password" />
 						</div>
-						<button className="filter-btn mt-4 w-1/2 self-end py-4 md:py-2">
-							Log In
-						</button>
+						<div className="flex w-full gap-2 py-2">
+							<button className="filter-btn flex w-1/2 self-end py-4 md:hidden md:py-2">
+								<Link to="/login">Login</Link>
+							</button>
+							<button className="filter-btn w-1/2 py-4 md:py-2">Sign Up</button>
+						</div>
 					</form>
 				</div>
 			</motion.div>
 			<motion.div
-				key="signup2"
 				variants={linkVariants}
 				initial="right"
 				animate="main"
@@ -65,13 +68,16 @@ const SignupPage = () => {
 					duration: 1,
 					ease: [0.8, 0.3, 0.3, 0.8],
 				}}
-				className="absolute right-0 h-content w-full"
+				className="absolute right-0 hidden h-content w-full md:flex"
 			>
 				<Link
 					to="/login"
 					className="flex h-full w-full items-center justify-end bg-bg-dark p-4 pr-4 text-4xl font-bold text-white transition-all hover:text-5xl"
 				>
 					Log In
+					<div className="h-14 w-14 text-white">
+						<ArrowLeftCircleIcon className="h-14 w-14 text-white" />
+					</div>
 				</Link>
 			</motion.div>
 		</motion.div>
