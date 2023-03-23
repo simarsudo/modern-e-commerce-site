@@ -98,10 +98,10 @@ const SignupPage = () => {
 					to="/login"
 					className="flex h-full w-full items-center justify-end bg-bg-dark p-4 pr-4 text-4xl font-bold text-white transition-all hover:text-5xl"
 				>
-					Log In
 					<div className="h-14 w-14 text-white">
 						<ArrowLeftCircleIcon className="h-14 w-14 text-white" />
 					</div>
+					Log In
 				</Link>
 			</motion.div>
 		</motion.div>
