@@ -2,22 +2,41 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-type Props = {};
+const linkVariants = {
+	right: {
+		left: "80%",
+		transition: { ease: [0.8, 0.3, 0.3, 0.8], duration: 1 },
+	},
+	main: {
+		left: "-80%",
+		transition: { ease: [0.8, 0.3, 0.3, 0.8], duration: 1 },
+	},
+	left: {
+		left: "80%",
+		transition: { ease: [0.8, 0.3, 0.3, 0.8], duration: 1 },
+	},
+};
 
-const SignupPage = (props: Props) => {
+const formVariants = {
+	hidden: {
+		opacity: 0,
+		transition: { delay: 0.5, duration: 1, ease: "easeInOut" },
+	},
+	shown: {
+		opacity: 100,
+		transition: { delay: 0.5, duration: 1, ease: "easeInOut" },
+	},
+};
+
+const SignupPage = () => {
 	return (
 		<>
 			<motion.div
 				key="signup1"
-				initial={{ opacity: 0 }}
-				animate={{ opacity: 1 }}
-				exit={{ opacity: 0 }}
-				transition={{
-					delay: 0.5,
-					duration: 1,
-					ease: "easeInOut",
-					repeatType: "mirror",
-				}}
+				variants={formVariants}
+				initial="hidden"
+				animate="shown"
+				exit="hidden"
 			>
 				<div className="content-wrapper relative grid grid-cols-8 grid-rows-6">
 					<div className="col-start-2 col-end-8 row-start-2 row-end-6 flex flex-col rounded bg-bg-dark p-8 md:col-start-5 md:col-end-8">
@@ -43,11 +62,13 @@ const SignupPage = (props: Props) => {
 			</motion.div>
 			<motion.div
 				key="signup2"
-				initial={{ left: "80%", opacity: "100%" }}
-				animate={{ left: "-80%" }}
-				exit={{ left: "80%", opacity: 0 }}
+				variants={linkVariants}
+				initial="right"
+				animate="main"
+				exit="left"
 				transition={{
 					duration: 1,
+					ease: [0.8, 0.3, 0.3, 0.8],
 				}}
 				className="absolute left-0 mt-14 h-content w-full"
 			>
