@@ -13,7 +13,7 @@ function App() {
 
 	return (
 		<AnimatePresence mode="wait">
-			<div className="relative flex flex-col gap-4 bg-bg-light">
+			<div className="relative flex flex-col gap-4 overflow-hidden bg-bg-light">
 				<Navbar
 					isMobileFilterOn={isMobileFilterOn}
 					setMobileFilters={setMobileFilters}
