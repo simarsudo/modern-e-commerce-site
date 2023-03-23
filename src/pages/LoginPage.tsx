@@ -22,24 +22,25 @@ const linkVariants = {
 	},
 };
 
-const formVariants = {
+const containerVariant = {
+	small: {
+		scaleY: 0,
+		transition: { delay: 0.5, duration: 0.4, ease: "easeIn" },
+	},
+	full: {
+		scaleY: "100%",
+		transition: { delay: 0.5, duration: 0.4, ease: "easeIn" },
+	},
+};
+
+const formContainer = {
 	hidden: {
 		opacity: 0,
-		transition: {
-			delay: 0.5,
-			duration: 0.4,
-			ease: "easeIn",
-			staggerChildren: 0.5,
-		},
+		transition: { delay: 1, duration: 0.4, ease: "easeIn" },
 	},
 	shown: {
 		opacity: 100,
-		transition: {
-			delay: 0.5,
-			duration: 0.4,
-			ease: "easeIn",
-			staggerChildren: 0.5,
-		},
+		transition: { delay: 1, duration: 0.4, ease: "easeIn" },
 	},
 };
 
@@ -50,33 +51,41 @@ const LoginPage = () => {
 			className="content-wrapper relative grid grid-cols-8 grid-rows-6"
 		>
 			<motion.div
-				variants={formVariants}
-				initial="hidden"
-				animate="shown"
-				exit="hidden"
-				className="col-start-2 col-end-8 row-start-2 row-end-6 flex flex-col rounded bg-bg-dark p-8 md:col-start-2 md:col-end-5"
+				variants={containerVariant}
+				initial="small"
+				animate="full"
+				exit="small"
+				className="col-start-2 col-end-8 row-start-2 row-end-6 flex origin-bottom flex-col rounded bg-bg-dark p-8 md:col-start-2 md:col-end-5"
 			>
-				<h1 className="text-5xl font-bold text-white">Log In</h1>
-				<div className="h-full w-full">
-					<form className="flex h-full flex-col gap-4 py-8">
-						<div>
-							<span className="text-white">Username</span>
-							<input type="text" />
-						</div>
-						<div>
-							<span className="text-white">Password</span>
-							<input type="password" />
-						</div>
-						<div className="flex w-full gap-2 py-2">
-							<button className="filter-btn flex w-1/2 self-end py-4 md:hidden md:py-2">
-								<Link to="/signup">SignUp</Link>
-							</button>
-							<button className="filter-btn mt-4 w-1/2 self-end py-4 md:py-2">
-								Log In
-							</button>
-						</div>
-					</form>
-				</div>
+				<motion.div
+					variants={formContainer}
+					initial="hidden"
+					animate="shown"
+					exit="hidden"
+					className="flex h-full flex-col justify-between"
+				>
+					<h1 className="text-5xl font-bold text-white">Log In</h1>
+					<div className="h-full w-full">
+						<form className="flex h-full flex-col justify-around gap-4 py-8">
+							<div>
+								<span className="text-white">Username</span>
+								<input type="text" />
+							</div>
+							<div>
+								<span className="text-white">Password</span>
+								<input type="password" />
+							</div>
+							<div className="flex w-full gap-2 py-2">
+								<button className="filter-btn flex w-1/2 self-end py-4 md:hidden md:py-2">
+									<Link to="/signup">SignUp</Link>
+								</button>
+								<button className="filter-btn mt-4 w-1/2 self-end py-4 md:py-2">
+									Log In
+								</button>
+							</div>
+						</form>
+					</div>
+				</motion.div>
 			</motion.div>
 			<motion.div
 				variants={linkVariants}
