@@ -40,7 +40,7 @@ const SignupPage = () => {
 	return (
 		<motion.div
 			key="loginPage"
-			className="content-wrapper relative grid grid-cols-8 grid-rows-6 overflow-hidden"
+			className="content-wrapper relative grid max-w-[100vw] grid-cols-8 grid-rows-6 overflow-hidden"
 		>
 			<motion.div
 				variants={containerVariant}
