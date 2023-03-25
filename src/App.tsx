@@ -11,7 +11,14 @@ import GlobalLoader from "./GlobalLoader";
 function App() {
 	const [isMobileFilterOn, setMobileFilters] = useState(false);
 	const location = useLocation();
-	// const [visible, setVisible] = useState(true);
+	const [visible, setVisible] = useState(true);
+
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setVisible(false);
+			console.log("bruh");
+		}, 4000);
+	}, []);
 
 	return (
 		<AnimatePresence mode="wait">
@@ -27,9 +34,11 @@ function App() {
 					/>
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/signup" element={<SignupPage />} />
-					<Route path="gl" element={<GlobalLoader />} />
+					{/* <Route path="gl" element={<GlobalLoader />} /> */}
 				</Routes>
-				{/* <AnimatePresence>{visible ? <GlobalLoader /> : null}</AnimatePresence> */}
+				<AnimatePresence>
+					{visible && <GlobalLoader key="LoadingScreen" />}
+				</AnimatePresence>
 			</div>
 		</AnimatePresence>
 	);
