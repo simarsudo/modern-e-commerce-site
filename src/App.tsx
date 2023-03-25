@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
@@ -6,10 +6,12 @@ import Footer from "./components/Footer";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import GlobalLoader from "./GlobalLoader";
 
 function App() {
 	const [isMobileFilterOn, setMobileFilters] = useState(false);
 	const location = useLocation();
+	// const [visible, setVisible] = useState(true);
 
 	return (
 		<AnimatePresence mode="wait">
@@ -25,7 +27,9 @@ function App() {
 					/>
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/signup" element={<SignupPage />} />
+					<Route path="gl" element={<GlobalLoader />} />
 				</Routes>
+				{/* <AnimatePresence>{visible ? <GlobalLoader /> : null}</AnimatePresence> */}
 			</div>
 		</AnimatePresence>
 	);
