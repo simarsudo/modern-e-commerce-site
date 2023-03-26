@@ -30,7 +30,7 @@ const Navbar = (props: Props) => {
 		<div className="2xl:m4 fixed top-0 left-0 z-40 flex h-14 w-full flex-col items-center justify-between border-b-2 bg-bg-light font-bold text-black md:flex-row">
 			<div className="flex h-full min-h-[3.5rem] w-full items-center justify-between px-4">
 				<Link to="/" className="text-4xl">
-					Lavish
+					LAVISH
 				</Link>
 				<div className="flex gap-4">
 					{location.pathname === "/" ? (
