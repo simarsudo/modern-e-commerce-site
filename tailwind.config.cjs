@@ -4,9 +4,10 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				"bg-light": "#f9f5ed",
+				"bg-light": "#FFFFFF",
 				"bg-dark": "#252A34",
 				text: "#08D9D6",
+				textBlack: "#111111",
 			},
 			spacing: {
 				18: "4.5rem",

@@ -55,7 +55,7 @@ const GlobalLoader = () => {
 			variants={pageVariant}
 			animate="main"
 			exit="exit"
-			className="fixed z-50 flex h-screen w-screen flex-col items-center justify-center gap-8 border-2 border-black bg-bg-light font-black"
+			className="fixed z-50 flex h-screen w-screen flex-col items-center justify-center gap-8 border-2 border-black bg-[#FFFFFF] font-black"
 		>
 			<motion.h1
 				variants={headingVariant}
@@ -65,6 +65,48 @@ const GlobalLoader = () => {
 				className="text-5xl uppercase tracking-wider md:text-8xl"
 			>
 				Loading
+				<motion.span
+					initial={{ opacity: 0 }}
+					animate={{
+						opacity: 1,
+						transition: {
+							duration: 1.2,
+							repeat: Infinity,
+							ease: "linear",
+							delay: 1,
+						},
+					}}
+				>
+					.
+				</motion.span>
+				<motion.span
+					initial={{ opacity: 0 }}
+					animate={{
+						opacity: 1,
+						transition: {
+							duration: 1.2,
+							repeat: Infinity,
+							ease: "linear",
+							delay: 1.3,
+						},
+					}}
+				>
+					.
+				</motion.span>
+				<motion.span
+					initial={{ opacity: 0 }}
+					animate={{
+						opacity: 1,
+						transition: {
+							duration: 1.2,
+							repeat: Infinity,
+							ease: "linear",
+							delay: 1.6,
+						},
+					}}
+				>
+					.
+				</motion.span>
 			</motion.h1>
 			<motion.div
 				variants={imgWrapperVariant}

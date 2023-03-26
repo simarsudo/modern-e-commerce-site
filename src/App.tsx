@@ -36,7 +36,7 @@ function App() {
 					/>
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/signup" element={<SignupPage />} />
-					{/* <Route path="gl" element={<GlobalLoader />} /> */}
+					<Route path="gl" element={<GlobalLoader />} />
 				</Routes>
 				<AnimatePresence>
 					{visible && <GlobalLoader key="LoadingScreen" />}
