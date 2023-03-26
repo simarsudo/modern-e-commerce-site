@@ -3,10 +3,11 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import MainPage from "./pages/MainPage";
+import MainPage from "./pages/ProductsPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import GlobalLoader from "./GlobalLoader";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
 	const [isMobileFilterOn, setMobileFilters] = useState(false);
@@ -28,8 +29,9 @@ function App() {
 					setMobileFilters={setMobileFilters}
 				/>
 				<Routes location={location} key={location.pathname}>
+					<Route index element={<LandingPage />} />
 					<Route
-						index
+						path="/products"
 						element={<MainPage isMobileFilterOn={isMobileFilterOn} />}
 					/>
 					<Route path="/login" element={<LoginPage />} />

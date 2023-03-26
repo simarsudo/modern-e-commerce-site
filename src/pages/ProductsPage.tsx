@@ -7,10 +7,10 @@ type Props = {
 	isMobileFilterOn: boolean;
 };
 
-const MainPage = (props: Props) => {
+const ProductsPage = (props: Props) => {
 	return (
 		<div className="relative">
-			<div className="content-wrapper relative flex h-full flex-col gap-4 border-t text-rose-400 md:flex-row md:p-2 2xl:p-4">
+			<div className="content-wrapper relative flex h-full flex-col gap-4 border-t md:flex-row md:p-2 2xl:p-4">
 				<Filters isMobileFilterOn={props.isMobileFilterOn} />
 				<Products />
 			</div>
@@ -19,4 +19,4 @@ const MainPage = (props: Props) => {
 	);
 };
 
-export default MainPage;
+export default ProductsPage;
