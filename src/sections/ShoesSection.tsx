@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import MainCard from "../MainCard";
+import MainCard from "../components/MainCard";
 
 type Props = {};
 
