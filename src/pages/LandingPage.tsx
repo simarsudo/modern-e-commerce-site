@@ -1,24 +1,25 @@
 import React from "react";
+import { motion } from "framer-motion";
+import MainCard from "../components/MainCard";
 
 type Props = {};
 
 const LandingPage = (props: Props) => {
+	function drag() {
+		console.log("bruh");
+	}
+
 	return (
 		<div className="content-wrapper relative flex h-full flex-col gap-4 border-t md:p-2 2xl:p-4">
-			<div className="flex flex-col gap-4 px-2 py-4">
+			<div className="flex flex-col gap-4 p-6 md:p-8">
 				<h1 className="border-b pb-4 text-6xl">Shoes</h1>
-				<div className="flex  hover:cursor-grab">
-					<ul className="no-scrollbar flex w-full gap-4 overflow-x-scroll pt-4 md:gap-12">
-						<li className="card">item 1</li>
-						<li className="card">item 2</li>
-						<li className="card">item 3</li>
-						<li className="card">item 4</li>
-						<li className="card">item 5</li>
-						<li className="card">item 3</li>
-						<li className="card">item 4</li>
-						<li className="card">item 5</li>
-						<li className="card">item 4</li>
-						<li className="card">item 5</li>
+				<div className="no-scrollbar flex overflow-x-scroll">
+					<ul className="grid w-full grid-cols-1 place-content-around gap-12 pt-4 md:grid-cols-4 md:gap-12">
+						<MainCard imgLink="https://api.lorem.space/image/album?w=350&h=500&hash=wmwzi6su" />
+						<MainCard imgLink="https://api.lorem.space/image/album?w=350&h=500&hash=kj5bnl3l" />
+						<MainCard imgLink="https://api.lorem.space/image/album?w=350&h=500&hash=dnqsm8rf" />
+						<MainCard imgLink="https://api.lorem.space/image/album?w=350&h=500&hash=yonbsdxr" />
+						<MainCard imgLink="https://api.lorem.space/image/album?w=350&h=500&hash=3kk4tw6g" />
 					</ul>
 				</div>
 			</div>
