@@ -3,8 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+	html {
+		@apply scroll-smooth;
+	}
+
 	* {
-		font-family: "IBM Plex Sans", sans-serif;
+		font-family: "Raleway", sans-serif;
 	}
 
 	*::-webkit-scrollbar {

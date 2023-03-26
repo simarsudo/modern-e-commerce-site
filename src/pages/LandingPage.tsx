@@ -12,7 +12,7 @@ const LandingPage = (props: Props) => {
 	return (
 		<div className="content-wrapper relative flex h-full flex-col gap-4 overflow-hidden">
 			<div className="flex flex-col gap-4 p-6 md:p-8">
-				<h1 className="border-b pb-4 text-6xl">Shoes</h1>
+				<h2 className="border-b pb-4 text-5xl">Shoes</h2>
 				<div className="no-scrollbar flex overflow-x-scroll">
 					<ul className="grid w-full grid-cols-1 place-content-around gap-12 pt-4 md:grid-cols-4 md:gap-12">
 						<MainCard imgLink="https://api.lorem.space/image/album?w=350&h=500&hash=wmwzi6su" />
