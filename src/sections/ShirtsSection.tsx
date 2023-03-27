@@ -1,5 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView, useAnimation, spring } from "framer-motion";
+import {
+	motion,
+	useInView,
+	useAnimation,
+	spring,
+	easeInOut,
+	easeOut,
+} from "framer-motion";
 import MainCard from "../components/MainCard";
 
 type Props = {};
@@ -9,14 +16,14 @@ const h2Variant = {
 	animate: {
 		transition: {
 			staggerChildren: 0.1,
-			ease: "easeInOut",
+			ease: [0.39, 0.575, 0.565, 1],
 		},
 	},
 };
 
 const spanVariant = {
 	initial: { translateY: "200%" },
-	animate: { translateY: 0, transition: { duration: 0.2, ease: "linear" } },
+	animate: { translateY: 0, transition: { duration: 0.8, ease: easeOut } },
 };
 
 const ShirtsSection = (props: Props) => {
@@ -41,22 +48,22 @@ const ShirtsSection = (props: Props) => {
 				animate={animationControl}
 				className="flex overflow-hidden border-b pb-4 text-6xl"
 			>
-				<motion.div className="font-highlight" variants={spanVariant}>
+				<motion.div className="font-highlight font-bold" variants={spanVariant}>
 					S
 				</motion.div>
-				<motion.div className="font-highlight" variants={spanVariant}>
+				<motion.div className="font-highlight font-bold" variants={spanVariant}>
 					H
 				</motion.div>
-				<motion.div className="font-highlight" variants={spanVariant}>
+				<motion.div className="font-highlight font-bold" variants={spanVariant}>
 					I
 				</motion.div>
-				<motion.div className="font-highlight" variants={spanVariant}>
+				<motion.div className="font-highlight font-bold" variants={spanVariant}>
 					R
 				</motion.div>
-				<motion.div className="font-highlight" variants={spanVariant}>
+				<motion.div className="font-highlight font-bold" variants={spanVariant}>
 					T
 				</motion.div>
-				<motion.div className="font-highlight" variants={spanVariant}>
+				<motion.div className="font-highlight font-bold" variants={spanVariant}>
 					S
 				</motion.div>
 			</motion.h2>

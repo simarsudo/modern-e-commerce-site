@@ -6,7 +6,7 @@ type Props = {};
 const ShoesSection = (props: Props) => {
 	return (
 		<div>
-			<h2 className="flex overflow-hidden border-b pb-4 font-highlight text-6xl uppercase">
+			<h2 className="flex overflow-hidden border-b pb-4 font-highlight text-6xl font-bold uppercase">
 				Shoes
 			</h2>
 			<div className="no-scrollbar flex overflow-x-scroll">
