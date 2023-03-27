@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import React, { useEffect, useRef } from "react";
+import { motion, useInView, useAnimation } from "framer-motion";
 import MainCard from "../components/MainCard";
 
 type Props = {};
@@ -9,8 +9,6 @@ const h2Variant = {
 	animate: {
 		transition: {
 			staggerChildren: 0.2,
-			delay: 3,
-			delayChildren: 3,
 		},
 	},
 };
@@ -23,6 +21,13 @@ const spanVariant = {
 const ShirtsSection = (props: Props) => {
 	const ref = useRef(null);
 	const isInView = useInView(ref);
+	const animationControl = useAnimation();
+
+	useEffect(() => {
+		if (isInView) {
+			animationControl.start("animate");
+		}
+	}, [isInView]);
 
 	return (
 		<div>
@@ -30,7 +35,7 @@ const ShirtsSection = (props: Props) => {
 				ref={ref}
 				variants={h2Variant}
 				initial="initial"
-				animate="animate"
+				animate={animationControl}
 				className="flex overflow-hidden border-b pb-4 text-5xl"
 			>
 				<motion.div variants={spanVariant}>S</motion.div>
