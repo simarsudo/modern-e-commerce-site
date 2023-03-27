@@ -55,7 +55,7 @@ const GlobalLoader = () => {
 			variants={pageVariant}
 			animate="main"
 			exit="exit"
-			className="fixed z-50 flex h-screen w-screen flex-col items-center justify-center gap-8 border-2 border-black bg-[#FFFFFF] font-black"
+			className="fixed top-0 z-50 flex h-screen w-screen flex-col items-center justify-center gap-8 border-2 border-black bg-[#FFFFFF] font-black"
 		>
 			<motion.h1
 				variants={headingVariant}

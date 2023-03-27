@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import React, { ReactElement, useEffect, useState } from "react";
+import { Route, Routes, useLocation, useRoutes } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import GlobalLoader from "./GlobalLoader";
 import LandingPage from "./pages/LandingPage";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
 	const [isMobileFilterOn, setMobileFilters] = useState(false);
@@ -21,28 +22,28 @@ function App() {
 		}, 4000);
 	}, []);
 
+	const element: any = useRoutes([
+		{ path: "/", element: <LandingPage /> },
+		{
+			path: "/products",
+			element: <MainPage isMobileFilterOn={isMobileFilterOn} />,
+		},
+		{ path: "/login", element: <LoginPage /> },
+		{ path: "/signup", element: <SignupPage /> },
+		{ path: "*", element: <PageNotFound /> },
+	]);
+
 	return (
-		<AnimatePresence mode="wait">
-			<div className="relative flex flex-col gap-4  bg-bg-light">
-				<Navbar
-					isMobileFilterOn={isMobileFilterOn}
-					setMobileFilters={setMobileFilters}
-				/>
-				<Routes location={location} key={location.pathname}>
-					<Route index element={<LandingPage />} />
-					<Route
-						path="/products"
-						element={<MainPage isMobileFilterOn={isMobileFilterOn} />}
-					/>
-					<Route path="/login" element={<LoginPage />} />
-					<Route path="/signup" element={<SignupPage />} />
-					<Route path="gl" element={<GlobalLoader />} />
-				</Routes>
-				<AnimatePresence>
-					{visible && <GlobalLoader key="LoadingScreen" />}
-				</AnimatePresence>
-			</div>
-		</AnimatePresence>
+		<>
+			<Navbar
+				isMobileFilterOn={isMobileFilterOn}
+				setMobileFilters={setMobileFilters}
+			/>
+			<AnimatePresence mode="sync">
+				{React.cloneElement(element, { key: location.pathname })}
+				{visible && <GlobalLoader key="LoadingScreen" />}
+			</AnimatePresence>
+		</>
 	);
 }
 
