@@ -8,6 +8,7 @@ import {
 	easeOut,
 } from "framer-motion";
 import MainCard from "../components/MainCard";
+import LinkCard from "../components/LinkCard";
 
 type Props = {};
 
@@ -74,6 +75,7 @@ const ShirtsSection = (props: Props) => {
 					<MainCard imgLink="https://api.lorem.space/image/album?w=350&h=500&hash=dnqsm8rf" />
 					<MainCard imgLink="https://api.lorem.space/image/album?w=350&h=500&hash=yonbsdxr" />
 					<MainCard imgLink="https://api.lorem.space/image/album?w=350&h=500&hash=3kk4tw6g" />
+					<LinkCard link="shirts" />
 				</ul>
 			</div>
 		</div>

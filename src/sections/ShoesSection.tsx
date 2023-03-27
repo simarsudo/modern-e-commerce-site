@@ -1,5 +1,6 @@
 import React from "react";
 import MainCard from "../components/MainCard";
+import LinkCard from "../components/LinkCard";
 
 type Props = {};
 
@@ -16,6 +17,7 @@ const ShoesSection = (props: Props) => {
 					<MainCard imgLink="https://api.lorem.space/image/album?w=350&h=500&hash=dnqsm8rf" />
 					<MainCard imgLink="https://api.lorem.space/image/album?w=350&h=500&hash=yonbsdxr" />
 					<MainCard imgLink="https://api.lorem.space/image/album?w=350&h=500&hash=3kk4tw6g" />
+					<LinkCard link="shoes" />
 				</ul>
 			</div>
 		</div>
