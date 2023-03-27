@@ -15,6 +15,9 @@ module.exports = {
 			height: {
 				content: "calc(100vh - 3.5rem)",
 			},
+			fontFamily: {
+				highlight: "Rokkitt",
+			},
 		},
 	},
 	plugins: [require("@tailwindcss/forms")],

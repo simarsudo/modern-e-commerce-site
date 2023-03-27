@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, useInView, useAnimation, spring } from "framer-motion";
 import MainCard from "../components/MainCard";
 
 type Props = {};
@@ -8,23 +8,26 @@ const h2Variant = {
 	initial: {},
 	animate: {
 		transition: {
-			staggerChildren: 0.2,
+			staggerChildren: 0.1,
+			ease: "easeInOut",
 		},
 	},
 };
 
 const spanVariant = {
 	initial: { translateY: "200%" },
-	animate: { translateY: 0, transition: { duration: 0.5, ease: "linear" } },
+	animate: { translateY: 0, transition: { duration: 0.2, ease: "linear" } },
 };
 
 const ShirtsSection = (props: Props) => {
+	const [firstShow, setFirstShow] = useState(false);
 	const ref = useRef(null);
 	const isInView = useInView(ref);
 	const animationControl = useAnimation();
 
 	useEffect(() => {
-		if (isInView) {
+		if (isInView && !firstShow) {
+			setFirstShow(true);
 			animationControl.start("animate");
 		}
 	}, [isInView]);
@@ -36,14 +39,26 @@ const ShirtsSection = (props: Props) => {
 				variants={h2Variant}
 				initial="initial"
 				animate={animationControl}
-				className="flex overflow-hidden border-b pb-4 text-5xl"
+				className="flex overflow-hidden border-b pb-4 text-6xl"
 			>
-				<motion.div variants={spanVariant}>S</motion.div>
-				<motion.div variants={spanVariant}>H</motion.div>
-				<motion.div variants={spanVariant}>I</motion.div>
-				<motion.div variants={spanVariant}>R</motion.div>
-				<motion.div variants={spanVariant}>T</motion.div>
-				<motion.div variants={spanVariant}>S</motion.div>
+				<motion.div className="font-highlight" variants={spanVariant}>
+					S
+				</motion.div>
+				<motion.div className="font-highlight" variants={spanVariant}>
+					H
+				</motion.div>
+				<motion.div className="font-highlight" variants={spanVariant}>
+					I
+				</motion.div>
+				<motion.div className="font-highlight" variants={spanVariant}>
+					R
+				</motion.div>
+				<motion.div className="font-highlight" variants={spanVariant}>
+					T
+				</motion.div>
+				<motion.div className="font-highlight" variants={spanVariant}>
+					S
+				</motion.div>
 			</motion.h2>
 			<div className="no-scrollbar flex overflow-x-scroll">
 				<ul className="grid w-full grid-cols-1 place-content-around gap-12 pt-4 md:grid-cols-4 md:gap-12">

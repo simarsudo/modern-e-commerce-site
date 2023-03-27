@@ -6,8 +6,8 @@ type Props = {};
 const ShoesSection = (props: Props) => {
 	return (
 		<div>
-			<h2 className="flex overflow-hidden border-b pb-4 text-5xl uppercase">
-				Shirt
+			<h2 className="flex overflow-hidden border-b pb-4 font-highlight text-6xl uppercase">
+				Shoes
 			</h2>
 			<div className="no-scrollbar flex overflow-x-scroll">
 				<ul className="grid w-full grid-cols-1 place-content-around gap-12 pt-4 md:grid-cols-4 md:gap-12">

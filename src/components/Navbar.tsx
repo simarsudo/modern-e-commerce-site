@@ -27,9 +27,9 @@ const Navbar = (props: Props) => {
 	const location = useLocation();
 
 	return (
-		<div className="2xl:m4 fixed top-0 left-0 z-40 flex h-14 w-full flex-col items-center justify-between bg-bg-dark font-bold text-white md:flex-row">
+		<div className="2xl:m4 fixed top-0 left-0 z-40 flex h-14 w-full flex-col items-center justify-between border-b border-white bg-bg-dark font-bold text-white md:flex-row">
 			<div className="flex h-full min-h-[3.5rem] w-full items-center justify-between px-4">
-				<Link to="/" className="text-4xl">
+				<Link to="/" className="text-2xl font-medium italic">
 					LAVISH
 				</Link>
 				<div className="flex gap-4">
@@ -58,7 +58,7 @@ const Navbar = (props: Props) => {
 				</div>
 			</div>
 			<div
-				className={`flex w-full min-w-fit justify-end bg-bg-dark py-4 pr-4 md:w-auto md:pt-4 ${
+				className={`flex w-full min-w-fit justify-end border-b border-white bg-bg-dark py-4 pr-4 md:w-auto md:pt-4 ${
 					mobileNavOn
 						? "scale-y-100 opacity-100"
 						: "origin-top scale-y-0 opacity-0"
