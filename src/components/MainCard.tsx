@@ -11,22 +11,23 @@ const MainCard = (props: Props) => {
 	const [yPos, setYpos] = useState(0);
 	const [isVisible, setIsVisible] = useState(0);
 
+	const applyValues = (x: number, y: number) => {
+		setXpos(x);
+		setYpos(y);
+	};
+
 	const handleMouseEvent = (e: MouseEvent, info: EventInfo) => {
 		const target = e.target as HTMLElement;
-		target?.addEventListener("mousemove", (e) => {
-			setXpos(e.pageX);
-			setYpos(e.pageY);
-		});
+		target?.addEventListener("mousemove", (e) => applyValues(e.pageX, e.pageY));
 		setIsVisible(100);
 	};
 
 	const mousePositionCleanUp = (e: MouseEvent, info: EventInfo) => {
 		console.log("removed event listeer");
 		const target = e.target as HTMLElement;
-		target?.removeEventListener("mousemove", (e) => {
-			setXpos(e.pageX);
-			setYpos(e.pageY);
-		});
+		target?.removeEventListener("mousemove", (e) =>
+			applyValues(e.pageX, e.pageY)
+		);
 		setIsVisible(0);
 	};
 
