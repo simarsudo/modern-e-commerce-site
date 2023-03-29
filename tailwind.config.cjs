@@ -18,11 +18,6 @@ module.exports = {
 			fontFamily: {
 				highlight: "Rokkitt",
 			},
-			keyframes: {
-				"card-hover": {
-					"0%, 100%": { transform: "scale()" },
-				},
-			},
 		},
 	},
 	plugins: [require("@tailwindcss/forms")],

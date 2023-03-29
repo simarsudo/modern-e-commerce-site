@@ -1,15 +1,40 @@
-import React, { useState } from "react";
-import { EventInfo, motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import {
+	AnimatePresence,
+	EventInfo,
+	easeInOut,
+	motion,
+	useAnimation,
+} from "framer-motion";
 import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
 
 type Props = {
 	imgLink: string;
 };
 
+const cardVariant = {
+	initial: {
+		scale: 0,
+		opacity: 0,
+		// transform: "translateY(-2.5rem), scale(0)",
+	},
+	animate: {
+		scale: 1,
+		opacity: 1,
+		transition: { duration: 0.2, ease: easeInOut },
+	},
+	exit: {
+		scale: 0,
+		opacity: 0,
+		transition: { duration: 0.2, ease: easeInOut },
+	},
+};
+
 const MainCard = (props: Props) => {
 	const [xPos, setXpos] = useState(0);
 	const [yPos, setYpos] = useState(0);
 	const [isVisible, setIsVisible] = useState(0);
+	const animationControl = useAnimation();
 
 	const applyValues = (x: number, y: number) => {
 		setXpos(x);
@@ -31,6 +56,12 @@ const MainCard = (props: Props) => {
 		setIsVisible(0);
 	};
 
+	useEffect(() => {
+		if (isVisible) {
+			animationControl.start("animate");
+		}
+	}, [isVisible]);
+
 	return (
 		<motion.li
 			onHoverStart={(e, info) => handleMouseEvent(e, info)}
@@ -46,18 +77,23 @@ const MainCard = (props: Props) => {
 					<p>Rs 500</p>
 				</div>
 			</a>
-			<div
-				style={{
-					top: yPos,
-					left: xPos,
-					scale: `${isVisible}%`,
-					opacity: isVisible,
-				}}
-				className={`w-h-28 absolute z-10 flex h-28 origin-top-left -translate-y-10 flex-col items-center justify-center gap-1 rounded-full bg-bg-dark p-8 text-xl font-bold text-white outline outline-white transition-[scale] transition-opacity duration-300 ease-in-out`}
-			>
-				{/* <h3>Open</h3> */}
-				<ArrowUpRightIcon className="w-h-12 h-12" />
-			</div>
+			<AnimatePresence>
+				{isVisible && (
+					<motion.div
+						variants={cardVariant}
+						initial="initial"
+						animate={animationControl}
+						exit="exit"
+						style={{
+							top: yPos - 30,
+							left: xPos,
+						}}
+						className={`w-h-28 absolute z-10 flex h-28 origin-top-left flex-col items-center justify-center gap-1 rounded-full bg-bg-dark p-8 text-xl font-bold text-white outline outline-white`}
+					>
+						<ArrowUpRightIcon className="w-h-12 h-12" />
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</motion.li>
 	);
 };

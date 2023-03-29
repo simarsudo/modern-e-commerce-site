@@ -98,4 +98,8 @@
 	.card a > div > img {
 		@apply rounded-lg border-2 border-black;
 	}
+
+	.animation-alternate {
+		animation-direction: alternate;
+	}
 }
