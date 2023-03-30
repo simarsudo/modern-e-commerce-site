@@ -41,13 +41,13 @@ const MainCard = (props: Props) => {
 		setYpos(y);
 	};
 
-	const handleMouseEvent = (e: MouseEvent, info: EventInfo) => {
+	const handleMouseEvent = (e: MouseEvent) => {
 		const target = e.target as HTMLElement;
 		target?.addEventListener("mousemove", (e) => applyValues(e.pageX, e.pageY));
 		setIsVisible(100);
 	};
 
-	const mousePositionCleanUp = (e: MouseEvent, info: EventInfo) => {
+	const mousePositionCleanUp = (e: MouseEvent) => {
 		console.log("removed event listeer");
 		const target = e.target as HTMLElement;
 		target?.removeEventListener("mousemove", (e) =>
@@ -64,8 +64,8 @@ const MainCard = (props: Props) => {
 
 	return (
 		<motion.li
-			onHoverStart={(e, info) => handleMouseEvent(e, info)}
-			onHoverEnd={(e, info) => mousePositionCleanUp(e, info)}
+			onHoverStart={(e) => handleMouseEvent(e)}
+			onHoverEnd={(e) => mousePositionCleanUp(e)}
 			className="card group"
 		>
 			<a href="#">
@@ -85,7 +85,7 @@ const MainCard = (props: Props) => {
 						animate={animationControl}
 						exit="exit"
 						style={{
-							top: yPos - 30,
+							top: yPos,
 							left: xPos,
 						}}
 						className={`w-h-28 absolute z-10 flex h-28 origin-top-left flex-col items-center justify-center gap-1 rounded-full bg-bg-dark p-8 text-xl font-bold text-white outline outline-white`}
