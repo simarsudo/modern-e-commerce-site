@@ -1,10 +1,17 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 type Props = {};
 
 const Products = (props: Props) => {
-	return <div className="content-wrapper">ProductPant</div>;
+	const location = useLocation();
+	console.log(location);
+
+	return (
+		<div className="content-wrapper">
+			{`${location.pathname}`.replace("/", "") + " Page"}
+		</div>
+	);
 };
 
 export default Products;
