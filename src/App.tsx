@@ -12,6 +12,8 @@ import PageNotFound from "./pages/PageNotFound";
 import PageLoader from "./PageLoader";
 import Products from "./pages/Products";
 import ProductPage from "./pages/ProductPage";
+import CartPage from "./pages/CartPage";
+import WishlistPage from "./pages/WishlistPage";
 
 function App() {
 	const [isMobileFilterOn, setMobileFilters] = useState(false);
@@ -34,6 +36,8 @@ function App() {
 		},
 		{ path: "/login", element: <LoginPage /> },
 		{ path: "/signup", element: <SignupPage /> },
+		{ path: "/cart", element: <CartPage /> },
+		{ path: "/wishlist", element: <WishlistPage /> },
 		{ path: "/shirts", element: <Products /> },
 		{ path: "/pants", element: <Products /> },
 		{ path: "/shoes", element: <Products /> },
