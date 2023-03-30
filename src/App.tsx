@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import { Route, Routes, useLocation, useRoutes } from "react-router-dom";
+import { useLocation, useRoutes } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -9,9 +9,11 @@ import SignupPage from "./pages/SignupPage";
 import GlobalLoader from "./GlobalLoader";
 import LandingPage from "./pages/LandingPage";
 import PageNotFound from "./pages/PageNotFound";
+import PageLoader from "./PageLoader";
 
 function App() {
 	const [isMobileFilterOn, setMobileFilters] = useState(false);
+	const [pageTransition, isPageTransition] = useState(false);
 	const location = useLocation();
 	const [visible, setVisible] = useState(true);
 
@@ -41,6 +43,7 @@ function App() {
 			/>
 			<AnimatePresence mode="sync">
 				{React.cloneElement(element, { key: location.pathname })}
+				{pageTransition && <PageLoader />}
 				{visible && <GlobalLoader key="LoadingScreen" />}
 			</AnimatePresence>
 		</>
