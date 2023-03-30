@@ -11,6 +11,7 @@ import LandingPage from "./pages/LandingPage";
 import PageNotFound from "./pages/PageNotFound";
 import PageLoader from "./PageLoader";
 import Products from "./pages/Products";
+import ProductPage from "./pages/ProductPage";
 
 function App() {
 	const [isMobileFilterOn, setMobileFilters] = useState(false);
@@ -36,6 +37,9 @@ function App() {
 		{ path: "/shirts", element: <Products /> },
 		{ path: "/pants", element: <Products /> },
 		{ path: "/shoes", element: <Products /> },
+		{ path: "/shirts/:id", element: <ProductPage /> },
+		{ path: "/pants/:id", element: <ProductPage /> },
+		{ path: "/shoes/:id", element: <ProductPage /> },
 		{ path: "*", element: <PageNotFound /> },
 	]);
 

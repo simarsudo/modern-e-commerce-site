@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import {
 	AnimatePresence,
-	EventInfo,
 	easeInOut,
 	motion,
 	useAnimation,
 } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
 
 type Props = {
 	imgLink: string;
+	type: string;
+	id: string;
 };
 
 const cardVariant = {
@@ -68,7 +70,7 @@ const MainCard = (props: Props) => {
 			onHoverEnd={(e) => mousePositionCleanUp(e)}
 			className="card group"
 		>
-			<a href="#">
+			<Link to={`${props.type}/${props.id}`}>
 				<div className="relative overflow-hidden rounded-lg">
 					<img src={props.imgLink} alt="gg" />
 				</div>
@@ -76,7 +78,7 @@ const MainCard = (props: Props) => {
 					<p>Name</p>
 					<p>Rs 500</p>
 				</div>
-			</a>
+			</Link>
 			<AnimatePresence>
 				{isVisible && (
 					<motion.div
