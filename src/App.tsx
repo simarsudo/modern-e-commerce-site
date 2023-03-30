@@ -3,7 +3,7 @@ import { useLocation, useRoutes } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import MainPage from "./pages/ProductsPage";
+import ProductsPage from "./pages/ProductsPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import GlobalLoader from "./GlobalLoader";
@@ -29,7 +29,7 @@ function App() {
 		{ path: "/", element: <LandingPage /> },
 		{
 			path: "/products",
-			element: <MainPage isMobileFilterOn={isMobileFilterOn} />,
+			element: <ProductsPage isMobileFilterOn={isMobileFilterOn} />,
 		},
 		{ path: "/login", element: <LoginPage /> },
 		{ path: "/signup", element: <SignupPage /> },
