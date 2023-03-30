@@ -3,7 +3,7 @@ import Product from "../components/Product";
 import { product, productAPI, products } from "../typeModels/models";
 import { randomProducts } from "../RandomData";
 
-const Products = () => {
+const ProductsWrapper = () => {
 	const [data, setData] = useState<products>([]);
 	const types = ["T-Shirt", "Shirt", "Jeans", "Pants", "Joggers"];
 
@@ -48,4 +48,4 @@ const Products = () => {
 	);
 };
 
-export default Products;
+export default ProductsWrapper;

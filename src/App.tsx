@@ -10,6 +10,7 @@ import GlobalLoader from "./GlobalLoader";
 import LandingPage from "./pages/LandingPage";
 import PageNotFound from "./pages/PageNotFound";
 import PageLoader from "./PageLoader";
+import Products from "./pages/Products";
 
 function App() {
 	const [isMobileFilterOn, setMobileFilters] = useState(false);
@@ -32,6 +33,9 @@ function App() {
 		},
 		{ path: "/login", element: <LoginPage /> },
 		{ path: "/signup", element: <SignupPage /> },
+		{ path: "/shirts", element: <Products /> },
+		{ path: "/pants", element: <Products /> },
+		{ path: "/shoes", element: <Products /> },
 		{ path: "*", element: <PageNotFound /> },
 	]);
 

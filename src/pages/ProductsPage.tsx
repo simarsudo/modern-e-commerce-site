@@ -1,6 +1,6 @@
 import React from "react";
 import Filters from "../components/Filters";
-import Products from "../wrappers/Products";
+import Products from "../wrappers/ProductsWrapper";
 import Footer from "../components/Footer";
 
 type Props = {
