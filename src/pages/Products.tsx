@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import PageTransitionWrapper from "../wrappers/PageTransitionWrapper";
 import { useLocation } from "react-router-dom";
 
 type Props = {};
@@ -12,9 +12,9 @@ const Products = (props: Props) => {
 	const location = useLocation();
 
 	return (
-		<motion.div variants={pagevariants} exit="exit" className="content-wrapper">
+		<PageTransitionWrapper className="content-wrapper">
 			{`${location.pathname}`.replace("/", "") + " Page"}
-		</motion.div>
+		</PageTransitionWrapper>
 	);
 };
 
