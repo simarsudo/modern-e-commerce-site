@@ -100,6 +100,15 @@
 	}
 
 	.animation-alternate {
-		animation-direction: alternate;
+		animation: pulse2 1s infinite alternate;
+	}
+
+	@keyframes pulse2 {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
 	}
 }

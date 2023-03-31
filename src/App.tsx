@@ -17,16 +17,34 @@ import WishlistPage from "./pages/WishlistPage";
 
 function App() {
 	const [isMobileFilterOn, setMobileFilters] = useState(false);
-	const [pageTransition, isPageTransition] = useState(false);
+	const [pageTransition, setPageTransition] = useState(false);
+	const [locationCount, setLocationCount] = useState(0);
+	const [firstLoad, setFirstLoad] = useState(true);
 	const location = useLocation();
 	const [visible, setVisible] = useState(true);
 
 	useEffect(() => {
+		if (!firstLoad) {
+			setPageTransition(true);
+			setLocationCount((prevValue) => {
+				return prevValue + 1;
+			});
+			console.log("location Changed");
+		}
+	}, [location]);
+
+	useEffect(() => {
 		const timer = setTimeout(() => {
 			setVisible(false);
-			console.log("bruh");
+			setFirstLoad(false);
 		}, 4000);
 	}, []);
+
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setPageTransition(false);
+		}, 4000);
+	}, [locationCount]);
 
 	const element: any = useRoutes([
 		{ path: "/", element: <LandingPage /> },
