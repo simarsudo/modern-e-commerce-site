@@ -25,13 +25,18 @@ const hoverTimings = {
 const Navbar = (props: Props) => {
 	const [mobileNavOn, setMobileNavOn] = useState(false);
 	const location = useLocation();
+	console.log(location.pathname);
 
 	return (
 		<div className="2xl:m4 fixed top-0 left-0 z-40 flex h-14 w-full flex-col items-center justify-between border-b border-white bg-bg-dark font-bold text-white md:flex-row">
 			<div className="flex h-full min-h-[3.5rem] w-full items-center justify-between px-4">
-				<Link to="/" className="text-2xl font-medium italic">
-					LAVISH
-				</Link>
+				{location.pathname === "/" ? (
+					<h2 className="cursor-pointer text-2xl font-medium italic">LAVISH</h2>
+				) : (
+					<Link to="/" className="text-2xl font-medium italic">
+						LAVISH
+					</Link>
+				)}
 				<div className="flex gap-4">
 					{location.pathname === "/" ? (
 						<div
