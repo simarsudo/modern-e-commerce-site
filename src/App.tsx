@@ -43,7 +43,7 @@ function App() {
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			setPageTransition(false);
-		}, 4000);
+		}, 1000);
 	}, [locationCount]);
 
 	const element: any = useRoutes([
