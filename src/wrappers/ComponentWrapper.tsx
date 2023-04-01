@@ -10,7 +10,7 @@ type Props = {
 const ComponentWrapper = (props: Props) => {
 	return (
 		<motion.div
-			className={props.className}
+			className={`min-w-[25rem] ${props.className}`}
 			variants={componentVariant}
 			initial="initial"
 			animate="animate"
