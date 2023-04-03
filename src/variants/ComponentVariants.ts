@@ -1,21 +1,25 @@
 export const componentVariant = {
 	initial: {
-		scale: 0.8,
+		translateX: "50%",
+		scale: 0.9,
+		opacity: 0,
 	},
 	animate: {
+		translateX: 0,
 		scale: 1,
 		opacity: 1,
 		transition: {
 			duration: 0.2,
-			ease: "linear",
+			ease: "easeInOut",
 		},
 	},
 	exit: {
-		scale: 1.3,
+		translateX: "-50%",
+		scale: 0.9,
 		opacity: 0,
 		transition: {
-			duration: 0.3,
-			ease: "linear",
+			duration: 0.2,
+			ease: "easeInOut",
 		},
 	},
 };
