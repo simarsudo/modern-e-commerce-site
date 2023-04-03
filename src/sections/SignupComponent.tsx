@@ -11,7 +11,7 @@ const SignupSection = (props: Props) => {
 	};
 
 	return (
-		<ComponentWrapper className="mt-4 flex aspect-[1/1.4] w-[90%] origin-top flex-col justify-evenly overflow-hidden bg-bg-dark p-8 text-white md:max-w-[30%]">
+		<ComponentWrapper className="z-10 mt-4 flex aspect-[1/1.4] w-[90%] origin-top flex-col justify-evenly overflow-hidden rounded bg-bg-dark p-8 text-white md:max-w-[30%]">
 			<h2 className="border-b text-center font-highlight text-5xl font-bold md:text-6xl">
 				Sign Up
 			</h2>

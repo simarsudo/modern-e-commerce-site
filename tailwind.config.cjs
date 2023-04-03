@@ -18,6 +18,20 @@ module.exports = {
 			fontFamily: {
 				highlight: "Rokkitt",
 			},
+			animation: {
+				moveX: "moveX 10s ease-in-out infinite",
+				moveY: "moveY 10s ease-in-out infinite",
+			},
+			keyframes: {
+				moveX: {
+					"0%, 100%": { transform: "translateX(10%)" },
+					"50%": { transform: "translateX(-10%)" },
+				},
+				moveY: {
+					"0%, 100%": { transform: "translateY(10%)" },
+					"50%": { transform: "translateY(-10%)" },
+				},
+			},
 		},
 	},
 	plugins: [require("@tailwindcss/forms")],
