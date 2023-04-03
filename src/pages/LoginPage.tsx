@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import PageTransitionWrapper from "../wrappers/PageTransitionWrapper";
-import LoginComponent from "../components/LoginComponent";
-import SignupComponent from "../components/SignupComponent";
-import ForgotPasswordComponent from "../components/ForgotPasswordComponent";
+import LoginSection from "../sections/LoginSection";
+import SignupSection from "../sections/SignupComponent";
+import ForgotPasswordSection from "../sections/ForgotPasswordSection";
 
 const LoginPage = () => {
 	const [currentComponent, setCurrentComponent] = useState("login");
 
 	let Component = (
-		<LoginComponent
+		<LoginSection
 			key="loginComponent"
 			setCurrentComponent={setCurrentComponent}
 		/>
@@ -17,14 +17,14 @@ const LoginPage = () => {
 
 	if (currentComponent === "signup") {
 		Component = (
-			<SignupComponent
+			<SignupSection
 				key="signupComponent"
 				setCurrentComponent={setCurrentComponent}
 			/>
 		);
 	} else if (currentComponent === "forgot") {
 		Component = (
-			<ForgotPasswordComponent
+			<ForgotPasswordSection
 				key="forgot"
 				setCurrentComponent={setCurrentComponent}
 			/>

@@ -5,7 +5,7 @@ type Props = {
 	setCurrentComponent: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const ForgotPasswordComponent = (props: Props) => {
+const ForgotPasswordSection = (props: Props) => {
 	const submitHandler = (e: React.FormEvent) => {
 		e.preventDefault();
 	};
@@ -42,4 +42,4 @@ const ForgotPasswordComponent = (props: Props) => {
 	);
 };
 
-export default ForgotPasswordComponent;
+export default ForgotPasswordSection;
