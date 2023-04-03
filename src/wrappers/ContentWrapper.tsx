@@ -1,7 +1,7 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 type Props = {
-	children: JSX.Element;
+	children: ReactNode;
 };
 
 const ContentWrapper: React.FC<Props> = ({ children }) => {
