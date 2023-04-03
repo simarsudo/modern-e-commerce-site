@@ -18,7 +18,7 @@ const pageVariant = {
 		transition: { duration: 0.5 },
 	},
 	exit: {
-		top: "100%",
+		top: "-100%",
 		transition: {
 			duration: 1,
 			delay: 0.5,
@@ -51,7 +51,7 @@ const PageLoader = (props: Props) => {
 			variants={pageVariant}
 			animate="main"
 			exit="exit"
-			className="fixed top-full z-50 flex h-screen w-screen flex-col items-center justify-center gap-8 border-2 border-black bg-[#FFFFFF] font-black"
+			className="fixed top-full z-30 flex h-screen w-screen flex-col items-center justify-center gap-8 border-2 border-black bg-[#FFFFFF] font-black"
 		>
 			<motion.div
 				variants={imgWrapperVariant}
