@@ -41,13 +41,13 @@ const LoginPage = () => {
 			</AnimatePresence>
 			<Shirt
 				className="absolute top-28 left-10 w-28 animate-moveX"
-				shirtBG="white"
-				shirtHighlight="cyan"
+				shirtBG="#A8D8EA"
+				shirtHighlight="#FCBAD3"
 			/>
 			<Shirt
 				className="absolute top-1/2 right-72 w-24 animate-moveY"
-				shirtBG="white"
-				shirtHighlight="red"
+				shirtBG="#BAD7DF"
+				shirtHighlight="#99DDCC"
 			/>
 			<Shirt
 				className="absolute bottom-10 right-10 w-14 animate-moveX"
@@ -56,13 +56,13 @@ const LoginPage = () => {
 			/>
 			<Pant
 				className="absolute top-28 right-10 w-24 animate-moveY"
-				pantBg="white"
-				pantHighlight="darkgray"
+				pantBg="#DCD6F7"
+				pantHighlight="#424874"
 			/>
 			<Pant
 				className="absolute -bottom-4 left-48 w-24 animate-moveX"
-				pantBg="white"
-				pantHighlight="brown"
+				pantBg="#8785A2"
+				pantHighlight="black"
 			/>
 			<Pant
 				className="absolute top-16 left-1/4 w-16 animate-moveY"
