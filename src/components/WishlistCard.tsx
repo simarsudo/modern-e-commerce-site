@@ -1,4 +1,5 @@
 import React from "react";
+import { ShoppingCartIcon, TrashIcon } from "@heroicons/react/24/solid";
 
 type Props = {};
 
@@ -21,8 +22,12 @@ const WishlistCard = (props: Props) => {
 					</h4>
 				</div>
 				<div className="flex items-center gap-2">
-					<button className="filter-btn">Add</button>
-					<button className="filter-btn">Delete</button>
+					<button className="filter-btn flex items-center justify-center bg-teal-500">
+						<ShoppingCartIcon className="h-5 w-5" />
+					</button>
+					<button className="filter-btn flex items-center justify-center bg-rose-500 hover:bg-rose-600">
+						<TrashIcon className="h-5 w-5" />
+					</button>
 				</div>
 			</div>
 		</div>
