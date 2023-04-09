@@ -73,27 +73,27 @@ const ShirtsSection = (props: Props) => {
 					<MainCard
 						id="shirt"
 						type="shirts"
-						imgLink="https://api.lorem.space/image/album?w=350&h=500&hash=wmwzi6su"
+						imgLink="https://picsum.photos/300/400"
 					/>
 					<MainCard
 						id="shirt"
 						type="shirts"
-						imgLink="https://api.lorem.space/image/album?w=350&h=500&hash=kj5bnl3l"
+						imgLink="https://picsum.photos/300/400"
 					/>
 					<MainCard
 						id="shirt"
 						type="shirts"
-						imgLink="https://api.lorem.space/image/album?w=350&h=500&hash=dnqsm8rf"
+						imgLink="https://picsum.photos/300/400"
 					/>
 					<MainCard
 						id="shirt"
 						type="shirts"
-						imgLink="https://api.lorem.space/image/album?w=350&h=500&hash=yonbsdxr"
+						imgLink="https://picsum.photos/300/400"
 					/>
 					<MainCard
 						id="shirt"
 						type="shirts"
-						imgLink="https://api.lorem.space/image/album?w=350&h=500&hash=3kk4tw6g"
+						imgLink="https://picsum.photos/300/400"
 					/>
 					<LinkCard link="shirts" />
 				</ul>
