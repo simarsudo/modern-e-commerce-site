@@ -18,6 +18,10 @@ module.exports = {
 			fontFamily: {
 				highlight: "Rokkitt",
 			},
+			gridTemplateColumns: {
+				md: "repeat(auto-fit, minmax(16rem, 1fr))",
+				lg: "repeat(auto-fit, minmax(20rem, 1fr))",
+			},
 			animation: {
 				moveX: "moveX 10s ease-in-out infinite",
 				moveY: "moveY 10s ease-in-out infinite",

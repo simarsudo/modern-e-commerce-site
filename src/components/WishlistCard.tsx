@@ -5,20 +5,21 @@ type Props = {};
 
 const WishlistCard = (props: Props) => {
 	return (
-		<div className="col-span-1 aspect-[1/1.3] min-w-min max-w-min border-2 shadow-lg lg:min-w-[22%]">
-			<div className="min-w-min">
+		<div className="col-span-1 aspect-[1/1.3] rounded border-2 bg-bg-dark p-1 text-white shadow-lg">
+			<div className="">
 				<img
-					src="https://api.lorem.space/image/fashion?w=400&h=500&hash=ckszl2nd"
+					className="w-full object-cover"
+					src="https://picsum.photos/300/400"
 					alt=""
 				/>
 			</div>
-			<div className="flex min-w-min flex-col p-4">
-				<div className="flex min-w-min items-center justify-between font-bold">
-					<h3 className="w-1/2 min-w-min text-ellipsis whitespace-nowrap px-1 text-lg font-bold">
-						Product Name
+			<div className="flex flex-col justify-evenly gap-2 p-2">
+				<div className="flex items-center justify-between font-bold">
+					<h3 className="one-line w-2/3 overflow-hidden text-ellipsis px-1 text-lg font-bold">
+						Product Name dawd adw awd adw awd ad dww
 					</h3>
-					<h4 className="w-1/2 min-w-min text-ellipsis whitespace-nowrap px-1 text-end text-base font-bold">
-						Product Type
+					<h4 className="w-1/3 min-w-min text-ellipsis whitespace-nowrap px-1 text-end text-base font-light">
+						Type
 					</h4>
 				</div>
 				<div className="flex items-center gap-2">

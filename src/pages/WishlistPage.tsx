@@ -35,7 +35,7 @@ const WishlistPage = (props: Props) => {
 				</>
 			)}
 			{!wishlist && (
-				<div className="flex h-full min-h-full w-full min-w-full flex-wrap items-center justify-evenly gap-8 bg-white p-10">
+				<div className="grid h-full w-full grid-cols-md content-center items-center justify-evenly gap-8 bg-white p-4 md:p-10 2xl:grid-cols-lg">
 					<WishlistCard />
 					<WishlistCard />
 					<WishlistCard />

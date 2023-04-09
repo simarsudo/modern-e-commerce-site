@@ -75,6 +75,13 @@
 		@apply flex items-center gap-3 px-1 font-normal;
 	}
 
+	.one-line {
+		display: -webkit-box;
+		-webkit-line-clamp: 1;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
 	.filters-wrapper > div {
 		@apply mb-1 flex w-full flex-col gap-1 overflow-y-hidden;
 	}
