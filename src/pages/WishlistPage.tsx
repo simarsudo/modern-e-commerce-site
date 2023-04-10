@@ -7,7 +7,7 @@ import WishlistCard from "../components/WishlistCard";
 type Props = {};
 
 const WishlistPage = (props: Props) => {
-	const [wishlist, setWishlist] = useState(false);
+	const [wishlist, setWishlist] = useState(true);
 
 	return (
 		<PageTransitionWrapper
@@ -18,11 +18,11 @@ const WishlistPage = (props: Props) => {
 			{wishlist && (
 				<>
 					<div className="z-10 h-full w-full rounded-xl border-2 border-neutral-300 bg-white p-12">
-						<h3 className="flex h-full flex-grow flex-col text-3xl font-bold text-neutral-800">
-							Your wishlist is empty.
-						</h3>
-						<p className="bg-white text-center text-xl font-semibold text-neutral-700">
-							Go back to{" "}
+						<h2 className="mx-8 mt-4 flex overflow-hidden border-b pb-4 font-highlight text-7xl font-bold tracking-wide">
+							Your Wishlist
+						</h2>
+						<p className="mt-4 bg-white text-center text-2xl font-semibold text-neutral-700">
+							Never mind, go to the{" "}
 							<Link
 								to="/"
 								className="underline decoration-text decoration-2 underline-offset-4 transition-colors hover:text-text"
