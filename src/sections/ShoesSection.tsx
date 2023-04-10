@@ -2,6 +2,7 @@ import React from "react";
 import { easeOut, motion } from "framer-motion";
 import MainCard from "../components/MainCard";
 import LinkCard from "../components/LinkCard";
+import Shoe from "../svgImages/Shoe";
 
 type Props = {};
 
@@ -29,7 +30,7 @@ const ShoesSection = (props: Props) => {
 				initial="initial"
 				animate="animate"
 				viewport={{ once: true }}
-				className="flex overflow-hidden border-b pb-4 font-highlight text-6xl font-bold uppercase"
+				className="flex overflow-hidden border-b font-highlight text-8xl font-bold uppercase"
 			>
 				<motion.div className="font-highlight font-bold" variants={spanVariant}>
 					S
@@ -48,31 +49,31 @@ const ShoesSection = (props: Props) => {
 				</motion.div>
 			</motion.h2>
 			<div className="no-scrollbar flex overflow-x-scroll pb-8">
-				<ul className="grid w-full grid-cols-1 place-content-around gap-12 pt-4 md:grid-cols-4 md:gap-12">
+				<ul className="grid w-full grid-cols-md gap-4 pt-6 md:gap-10 2xl:grid-cols-lg">
 					<MainCard
 						id="shoe"
 						type="shoes"
-						imgLink="https://picsum.photos/300/400"
+						imgLink="https://picsum.photos/300/350"
 					/>
 					<MainCard
 						id="shoe"
 						type="shoes"
-						imgLink="https://picsum.photos/300/400"
+						imgLink="https://picsum.photos/300/350"
 					/>
 					<MainCard
 						id="shoe"
 						type="shoes"
-						imgLink="https://picsum.photos/300/400"
+						imgLink="https://picsum.photos/300/350"
 					/>
 					<MainCard
 						id="shoe"
 						type="shoes"
-						imgLink="https://picsum.photos/300/400"
+						imgLink="https://picsum.photos/300/350"
 					/>
 					<MainCard
 						id="shoe"
 						type="shoes"
-						imgLink="https://picsum.photos/300/400"
+						imgLink="https://picsum.photos/300/350"
 					/>
 					<LinkCard link="shoes" />
 				</ul>

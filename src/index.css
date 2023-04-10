@@ -11,6 +11,10 @@
 		font-family: "Raleway", sans-serif;
 	}
 
+	img {
+		object-fit: cover;
+	}
+
 	*::-webkit-scrollbar {
 		display: none;
 		-ms-overflow-style: none; /* IE and Edge */

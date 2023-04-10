@@ -6,7 +6,7 @@ import {
 	useAnimation,
 } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
+import { ArrowUpRightIcon, StarIcon } from "@heroicons/react/24/solid";
 
 type Props = {
 	imgLink: string;
@@ -18,7 +18,6 @@ const cardVariant = {
 	initial: {
 		scale: 0,
 		opacity: 0,
-		// transform: "translateY(-2.5rem), scale(0)",
 	},
 	animate: {
 		scale: 1,
@@ -68,16 +67,26 @@ const MainCard = (props: Props) => {
 		<motion.li
 			onHoverStart={(e) => handleMouseEvent(e)}
 			onHoverEnd={(e) => mousePositionCleanUp(e)}
-			className="card group"
+			className="w-full overflow-hidden rounded-xl bg-bg-dark text-white"
 		>
 			<Link to={`${props.type}/${props.id}`}>
-				<div className="relative overflow-hidden rounded-lg">
-					<img src={props.imgLink} alt="gg" />
+				<div className="relative h-[400px] w-[350px] overflow-hidden rounded-b-xl">
+					<img
+						src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1680943740_3715930.jpg?format=webp&w=300&dpr=2"
+						alt="gg"
+						className="w-full object-cover"
+					/>
 				</div>
-				<div className="flex justify-between">
-					<p>Name</p>
-					<p>Rs 500</p>
+				<div className="mx-4 flex justify-between border-b border-gray-600 p-2">
+					<p className="one-line font-semibold">Calvin Klen Shirt</p>
+					<span className="flex">
+						<StarIcon className="h-5 w-5 text-amber-400" />
+						<StarIcon className="h-5 w-5 text-amber-400" />
+						<StarIcon className="h-5 w-5 text-amber-400" />
+						<StarIcon className="h-5 w-5 text-amber-400" />
+					</span>
 				</div>
+				<p className="mx-4 p-2 pt-1 text-2xl font-bold">&#8377; 500</p>
 			</Link>
 			<AnimatePresence>
 				{isVisible && (
