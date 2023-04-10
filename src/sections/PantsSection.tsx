@@ -40,7 +40,7 @@ const PantsSection = (props: Props) => {
 				variants={h2Variant}
 				initial="initial"
 				animate={animationControl}
-				className="flex overflow-hidden border-b pb-4 text-6xl"
+				className="flex overflow-hidden border-b pb-4 text-8xl"
 			>
 				<motion.div className="font-highlight font-bold" variants={spanVariant}>
 					J
