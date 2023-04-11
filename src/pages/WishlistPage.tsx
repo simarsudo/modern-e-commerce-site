@@ -7,7 +7,7 @@ import WishlistCard from "../components/WishlistCard";
 type Props = {};
 
 const WishlistPage = (props: Props) => {
-	const [wishlist, setWishlist] = useState(true);
+	const [wishlist, setWishlist] = useState(false);
 
 	return (
 		<PageTransitionWrapper

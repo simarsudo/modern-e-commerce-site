@@ -7,6 +7,7 @@ import {
 } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRightIcon, StarIcon } from "@heroicons/react/24/solid";
+import { HeartIcon } from "@heroicons/react/24/outline";
 
 type Props = {
 	imgLink: string;
@@ -69,8 +70,8 @@ const MainCard = (props: Props) => {
 			onHoverEnd={(e) => mousePositionCleanUp(e)}
 			className="w-full overflow-hidden rounded-xl bg-bg-dark text-white"
 		>
-			<Link to={`${props.type}/${props.id}`}>
-				<div className="relative h-[400px] w-[350px] overflow-hidden rounded-b-xl">
+			<Link className="relative" to={`${props.type}/${props.id}`}>
+				<div className="relative overflow-hidden rounded-b-xl">
 					<img
 						src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1680943740_3715930.jpg?format=webp&w=300&dpr=2"
 						alt="gg"
@@ -86,7 +87,15 @@ const MainCard = (props: Props) => {
 						<StarIcon className="h-5 w-5 text-amber-400" />
 					</span>
 				</div>
-				<p className="mx-4 p-2 pt-1 text-2xl font-bold">&#8377; 500</p>
+				<div className="mx-4 flex items-center justify-between p-2">
+					<p className="text-2xl font-bold">&#8377; 500</p>
+					<div
+						className="h-8 w-8 transition-all hover:scale-125"
+						onClick={(e) => e.preventDefault()}
+					>
+						<HeartIcon className="h-8 w-8 text-rose-500" />
+					</div>
+				</div>
 			</Link>
 			<AnimatePresence>
 				{isVisible && (
