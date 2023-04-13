@@ -25,11 +25,11 @@ const ForgotPasswordSection = (props: Props) => {
 						<input type="email" />
 					</div>
 					<div className="flex gap-2">
-						<button type="submit" className="filter-btn">
+						<button type="submit" className="filter-btn btn-click">
 							Send reset link
 						</button>
 						<button
-							className="filter-btn"
+							className="filter-btn btn-click"
 							type="button"
 							onClick={() => {
 								props.setCurrentComponent("login");

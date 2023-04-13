@@ -30,7 +30,7 @@ const LoginSection = (props: Props) => {
 				>
 					Forgot your password?
 				</p>
-				<button className="filter-btn">Login</button>
+				<button className="filter-btn btn-click">Login</button>
 			</form>
 			<p
 				className="mt-4 text-center text-xl font-bold underline hover:cursor-pointer"

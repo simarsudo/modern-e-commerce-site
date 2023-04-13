@@ -28,7 +28,7 @@ const SignupSection = (props: Props) => {
 					<span className="text-white">Password</span>
 					<input type="password" />
 				</div>
-				<button className="filter-btn mt-6">Login</button>
+				<button className="filter-btn btn-click mt-6">Login</button>
 			</form>
 			<p
 				className="mt-4 text-center text-xl font-bold underline hover:cursor-pointer"
