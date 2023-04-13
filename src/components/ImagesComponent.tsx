@@ -8,15 +8,16 @@ const ImagesComponent = (props: Props) => {
 	const [currentImg, setCurrentImg] = useState(props.imgs[0]);
 
 	return (
-		<div className="ml-4 flex h-[88vh] gap-4 overflow-hidden py-4">
-			<div className={`overflow-hidden overflow-y-auto transition-all`}>
-				<div className="flex flex-shrink-0 flex-col gap-1 overflow-y-auto">
+		<div className="flex min-h-full w-full flex-col-reverse gap-4 overflow-hidden py-4 md:h-[88vh] md:flex-row">
+			<div
+				className={`w-full shrink-0 overflow-hidden overflow-x-auto transition-all md:w-auto md:overflow-y-auto`}
+			>
+				<div className="flex w-full gap-1 overflow-x-auto md:flex-col md:overflow-y-auto">
 					{props.imgs.map((imgLink, key) => {
-						console.log(key);
 						return (
 							<div
 								key={key}
-								className="w-36 hover:cursor-pointer"
+								className="min-w-[5rem] max-w-[5rem] hover:cursor-pointer md:w-36 lg:min-w-full lg:max-w-max"
 								onClick={() => {
 									setCurrentImg(imgLink);
 								}}
@@ -27,8 +28,8 @@ const ImagesComponent = (props: Props) => {
 					})}
 				</div>
 			</div>
-			<div className="mr-4 flex justify-end overflow-hidden border-2 border-neutral-400 md:ml-5 lg:ml-10">
-				<img className="w-[28rem] object-cover" src={currentImg} alt="" />
+			<div className="flex w-full shrink-0">
+				<img src={currentImg} className="" alt="" />
 			</div>
 		</div>
 	);

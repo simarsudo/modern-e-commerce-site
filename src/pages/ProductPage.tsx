@@ -24,11 +24,11 @@ const ProductPage = (props: Props) => {
 
 	return (
 		<PageTransitionWrapper className="content-wrapper">
-			<div className="flex w-full p-4">
-				<div className="w-1/2">
+			<div className="flex w-full flex-col p-4 md:flex-row md:gap-4">
+				<div className="w-full lg:w-1/2">
 					<ImagesComponent imgs={imgs} />
 				</div>
-				<div className="flex w-1/2 flex-col gap-4">
+				<div className="flex w-full flex-col gap-4 md:w-1/2 md:pr-4">
 					<div className="border-b-2">
 						<h1 className="my-4 text-4xl font-extrabold uppercase text-neutral-900">
 							Product {`${id}`}
@@ -52,7 +52,7 @@ const ProductPage = (props: Props) => {
 							</button>
 						</div>
 					</div>
-					<div className="flex w-[40rem] flex-col gap-4 text-justify">
+					<div className="flex w-full flex-col gap-4 text-justify lg:w-[36rem]">
 						<h3 className="text-2xl font-semibold text-neutral-700 underline decoration-2">
 							Details
 						</h3>
