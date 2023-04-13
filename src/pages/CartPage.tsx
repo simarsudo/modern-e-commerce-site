@@ -22,7 +22,7 @@ const CartPage = (props: Props) => {
 						<PaymentPriceCard name="GST" price={50} />
 						<PaymentPriceCard name="Shipping Charges" price={50} />
 					</div>
-					<div className="mb-4 flex items-center justify-between border-t-2 p-2 px-6 font-semibold font-bold text-neutral-700">
+					<div className="mb-4 flex items-center justify-between border-t-2 p-2 px-6 font-semibold text-neutral-700">
 						<p className="font-semibold subpixel-antialiased">
 							Total (Including Taxes)
 						</p>
