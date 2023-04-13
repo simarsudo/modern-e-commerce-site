@@ -17,6 +17,7 @@ module.exports = {
 			},
 			fontFamily: {
 				highlight: "Rokkitt",
+				price: "Poppins",
 			},
 			gridTemplateColumns: {
 				md: "repeat(auto-fit, minmax(16rem, 1fr))",
