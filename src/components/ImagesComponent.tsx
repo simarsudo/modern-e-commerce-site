@@ -1,5 +1,4 @@
-import React, { ReactElement, ReactHTMLElement, useRef, useState } from "react";
-import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
+import React, { useState } from "react";
 
 type Props = {
 	imgs: string[];
