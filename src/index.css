@@ -114,6 +114,10 @@
 		animation: pulse2 1s infinite alternate;
 	}
 
+	.btn-click {
+		@apply hover:-translate-y-1 active:translate-y-1;
+	}
+
 	@keyframes pulse2 {
 		from {
 			opacity: 0;

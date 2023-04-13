@@ -14,18 +14,26 @@ const SummaryCard = (props: Props) => {
 			</div>
 			<div className="flex w-1/2 flex-col justify-between">
 				<div className="mr-1 flex flex-col">
-					<h4 className="text-lg font-bold text-neutral-800">Product Name</h4>
-					<h5 className="text-neutral-700">Shirt</h5>
+					<h4 className="text-xl font-bold text-neutral-800">Product Name</h4>
+					<h5 className="text-lg text-neutral-700">Shirt</h5>
 				</div>
 				<div className="mb-2 flex gap-4">
-					<select name="size" id="size" className="mr-1 h-10 w-min">
+					<select
+						name="size"
+						id="size"
+						className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
+					>
 						<option value="XS">XS</option>
 						<option value="S">S</option>
 						<option value="M">M</option>
 						<option value="L">L</option>
 						<option value="Xl">Xl</option>
 					</select>
-					<select name="size" id="size" className="mr-1 h-10 w-min">
+					<select
+						name="size"
+						id="size"
+						className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
+					>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -35,12 +43,14 @@ const SummaryCard = (props: Props) => {
 				</div>
 			</div>
 			<div className="flex w-60 flex-col justify-between">
-				<div className="flex justify-end font-price">&#8377; 500/-</div>
+				<h4 className="flex justify-end font-price text-lg font-semibold text-neutral-900">
+					&#8377; 500/-
+				</h4>
 				<div className="flex items-end justify-end">
-					<button className="filter-btn mx-1 max-w-min rounded bg-rose-600 hover:bg-rose-500">
+					<button className="filter-btn btn-click mx-1 max-w-min rounded bg-rose-600 text-base font-semibold hover:bg-rose-500 ">
 						Remove
 					</button>
-					<button className="filter-btn mx-1 max-w-min whitespace-nowrap rounded bg-sky-600 hover:bg-sky-500">
+					<button className="filter-btn btn-click mx-1 max-w-min whitespace-nowrap rounded bg-sky-600 text-base font-semibold hover:bg-sky-500">
 						Move to Wishlist
 					</button>
 				</div>

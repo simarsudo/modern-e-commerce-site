@@ -7,8 +7,8 @@ type Props = {
 
 const PaymentPriceCard = (props: Props) => {
 	return (
-		<div className="flex items-center justify-between border-b-2 p-4 px-6 font-bold text-neutral-700">
-			<p className="font-semibold subpixel-antialiased">{props.name}</p>
+		<div className="flex items-center justify-between border-b-2 p-4 px-6 font-semibold text-neutral-700">
+			<p className="subpixel-antialiased">{props.name}</p>
 			<p className="font-price">&#8377; {props.price}/-</p>
 		</div>
 	);
