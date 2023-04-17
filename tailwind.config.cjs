@@ -22,6 +22,7 @@ module.exports = {
 			gridTemplateColumns: {
 				md: "repeat(auto-fit, minmax(16rem, 1fr))",
 				lg: "repeat(auto-fit, minmax(20rem, 1fr))",
+				summaryCard: "repeat(4, 2rem) repeat(8, 1fr)",
 			},
 			animation: {
 				moveX: "moveX 10s ease-in-out infinite",
