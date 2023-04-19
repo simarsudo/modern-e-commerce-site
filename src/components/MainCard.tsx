@@ -68,9 +68,9 @@ const MainCard = (props: Props) => {
 		<motion.li
 			onHoverStart={(e) => handleMouseEvent(e)}
 			onHoverEnd={(e) => mousePositionCleanUp(e)}
-			className="w-full overflow-hidden rounded-xl bg-bg-dark text-white"
+			className="max-h-min w-full max-w-sm overflow-hidden rounded-xl bg-bg-dark text-white"
 		>
-			<Link className="relative" to={`${props.type}/${props.id}`}>
+			<Link className="relative max-h-min" to={`${props.type}/${props.id}`}>
 				<div className="relative overflow-hidden rounded-b-xl">
 					<img
 						src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1680943740_3715930.jpg?format=webp&w=300&dpr=2"

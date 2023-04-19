@@ -20,8 +20,8 @@ module.exports = {
 				price: "Poppins",
 			},
 			gridTemplateColumns: {
-				md: "repeat(auto-fit, minmax(16rem, 1fr))",
-				lg: "repeat(auto-fit, minmax(20rem, 1fr))",
+				md: "repeat(auto-fill, minmax(16rem, 1fr))",
+				lg: "repeat(auto-fill, minmax(20rem, 1fr))",
 				summaryCard: "repeat(4, 2rem) repeat(8, 1fr)",
 			},
 			gridTemplateRows: {
