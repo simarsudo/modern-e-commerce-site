@@ -24,6 +24,9 @@ module.exports = {
 				lg: "repeat(auto-fit, minmax(20rem, 1fr))",
 				summaryCard: "repeat(4, 2rem) repeat(8, 1fr)",
 			},
+			gridTemplateRows: {
+				summaryCard: "repeat(5, 2.2rem)",
+			},
 			animation: {
 				moveX: "moveX 10s ease-in-out infinite",
 				moveY: "moveY 10s ease-in-out infinite",

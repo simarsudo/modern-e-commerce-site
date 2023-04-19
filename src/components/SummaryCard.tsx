@@ -4,7 +4,7 @@ type Props = {};
 
 const SummaryCard = (props: Props) => {
 	return (
-		<div className="grid h-60 max-h-min grid-cols-summaryCard grid-rows-5 gap-1 border-b-2 pb-2">
+		<div className="grid h-60 max-h-min grid-cols-summaryCard grid-rows-summaryCard gap-1 border-b-2 pb-2">
 			<div className="col-start-1 col-end-5 row-span-full mr-1 h-full w-auto object-cover">
 				<img
 					className="h-full w-auto object-cover"
