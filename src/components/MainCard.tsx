@@ -38,6 +38,8 @@ const MainCard = (props: Props) => {
 	const [isVisible, setIsVisible] = useState(0);
 	const animationControl = useAnimation();
 
+	props.type.toLowerCase();
+
 	const applyValues = (x: number, y: number) => {
 		setXpos(x);
 		setYpos(y);
@@ -70,7 +72,7 @@ const MainCard = (props: Props) => {
 			onHoverEnd={(e) => mousePositionCleanUp(e)}
 			className="max-h-min w-full max-w-sm overflow-hidden rounded-xl bg-bg-dark text-white"
 		>
-			<Link className="relative max-h-min" to={`${props.type}/${props.id}`}>
+			<Link className="relative max-h-min" to={`/${props.type}/${props.id}`}>
 				<div className="relative overflow-hidden rounded-b-xl">
 					<img
 						src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1680943740_3715930.jpg?format=webp&w=300&dpr=2"
