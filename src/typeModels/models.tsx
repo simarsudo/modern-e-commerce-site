@@ -14,4 +14,11 @@ export type productAPI = {
 	thumbnail: string;
 };
 
+export type item = {
+	name: string;
+	price: number;
+	type: string;
+	images: string[];
+};
+
 export type products = product[];

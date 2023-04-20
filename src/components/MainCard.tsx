@@ -75,7 +75,11 @@ const MainCard = (props: Props) => {
 			<Link className="relative max-h-min" to={`/${props.type}/${props.id}`}>
 				<div className="relative overflow-hidden rounded-b-xl">
 					<img
-						src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1680943740_3715930.jpg?format=webp&w=300&dpr=2"
+						src={
+							props.imgLink
+								? props.imgLink
+								: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1680943740_3715930.jpg?format=webp&w=300&dpr=2"
+						}
 						alt="gg"
 						className="w-full object-cover"
 					/>
