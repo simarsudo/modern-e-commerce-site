@@ -57,10 +57,10 @@ function App() {
 		{ path: "/cart", element: <CartPage /> },
 		{ path: "/wishlist", element: <WishlistPage /> },
 		{ path: "/shirts", element: <Products /> },
-		{ path: "/pants", element: <Products /> },
+		{ path: "/jeans", element: <Products /> },
 		{ path: "/shoes", element: <Products /> },
 		{ path: "/shirts/:id", element: <ProductPage /> },
-		{ path: "/pants/:id", element: <ProductPage /> },
+		{ path: "/jeans/:id", element: <ProductPage /> },
 		{ path: "/shoes/:id", element: <ProductPage /> },
 		{ path: "*", element: <PageNotFound /> },
 	]);

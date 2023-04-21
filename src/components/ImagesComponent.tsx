@@ -5,7 +5,7 @@ type Props = {
 };
 
 const ImagesComponent = (props: Props) => {
-	const [currentImg, setCurrentImg] = useState(props.imgs[0]);
+	const [currentImg, setCurrentImg] = useState(props?.imgs[0]);
 
 	return (
 		<div className="flex min-h-full w-full flex-col-reverse gap-4 overflow-hidden py-4 md:h-[88vh] md:flex-row">

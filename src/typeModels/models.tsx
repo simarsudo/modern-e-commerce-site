@@ -15,6 +15,7 @@ export type productAPI = {
 };
 
 export type item = {
+	id: string;
 	name: string;
 	price: number;
 	type: string;

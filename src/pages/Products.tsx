@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PageTransitionWrapper from "../wrappers/PageTransitionWrapper";
 import { useLocation } from "react-router-dom";
-import MainCard from "../components/MainCard";
+import { Link } from "react-router-dom";
 import { item } from "../typeModels/models";
+import { fireDB } from "../Firebase";
+import { query, limit, collection, getDocs } from "firebase/firestore";
+import MainCard from "../components/MainCard";
+import ErrorComponent from "../components/ErrorComponent";
 
 type Props = {};
 
@@ -13,79 +17,70 @@ const pagevariants = {
 const Products = (props: Props) => {
 	const [items, setItems] = useState<item[]>([]);
 	const [firstLoad, setFirstLoad] = useState(false);
+	const [error, setError] = useState(false);
 	const location = useLocation();
+	const itemData = location.pathname.split("/");
+	const itemType = itemData[1];
+	const itemId = itemData[2];
 
 	useEffect(() => {
 		async function getData(currentPath: string) {
-			var data;
-			if (currentPath === "/shirts") {
-				const response = await fetch("http://127.0.0.1:8000/items");
-				const jsonData: item[] = await response.json();
-				setItems(jsonData);
+			var data: item;
+			if (currentPath === "/shirts" || "shoes" || "jeans") {
+				const shirtRef = collection(fireDB, itemType);
+				const q = query(shirtRef, limit(3));
+				const querySnapshot = await getDocs(q);
+				querySnapshot.forEach((doc) => {
+					setItems((prevValue) => {
+						var newData = doc.data();
+						data = {
+							id: doc.id,
+							images: newData.images,
+							name: newData.name,
+							price: newData.price,
+							type: newData.type,
+						};
+						return [...prevValue, data];
+					});
+				});
 				return;
 			}
 			return;
 		}
 
 		if (!firstLoad) {
-			console.log("data fetched");
-			getData(location.pathname);
+			try {
+				getData(location.pathname);
+			} catch (e) {
+				console.log(e);
+				setError(true);
+			}
 			setFirstLoad(true);
 		}
 	});
 
 	return (
-		<PageTransitionWrapper className="content-wrapper relative">
-			{/* <h2 className="my-4 h-full w-full px-4 font-highlight text-6xl font-semibold uppercase md:px-10">
-				{`${location.pathname}`.replace("/", "")}
-			</h2> */}
-			<ul className="grid grid-cols-md justify-items-start gap-8 bg-white p-4 md:p-10 2xl:grid-cols-lg">
-				{items.length > 0 ? (
-					items.map((item, key) => {
+		<PageTransitionWrapper
+			className={`content-wrapper relative ${
+				error && "flex items-center justify-center"
+			}`}
+		>
+			{!error ? (
+				<ul className="grid grid-cols-md justify-items-start gap-8 bg-white p-4 md:p-10 2xl:grid-cols-lg">
+					{items.map((item) => {
 						return (
 							<MainCard
-								key={key}
-								type={item.images[0]}
-								id={`${key}`}
+								key={item.id}
+								type={item.type}
+								id={`${item.id}`}
 								imgLink={item.images[0]}
 							/>
 						);
-					})
-				) : (
-					<>
-						<MainCard
-							id="d"
-							imgLink="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1680943740_3715930.jpg?format=webp&w=300&dpr=2"
-							type="Shirt"
-						/>
-						<MainCard
-							id="d"
-							imgLink="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1680943740_3715930.jpg?format=webp&w=300&dpr=2"
-							type="Shirt"
-						/>
-						<MainCard
-							id="d"
-							imgLink="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1680943740_3715930.jpg?format=webp&w=300&dpr=2"
-							type="Shirt"
-						/>
-						<MainCard
-							id="d"
-							imgLink="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1680943740_3715930.jpg?format=webp&w=300&dpr=2"
-							type="Shirt"
-						/>
-						<MainCard
-							id="d"
-							imgLink="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1680943740_3715930.jpg?format=webp&w=300&dpr=2"
-							type="Shirt"
-						/>
-						<MainCard
-							id="d"
-							imgLink="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1680943740_3715930.jpg?format=webp&w=300&dpr=2"
-							type="Shirt"
-						/>
-					</>
-				)}{" "}
-			</ul>
+					})}
+				</ul>
+			) : (
+				<ErrorComponent />
+			)}
 		</PageTransitionWrapper>
 	);
 };

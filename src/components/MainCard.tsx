@@ -9,10 +9,24 @@ import { Link } from "react-router-dom";
 import { ArrowUpRightIcon, StarIcon } from "@heroicons/react/24/solid";
 import { HeartIcon } from "@heroicons/react/24/outline";
 
+type itemType = {
+	shirt: string;
+	pant: string;
+	jeans: string;
+	shoes: string;
+};
+
 type Props = {
 	imgLink: string;
 	type: string;
 	id: string;
+};
+
+const itemType: itemType = {
+	shirt: "shirts",
+	pant: "pants",
+	jeans: "jeans",
+	shoes: "shoes",
 };
 
 const cardVariant = {
@@ -72,8 +86,11 @@ const MainCard = (props: Props) => {
 			onHoverEnd={(e) => mousePositionCleanUp(e)}
 			className="max-h-min w-full max-w-sm overflow-hidden rounded-xl bg-bg-dark text-white"
 		>
-			<Link className="relative max-h-min" to={`/${props.type}/${props.id}`}>
-				<div className="relative overflow-hidden rounded-b-xl">
+			<Link
+				className="relative max-h-min"
+				to={`/${itemType[props.type as keyof itemType]}/${props.id}`}
+			>
+				<div className="relative overflow-hidden">
 					<img
 						src={
 							props.imgLink
