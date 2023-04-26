@@ -10,10 +10,12 @@
 	},
 	"dependencies": {
 		"@heroicons/react": "^2.0.16",
+		"@reduxjs/toolkit": "^1.9.5",
 		"firebase": "^9.20.0",
 		"framer-motion": "^10.3.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
+		"react-redux": "^8.0.5",
 		"react-router-dom": "^6.9.0"
 	},
 	"devDependencies": {
