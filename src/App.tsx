@@ -1,6 +1,9 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { useLocation, useRoutes } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import { onAuthStateChanged, getAuth } from "firebase/auth";
+import { useAppDispatch, useAppSelector } from "./store/hooks"; 
+import { authenticateUser, deAuthenticateUser } from "./store/UserSlice";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProductsPage from "./pages/ProductsPage";
@@ -22,6 +25,9 @@ function App() {
 	const [firstLoad, setFirstLoad] = useState(true);
 	const location = useLocation();
 	const [visible, setVisible] = useState(true);
+	const auth = getAuth()
+	const currentUser = useAppSelector(state=> state.user)
+	const dispatch = useAppDispatch()
 
 	useEffect(() => {
 		if (!firstLoad) {
@@ -29,7 +35,7 @@ function App() {
 			setLocationCount((prevValue) => {
 				return prevValue + 1;
 			});
-			console.log("location Changed");
+			// console.log("location Changed");
 		}
 	}, [location]);
 
@@ -45,6 +51,14 @@ function App() {
 			setPageTransition(false);
 		}, 1000);
 	}, [locationCount]);
+
+	onAuthStateChanged(auth, (user)=>{
+		if(user) {
+			dispatch(authenticateUser({displayName: user.displayName!, email: user.email!}))
+		} else {
+			dispatch(deAuthenticateUser())
+		}
+	})
 
 	const element: any = useRoutes([
 		{ path: "/", element: <LandingPage /> },

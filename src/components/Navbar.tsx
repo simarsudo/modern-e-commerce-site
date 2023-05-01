@@ -6,6 +6,7 @@ import {
 	UserIcon,
 	ShoppingBagIcon,
 	AdjustmentsHorizontalIcon,
+	ArrowLeftOnRectangleIcon
 } from "@heroicons/react/24/solid";
 import NavItem from "./NavItem";
 
