@@ -84,32 +84,37 @@ const Navbar = (props: Props) => {
                             <ArrowLeftOnRectangleIcon className="h-6 w-6 text-white hover:cursor-pointer hover:text-text" />
                         </li>
                     )}
-                    <NavItem
-                        hoverStyles={hoverStyles}
-                        hoverTimings={hoverTimings}
-                        linkName="Wishlist"
-                        linkTo="wishlist"
-                    >
-                        <HeartIcon className="h-6 w-6" />
-                    </NavItem>
+                    {isAuthenticated && (
+                        <>
+                            <NavItem
+                                hoverStyles={hoverStyles}
+                                hoverTimings={hoverTimings}
+                                linkName="Wishlist"
+                                linkTo="wishlist"
+                            >
+                                <HeartIcon className="h-6 w-6" />
+                            </NavItem>
+                            <NavItem
+                                hoverStyles={hoverStyles}
+                                hoverTimings={hoverTimings}
+                                linkName="Cart"
+                                linkTo="cart"
+                            >
+                                <ShoppingBagIcon className="h-6 w-6" />
+                            </NavItem>
+                        </>
+                    )}
 
-                    <NavItem
-                        hoverStyles={hoverStyles}
-                        hoverTimings={hoverTimings}
-                        linkName="Cart"
-                        linkTo="cart"
-                    >
-                        <ShoppingBagIcon className="h-6 w-6" />
-                    </NavItem>
-
-                    <NavItem
-                        hoverStyles={hoverStyles}
-                        hoverTimings={hoverTimings}
-                        linkName="Login"
-                        linkTo="login"
-                    >
-                        <UserIcon className="h-6 w-6" />
-                    </NavItem>
+                    {!isAuthenticated && (
+                        <NavItem
+                            hoverStyles={hoverStyles}
+                            hoverTimings={hoverTimings}
+                            linkName="Login"
+                            linkTo="login"
+                        >
+                            <UserIcon className="h-6 w-6" />
+                        </NavItem>
+                    )}
                 </ul>
             </div>
         </div>
