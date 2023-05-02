@@ -15,6 +15,10 @@ const ProductPage = (props: Props) => {
     const [item, setItem] = useState<item>();
     const [loading, setLoading] = useState(false);
     const currentUser = useAppSelector((state) => state.user);
+    const cartItems = useAppSelector((state) => state.cart.cartItems);
+    const wishlistItems = useAppSelector(
+        (state) => state.wishlist.wishlistItems
+    );
     const location = useLocation();
     const itemData = location.pathname.split("/");
     const itemType = itemData[1];
