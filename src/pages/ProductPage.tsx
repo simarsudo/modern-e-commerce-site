@@ -4,7 +4,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import ImagesComponent from "../components/ImagesComponent";
 import ShoeSize from "../components/ShoeSize";
 import { fireDB } from "../Firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { item } from "../typeModels/models";
 import { useAppSelector } from "../store/hooks";
 
@@ -13,14 +13,14 @@ type Props = {};
 const ProductPage = (props: Props) => {
     const [firstLoad, setFirstLoad] = useState(false);
     const [item, setItem] = useState<item>();
-    const isAuthenticared = useAppSelector(
-        (state) => state.user.isAuthenticated
-    );
+    const [loading, setLoading] = useState(false);
+    const currentUser = useAppSelector((state) => state.user);
     const location = useLocation();
     const itemData = location.pathname.split("/");
     const itemType = itemData[1];
     const itemId = itemData[2];
 
+    // Data Fetching from firebase using router link
     useEffect(() => {
         const getItemDetails = async () => {
             const docRef = doc(fireDB, itemType, itemId);
@@ -42,6 +42,28 @@ const ProductPage = (props: Props) => {
             getItemDetails();
         }
     });
+
+    // add to user card or wishlist
+    const btnHandlers = async (option: "cart" | "wishlist") => {
+        if (!loading) {
+            const docRef = doc(fireDB, "users", currentUser.uid);
+            try {
+                if (option === "wishlist") {
+                    await updateDoc(docRef, {
+                        wishlist: arrayUnion(itemId),
+                    });
+                } else if (option === "cart") {
+                    await updateDoc(docRef, {
+                        cart: arrayUnion(itemId),
+                    });
+                }
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setLoading(false);
+            }
+        }
+    };
 
     return (
         <PageTransitionWrapper className="content-wrapper">
@@ -66,12 +88,20 @@ const ProductPage = (props: Props) => {
                         <p className="font-semibold text-neutral-500">
                             Size are based on UK/India
                         </p>
-                        {isAuthenticared ? (
+                        {currentUser.isAuthenticated ? (
                             <div className="flex gap-4">
-                                <button className="filter-btn w-80 bg-sky-600 py-3 text-xl font-semibold hover:bg-sky-500">
+                                <button
+                                    onClick={() => btnHandlers("wishlist")}
+                                    disabled={loading}
+                                    className="filter-btn w-80 bg-sky-600 py-3 text-xl font-semibold hover:bg-sky-500"
+                                >
                                     Add to Wishlist
                                 </button>
-                                <button className="filter-btn w-80 bg-sky-600 py-3 text-xl font-semibold hover:bg-sky-500">
+                                <button
+                                    onClick={() => btnHandlers("cart")}
+                                    disabled={loading}
+                                    className="filter-btn w-80 bg-sky-600 py-3 text-xl font-semibold hover:bg-sky-500"
+                                >
                                     Add to Cart
                                 </button>
                             </div>
