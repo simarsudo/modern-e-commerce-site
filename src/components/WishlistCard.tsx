@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ShoppingCartIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { doc, getDoc } from "firebase/firestore";
 import { fireDB } from "../Firebase";
 import { product, item } from "../typeModels/models";
+import { useAppSelector } from "../store/hooks";
 
 type Props = {
     id: string;
 };
 
 const WishlistCard = (props: Props) => {
-    const [firstFetch, setFirstFetch] = useState(true);
     const [productDetails, setProductDetails] = useState<product>({
         name: "default",
         id: "default",
@@ -17,6 +17,8 @@ const WishlistCard = (props: Props) => {
         price: 100,
         type: "idk",
     });
+    const currentUser = useAppSelector((state) => state.user);
+
     // console.log(props.id);
     const fetchProductDetails = async () => {
         const docRef = doc(fireDB, "products", props.id);
@@ -34,19 +36,20 @@ const WishlistCard = (props: Props) => {
         } else {
             console.log("iuuuuffff");
         }
-        setFirstFetch(false);
     };
 
-    if (firstFetch) {
-        fetchProductDetails();
-    }
+    useEffect(() => {
+        if (currentUser.isAuthenticated) {
+            fetchProductDetails();
+        }
+    }, [currentUser]);
 
     return (
         <div className="col-span-1 overflow-hidden rounded-xl bg-bg-dark text-white shadow-lg">
             <div className="overflow-hidden">
                 <img
                     className="object-cover"
-                    src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1680943740_3715930.jpg?format=webp&w=300&dpr=2"
+                    src={productDetails.imgLink}
                     alt=""
                 />
             </div>

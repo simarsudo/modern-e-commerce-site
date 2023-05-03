@@ -19,15 +19,14 @@ import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import WishlistPage from "./pages/WishlistPage";
 import { fireDB } from "./Firebase";
-import { createNewCart } from "./store/cartSlice";
-import { createNewWishlist } from "./store/wishlistSlice";
+import { createNewCart, emptyUserCart } from "./store/cartSlice";
+import { createNewWishlist, emptyUserWishlist } from "./store/wishlistSlice";
 
 function App() {
     const [isMobileFilterOn, setMobileFilters] = useState(false);
     const [pageTransition, setPageTransition] = useState(false);
     const [locationCount, setLocationCount] = useState(0);
     const [firstLoad, setFirstLoad] = useState(true);
-    const [firstDataFetch, setFirstDataFetch] = useState(true);
     const location = useLocation();
     const [visible, setVisible] = useState(true);
     const auth = getAuth();
@@ -45,7 +44,6 @@ function App() {
         } else {
             console.log("Data don't exist");
         }
-        setFirstDataFetch(false);
     };
 
     useEffect(() => {
@@ -73,10 +71,10 @@ function App() {
 
     // wishlist and cart data fetching of the user
     useEffect(() => {
-        if (firstDataFetch && currentUser.isAuthenticated) {
+        if (currentUser.isAuthenticated) {
             fetchWishlistAndCart(currentUser.uid);
         }
-    }, [currentUser.isAuthenticated]);
+    }, [currentUser]);
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -89,6 +87,8 @@ function App() {
             );
         } else {
             dispatch(deAuthenticateUser());
+            dispatch(emptyUserCart());
+            dispatch(emptyUserWishlist());
         }
     });
 
