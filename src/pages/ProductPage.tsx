@@ -27,6 +27,7 @@ const ProductPage = (props: Props) => {
     // Data Fetching from firebase using router link
     useEffect(() => {
         const getItemDetails = async () => {
+            console.log(itemId);
             const docRef = doc(fireDB, "products", itemId);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {

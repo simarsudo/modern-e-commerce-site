@@ -35,8 +35,8 @@ const ShirtsSection = (props: Props) => {
     useEffect(() => {
         async function getData() {
             var data: item;
-            const shirtRef = collection(fireDB, "shirts");
-            const q = query(shirtRef, where("type", "==", "shirt"), limit(5));
+            const shirtRef = collection(fireDB, "products");
+            const q = query(shirtRef, where("type", "==", "shirts"), limit(5));
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
                 setItems((prevValue) => {
