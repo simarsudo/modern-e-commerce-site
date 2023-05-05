@@ -32,7 +32,6 @@ const Navbar = (props: Props) => {
     const isAuthenticated = useAppSelector(
         (state) => state.user.isAuthenticated
     );
-    // console.log(location.pathname);
 
     return (
         <div className="2xl:m4 fixed top-0 left-0 z-40 flex h-14 w-full flex-col items-center justify-between border-b border-white bg-bg-dark font-bold text-white md:flex-row">
@@ -80,7 +79,7 @@ const Navbar = (props: Props) => {
             >
                 <ul className="flex flex-col flex-nowrap gap-4 overflow-hidden md:flex-row">
                     {isAuthenticated && (
-                        <li onClick={() => signOut(auth)}>
+                        <li title="Logout" onClick={() => signOut(auth)}>
                             <ArrowLeftOnRectangleIcon className="h-6 w-6 text-white hover:cursor-pointer hover:text-text" />
                         </li>
                     )}
