@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { ShoppingCartIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { doc, getDoc, updateDoc, arrayRemove } from "firebase/firestore";
+import {
+    doc,
+    getDoc,
+    updateDoc,
+    arrayRemove,
+    arrayUnion,
+    runTransaction,
+} from "firebase/firestore";
 import { fireDB } from "../Firebase";
 import { product, item } from "../typeModels/models";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { removeFromWishlist } from "../store/wishlistSlice";
+import { addToCart } from "../store/cartSlice";
 
 type Props = {
     id: string;
@@ -21,13 +29,13 @@ const WishlistCard = (props: Props) => {
     const currentUser = useAppSelector((state) => state.user);
     const dispatch = useAppDispatch();
     const [loadingDelete, setLoadingDelete] = useState(false);
+    const [movingToCart, setMovingToCart] = useState(false);
 
     // delete item from cart
     const deleteHandler = async () => {
         const q = doc(fireDB, "users", currentUser.uid);
         setLoadingDelete(true);
         try {
-            console.log("deleting data");
             await updateDoc(q, {
                 wishlist: arrayRemove(props.id),
             });
@@ -39,12 +47,36 @@ const WishlistCard = (props: Props) => {
         }
     };
 
-    // console.log(props.id);
+    const moveToCart = async () => {
+        const qRef = doc(fireDB, "users", currentUser.uid);
+        try {
+            await runTransaction(fireDB, async (transaction) => {
+                const qDoc = await transaction.get(qRef);
+                if (!qDoc.exists()) {
+                    throw "Document not Exist";
+                }
+                // console.log(qDoc.data());
+                transaction.update(qRef, {
+                    wishlist: arrayRemove(props.id),
+                });
+                transaction.update(qRef, {
+                    cart: arrayUnion(props.id),
+                });
+                dispatch(removeFromWishlist(props.id));
+                dispatch(addToCart(props.id));
+                console.log();
+            });
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setMovingToCart(false);
+        }
+    };
+
     const fetchProductDetails = async () => {
         const docRef = doc(fireDB, "products", props.id);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            // console.log(docSnap.data());
             const data = docSnap.data() as item;
             setProductDetails({
                 id: props.id,
@@ -83,10 +115,16 @@ const WishlistCard = (props: Props) => {
                     </h4>
                 </div>
                 <div className="flex items-center gap-2">
-                    <button className="filter-btn flex items-center justify-center rounded-md bg-teal-500 hover:-translate-y-1 hover:bg-teal-400">
+                    <button
+                        title="Move to cart"
+                        disabled={movingToCart}
+                        onClick={moveToCart}
+                        className="filter-btn flex items-center justify-center rounded-md bg-teal-500 hover:-translate-y-1 hover:bg-teal-400"
+                    >
                         <ShoppingCartIcon className="h-5 w-5" />
                     </button>
                     <button
+                        title="Remove from Wishlist"
                         disabled={loadingDelete}
                         onClick={deleteHandler}
                         className="filter-btn flex items-center justify-center rounded-md bg-rose-600 hover:-translate-y-1 hover:bg-rose-500 disabled:bg-text"
