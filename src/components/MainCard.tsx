@@ -7,7 +7,9 @@ import {
 } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRightIcon, StarIcon } from "@heroicons/react/24/solid";
-import { HeartIcon } from "@heroicons/react/24/outline";
+// import { HeartIcon } from "@heroicons/react/24/outline"
+import { HeartIcon } from "@heroicons/react/24/solid";
+import { useAppSelector } from "../store/hooks";
 
 type itemType = {
     shirts: string;
@@ -51,6 +53,9 @@ const MainCard = (props: Props) => {
     const [yPos, setYpos] = useState(0);
     const [isVisible, setIsVisible] = useState(0);
     const animationControl = useAnimation();
+    const wishlistItems = useAppSelector(
+        (state) => state.wishlist.wishlistItems
+    );
 
     props.type.toLowerCase();
 
@@ -114,12 +119,17 @@ const MainCard = (props: Props) => {
                 </div>
                 <div className="mx-4 flex items-center justify-between p-2">
                     <p className="text-2xl font-bold">&#8377; 500</p>
-                    <div
-                        className="h-8 w-8 transition-all hover:scale-125"
-                        onClick={(e) => e.preventDefault()}
-                    >
-                        <HeartIcon className="h-8 w-8 text-rose-500" />
-                    </div>
+                    {wishlistItems.includes(props.id) && (
+                        <Link
+                            to="/wishlist"
+                            className="h-8 w-8 transition-all hover:scale-125"
+                        >
+                            <HeartIcon
+                                title="In your wishlist"
+                                className="h-8 w-8 text-rose-500"
+                            />
+                        </Link>
+                    )}
                 </div>
             </Link>
             <AnimatePresence>
