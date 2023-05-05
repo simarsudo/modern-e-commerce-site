@@ -14,11 +14,11 @@ export const cartSlice = createSlice({
     name: "cart",
     initialState,
     reducers: {
-        addToCart: (state, action: PayloadAction<{ item: string }>) => {
-            state.cartItems.push(action.payload.item);
+        addToCart: (state, action: PayloadAction<string>) => {
+            state.cartItems.push(action.payload);
         },
-        removeFromCart: (state, action: PayloadAction<{ item: string }>) => {
-            const index = state.cartItems.indexOf(action.payload.item);
+        removeFromCart: (state, action: PayloadAction<string>) => {
+            const index = state.cartItems.indexOf(action.payload);
             state.cartItems.splice(index, 1);
         },
         createNewCart: (state, action: PayloadAction<string[]>) => {

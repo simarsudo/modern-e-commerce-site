@@ -6,7 +6,9 @@ import ShoeSize from "../components/ShoeSize";
 import { fireDB } from "../Firebase";
 import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { item } from "../typeModels/models";
-import { useAppSelector } from "../store/hooks";
+import { useAppSelector, useAppDispatch } from "../store/hooks";
+import { addToCart } from "../store/cartSlice";
+import { addToWishlist } from "../store/wishlistSlice";
 
 type Props = {};
 
@@ -20,6 +22,7 @@ const ProductPage = (props: Props) => {
     const wishlistItems = useAppSelector(
         (state) => state.wishlist.wishlistItems
     );
+    const dispatch = useAppDispatch();
     const location = useLocation();
     const itemData = location.pathname.split("/");
     const itemId = itemData[2];
@@ -53,16 +56,19 @@ const ProductPage = (props: Props) => {
     // add to user card or wishlist
     const btnHandlers = async (option: "cart" | "wishlist") => {
         if (!loading) {
+            setLoading(true);
             const docRef = doc(fireDB, "users", currentUser.uid);
             try {
                 if (option === "wishlist") {
                     await updateDoc(docRef, {
                         wishlist: arrayUnion(itemId),
                     });
+                    dispatch(addToWishlist(itemId));
                 } else if (option === "cart") {
                     await updateDoc(docRef, {
                         cart: arrayUnion(itemId),
                     });
+                    dispatch(addToCart(itemId));
                 }
             } catch (error) {
                 console.log(error);
@@ -118,14 +124,14 @@ const ProductPage = (props: Props) => {
                                     <button
                                         onClick={() => btnHandlers("wishlist")}
                                         disabled={loading}
-                                        className="filter-btn w-80 bg-sky-600 py-3 text-xl font-semibold hover:bg-sky-500"
+                                        className="filter-btn w-80 bg-sky-600 py-3 text-xl font-semibold hover:bg-sky-500 disabled:bg-rose-500"
                                     >
                                         Add to Wishlist
                                     </button>
                                     <button
                                         onClick={() => btnHandlers("cart")}
                                         disabled={loading}
-                                        className="filter-btn w-80 bg-sky-600 py-3 text-xl font-semibold hover:bg-sky-500"
+                                        className="filter-btn w-80 bg-sky-600 py-3 text-xl font-semibold hover:bg-sky-500 disabled:bg-rose-500"
                                     >
                                         Add to Cart
                                     </button>

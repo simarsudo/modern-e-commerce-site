@@ -14,14 +14,12 @@ export const wishlistSlice = createSlice({
     name: "wishlist",
     initialState,
     reducers: {
-        addToWishlist: (state, action: PayloadAction<{ item: string }>) => {
-            state.wishlistItems.push(action.payload.item);
+        addToWishlist: (state, action: PayloadAction<string>) => {
+            console.log(action.payload, "dispatch actions");
+            state.wishlistItems.push(action.payload);
         },
-        removeFromWishlist: (
-            state,
-            action: PayloadAction<{ item: string }>
-        ) => {
-            const index = state.wishlistItems.indexOf(action.payload.item);
+        removeFromWishlist: (state, action: PayloadAction<string>) => {
+            const index = state.wishlistItems.indexOf(action.payload);
             state.wishlistItems.splice(index, 1);
         },
         createNewWishlist: (state, action: PayloadAction<string[]>) => {
