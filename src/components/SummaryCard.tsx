@@ -1,9 +1,17 @@
-import { arrayRemove, doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+    arrayRemove,
+    arrayUnion,
+    doc,
+    getDoc,
+    runTransaction,
+    updateDoc,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { fireDB } from "../Firebase";
 import { item, product } from "../typeModels/models";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { removeFromCart } from "../store/cartSlice";
+import { addToWishlist } from "../store/wishlistSlice";
 
 const SummaryCard = (props: { id: string }) => {
     const [productDetails, setProductDetails] = useState<product>({
@@ -16,6 +24,7 @@ const SummaryCard = (props: { id: string }) => {
     const currentUser = useAppSelector((state) => state.user);
     const dispatch = useAppDispatch();
     const [loadingDelete, setLoadingDelete] = useState(false);
+    const [movingToWishlist, setMovingToWishlist] = useState(false);
 
     const deleteHandler = async () => {
         const q = doc(fireDB, "users", currentUser.uid);
@@ -30,6 +39,33 @@ const SummaryCard = (props: { id: string }) => {
             console.log(e);
         } finally {
             setLoadingDelete(false);
+        }
+    };
+
+    const moveToWishlist = async () => {
+        const qRef = doc(fireDB, "users", currentUser.uid);
+        setMovingToWishlist(true);
+        try {
+            await runTransaction(fireDB, async (transaction) => {
+                const qDoc = await transaction.get(qRef);
+                if (!qDoc.exists()) {
+                    throw "Document not Exist";
+                }
+                // console.log(qDoc.data());
+                transaction.update(qRef, {
+                    wishlist: arrayUnion(props.id),
+                });
+                transaction.update(qRef, {
+                    cart: arrayRemove(props.id),
+                });
+                dispatch(addToWishlist(props.id));
+                dispatch(removeFromCart(props.id));
+                console.log();
+            });
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setMovingToWishlist(false);
         }
     };
 
@@ -106,7 +142,11 @@ const SummaryCard = (props: { id: string }) => {
                 >
                     Remove
                 </button>
-                <button className="filter-btn btn-click mx-1 h-min max-w-min whitespace-nowrap rounded bg-sky-600 text-base font-semibold hover:bg-sky-500">
+                <button
+                    onClick={moveToWishlist}
+                    disabled={movingToWishlist}
+                    className="filter-btn btn-click mx-1 h-min max-w-min whitespace-nowrap rounded bg-sky-600 text-base font-semibold hover:bg-sky-500 disabled:bg-rose-500"
+                >
                     Move to Wishlist
                 </button>
             </div>
