@@ -49,6 +49,7 @@ const WishlistCard = (props: Props) => {
 
     const moveToCart = async () => {
         const qRef = doc(fireDB, "users", currentUser.uid);
+        setMovingToCart(true);
         try {
             await runTransaction(fireDB, async (transaction) => {
                 const qDoc = await transaction.get(qRef);
@@ -119,7 +120,7 @@ const WishlistCard = (props: Props) => {
                         title="Move to cart"
                         disabled={movingToCart}
                         onClick={moveToCart}
-                        className="filter-btn flex items-center justify-center rounded-md bg-teal-500 hover:-translate-y-1 hover:bg-teal-400"
+                        className="filter-btn flex items-center justify-center rounded-md bg-teal-500 hover:-translate-y-1 hover:bg-teal-400 disabled:bg-rose-500"
                     >
                         <ShoppingCartIcon className="h-5 w-5" />
                     </button>
