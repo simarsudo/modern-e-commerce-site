@@ -17,7 +17,7 @@ const WishlistPage = (props: Props) => {
                 wishlist.length === 0 ? "" : "h-full grid-cols-1 grid-rows-1"
             }`}
         >
-            {wishlist.length === 0 && !currentUser.isAuthenticated ? (
+            {wishlist.length === 0 ? (
                 <>
                     <div className="z-10 h-full w-full rounded-xl border-2 border-neutral-300 bg-white p-12">
                         <h2 className="mx-8 mt-4 flex overflow-hidden border-b pb-4 font-highlight text-7xl font-bold tracking-wide">

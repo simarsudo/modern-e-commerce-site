@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ShoppingCartIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, arrayRemove } from "firebase/firestore";
 import { fireDB } from "../Firebase";
 import { product, item } from "../typeModels/models";
-import { useAppSelector } from "../store/hooks";
+import { useAppSelector, useAppDispatch } from "../store/hooks";
+import { removeFromWishlist } from "../store/wishlistSlice";
 
 type Props = {
     id: string;
@@ -18,6 +19,25 @@ const WishlistCard = (props: Props) => {
         type: "idk",
     });
     const currentUser = useAppSelector((state) => state.user);
+    const dispatch = useAppDispatch();
+    const [loadingDelete, setLoadingDelete] = useState(false);
+
+    // delete item from cart
+    const deleteHandler = async () => {
+        const q = doc(fireDB, "users", currentUser.uid);
+        setLoadingDelete(true);
+        try {
+            console.log("deleting data");
+            await updateDoc(q, {
+                wishlist: arrayRemove(props.id),
+            });
+            dispatch(removeFromWishlist(props.id));
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setLoadingDelete(false);
+        }
+    };
 
     // console.log(props.id);
     const fetchProductDetails = async () => {
@@ -66,7 +86,11 @@ const WishlistCard = (props: Props) => {
                     <button className="filter-btn flex items-center justify-center rounded-md bg-teal-500 hover:-translate-y-1 hover:bg-teal-400">
                         <ShoppingCartIcon className="h-5 w-5" />
                     </button>
-                    <button className="filter-btn flex items-center justify-center rounded-md bg-rose-600 hover:-translate-y-1 hover:bg-rose-500">
+                    <button
+                        disabled={loadingDelete}
+                        onClick={deleteHandler}
+                        className="filter-btn flex items-center justify-center rounded-md bg-rose-600 hover:-translate-y-1 hover:bg-rose-500 disabled:bg-text"
+                    >
                         <TrashIcon className="h-5 w-5" />
                     </button>
                 </div>

@@ -16,7 +16,8 @@ const ProductPage = (props: Props) => {
     const [firstLoad, setFirstLoad] = useState(false);
     const [item, setItem] = useState<item>();
     const [itemNotFound, setItemNotFound] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [wishlistLoading, setWishlistLoading] = useState(false);
+    const [cartlistLoading, setCartlistLoading] = useState(false);
     const currentUser = useAppSelector((state) => state.user);
     const cartItems = useAppSelector((state) => state.cart.cartItems);
     const wishlistItems = useAppSelector(
@@ -55,16 +56,17 @@ const ProductPage = (props: Props) => {
 
     // add to user card or wishlist
     const btnHandlers = async (option: "cart" | "wishlist") => {
-        if (!loading) {
-            setLoading(true);
+        if (!wishlistLoading || !cartlistLoading) {
             const docRef = doc(fireDB, "users", currentUser.uid);
             try {
                 if (option === "wishlist") {
+                    setWishlistLoading(true);
                     await updateDoc(docRef, {
                         wishlist: arrayUnion(itemId),
                     });
                     dispatch(addToWishlist(itemId));
                 } else if (option === "cart") {
+                    setCartlistLoading(true);
                     await updateDoc(docRef, {
                         cart: arrayUnion(itemId),
                     });
@@ -73,7 +75,8 @@ const ProductPage = (props: Props) => {
             } catch (error) {
                 console.log(error);
             } finally {
-                setLoading(false);
+                setWishlistLoading(false);
+                setCartlistLoading(false);
             }
         }
     };
@@ -121,16 +124,28 @@ const ProductPage = (props: Props) => {
                             </p>
                             {currentUser.isAuthenticated ? (
                                 <div className="flex gap-4">
-                                    <button
-                                        onClick={() => btnHandlers("wishlist")}
-                                        disabled={loading}
-                                        className="filter-btn w-80 bg-sky-600 py-3 text-xl font-semibold hover:bg-sky-500 disabled:bg-rose-500"
-                                    >
-                                        Add to Wishlist
-                                    </button>
+                                    {!wishlistItems.includes(itemId) ? (
+                                        <button
+                                            onClick={() =>
+                                                btnHandlers("wishlist")
+                                            }
+                                            disabled={wishlistLoading}
+                                            className="filter-btn w-80 bg-sky-600 py-3 text-xl font-semibold hover:bg-sky-500 disabled:bg-rose-500"
+                                        >
+                                            Add to Wishlist
+                                        </button>
+                                    ) : (
+                                        <Link
+                                            to="/wishlist"
+                                            className="filter-btn w-80 bg-sky-600 py-3 text-center text-xl font-semibold hover:bg-sky-500 disabled:bg-rose-500"
+                                        >
+                                            Go to wishlist
+                                        </Link>
+                                    )}
+
                                     <button
                                         onClick={() => btnHandlers("cart")}
-                                        disabled={loading}
+                                        disabled={cartlistLoading}
                                         className="filter-btn w-80 bg-sky-600 py-3 text-xl font-semibold hover:bg-sky-500 disabled:bg-rose-500"
                                     >
                                         Add to Cart
