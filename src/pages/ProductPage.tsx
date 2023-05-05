@@ -139,17 +139,25 @@ const ProductPage = (props: Props) => {
                                             to="/wishlist"
                                             className="filter-btn w-80 bg-sky-600 py-3 text-center text-xl font-semibold hover:bg-sky-500 disabled:bg-rose-500"
                                         >
-                                            Go to wishlist
+                                            Added to wishlist
                                         </Link>
                                     )}
-
-                                    <button
-                                        onClick={() => btnHandlers("cart")}
-                                        disabled={cartlistLoading}
-                                        className="filter-btn w-80 bg-sky-600 py-3 text-xl font-semibold hover:bg-sky-500 disabled:bg-rose-500"
-                                    >
-                                        Add to Cart
-                                    </button>
+                                    {!cartItems.includes(itemId) ? (
+                                        <button
+                                            onClick={() => btnHandlers("cart")}
+                                            disabled={cartlistLoading}
+                                            className="filter-btn w-80 bg-sky-600 py-3 text-xl font-semibold hover:bg-sky-500 disabled:bg-rose-500"
+                                        >
+                                            Add to Cart
+                                        </button>
+                                    ) : (
+                                        <Link
+                                            to="/cart"
+                                            className="filter-btn w-80 bg-sky-600 py-3 text-center text-xl font-semibold hover:bg-sky-500 disabled:bg-rose-500"
+                                        >
+                                            Added to cart
+                                        </Link>
+                                    )}
                                 </div>
                             ) : (
                                 <p className="text-xl font-semibold text-neutral-800">

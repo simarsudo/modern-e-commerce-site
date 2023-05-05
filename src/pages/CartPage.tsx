@@ -5,6 +5,9 @@ import PaymentPriceCard from "../components/PaymentPriceCard";
 import { Link } from "react-router-dom";
 import SVGBackground from "../components/SVGBackground";
 import { useAppSelector } from "../store/hooks";
+import { item, product } from "../typeModels/models";
+import { doc } from "firebase/firestore";
+import { fireDB } from "../Firebase";
 
 type Props = {};
 
@@ -13,7 +16,7 @@ const CartPage = (props: Props) => {
 
     return (
         <PageTransitionWrapper className="content-wrapper flex h-full items-stretch justify-center">
-            {cartItems ? (
+            {cartItems.length === 0 ? (
                 <div className="my-auto flex h-min items-center justify-center">
                     <div className="z-10 h-full w-full rounded-xl border-2 border-neutral-300 bg-white p-12">
                         <h2 className="mx-8 mt-4 flex overflow-hidden border-b pb-4 font-highlight text-7xl font-bold tracking-wide underline">
@@ -37,10 +40,9 @@ const CartPage = (props: Props) => {
                         <h2 className=" w-min whitespace-nowrap font-highlight text-3xl font-bold text-neutral-800 underline">
                             Products Details
                         </h2>
-                        <SummaryCard />
-                        <SummaryCard />
-                        <SummaryCard />
-                        <SummaryCard />
+                        {cartItems.map((cartItem) => {
+                            return <SummaryCard key={cartItem} id={cartItem} />;
+                        })}
                     </div>
                     <div className="container flex h-full flex-grow flex-col justify-between rounded border-2 border-bg-dark p-2 px-0 md:w-1/3">
                         <div className="flex h-full flex-col">
