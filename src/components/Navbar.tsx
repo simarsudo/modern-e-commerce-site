@@ -78,11 +78,30 @@ const Navbar = (props: Props) => {
                 } origin-top transition-all md:scale-y-100 md:opacity-100`}
             >
                 <ul className="flex flex-col flex-nowrap gap-4 overflow-hidden md:flex-row">
-                    {isAuthenticated && (
-                        <li title="Logout" onClick={() => signOut(auth)}>
-                            <ArrowLeftOnRectangleIcon className="h-6 w-6 text-white hover:cursor-pointer hover:text-text" />
-                        </li>
-                    )}
+                    <NavItem
+                        linkTo="shoes"
+                        linkName="Shoes"
+                        hoverStyles={hoverStyles}
+                        hoverTimings={hoverTimings}
+                    >
+                        {""}
+                    </NavItem>
+                    <NavItem
+                        linkTo="shirts"
+                        linkName="Shirts"
+                        hoverStyles={hoverStyles}
+                        hoverTimings={hoverTimings}
+                    >
+                        {""}
+                    </NavItem>
+                    <NavItem
+                        linkTo="jeans"
+                        linkName="Jeans"
+                        hoverStyles={hoverStyles}
+                        hoverTimings={hoverTimings}
+                    >
+                        {""}
+                    </NavItem>
                     {isAuthenticated && (
                         <>
                             <NavItem
@@ -113,6 +132,11 @@ const Navbar = (props: Props) => {
                         >
                             <UserIcon className="h-6 w-6" />
                         </NavItem>
+                    )}
+                    {isAuthenticated && (
+                        <li title="Logout" onClick={() => signOut(auth)}>
+                            <ArrowLeftOnRectangleIcon className="h-6 w-6 text-white hover:cursor-pointer hover:text-text" />
+                        </li>
                     )}
                 </ul>
             </div>
