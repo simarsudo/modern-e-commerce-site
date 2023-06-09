@@ -5,7 +5,6 @@ import { pageVariants } from "../variants/pageVariants";
 import ShoesSection from "../sections/ShoesSection";
 import ShirtsSection from "../sections/ShirtsSection";
 import JeansSection from "../sections/JeansSection";
-import Footer from "../components/Footer";
 
 type Props = {};
 
