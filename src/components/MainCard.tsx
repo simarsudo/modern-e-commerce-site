@@ -10,6 +10,7 @@ import { ArrowUpRightIcon, StarIcon } from "@heroicons/react/24/solid";
 // import { HeartIcon } from "@heroicons/react/24/outline"
 import { HeartIcon } from "@heroicons/react/24/solid";
 import { useAppSelector } from "../store/hooks";
+import { product } from "../typeModels/models";
 
 type itemType = {
     shirts: string;
@@ -32,67 +33,19 @@ const itemType: itemType = {
 };
 
 const cardVariant = {
-    initial: {
-        scale: 0,
-        opacity: 0,
-    },
-    animate: {
-        scale: 1,
-        opacity: 1,
-        transition: { duration: 0.2, ease: easeInOut },
-    },
-    exit: {
-        scale: 0,
-        opacity: 0,
-        transition: { duration: 0.2, ease: easeInOut },
-    },
+    initial: { translateY: "100%" },
+    animate: { translateY: 0, transition: { duration: 0.8, ease: "easeOut" } },
 };
 
-const MainCard = (props: Props) => {
-    const [xPos, setXpos] = useState(0);
-    const [yPos, setYpos] = useState(0);
-    const [isVisible, setIsVisible] = useState(0);
-    const animationControl = useAnimation();
+const MainCard = (props: product) => {
     const wishlistItems = useAppSelector(
         (state) => state.wishlist.wishlistItems
     );
 
     props.type.toLowerCase();
 
-    const applyValues = (x: number, y: number) => {
-        setXpos(x);
-        setYpos(y);
-    };
-
-    const handleMouseEvent = (e: MouseEvent) => {
-        const target = e.target as HTMLElement;
-        target?.addEventListener("mousemove", (e) =>
-            applyValues(e.pageX, e.pageY)
-        );
-        setIsVisible(100);
-    };
-
-    const mousePositionCleanUp = (e: MouseEvent) => {
-        console.log("removed event listeer");
-        const target = e.target as HTMLElement;
-        target?.removeEventListener("mousemove", (e) =>
-            applyValues(e.pageX, e.pageY)
-        );
-        setIsVisible(0);
-    };
-
-    useEffect(() => {
-        if (isVisible) {
-            animationControl.start("animate");
-        }
-    }, [isVisible]);
-
     return (
-        <motion.li
-            onHoverStart={(e) => handleMouseEvent(e)}
-            onHoverEnd={(e) => mousePositionCleanUp(e)}
-            className="max-h-min w-full max-w-sm overflow-hidden rounded-xl bg-bg-dark text-white"
-        >
+        <li className="max-h-min w-full max-w-sm overflow-x-hidden rounded-sm bg-bg-dark text-white shadow-md shadow-neutral-700 transition-all hover:-translate-y-2">
             <Link
                 className="relative max-h-min"
                 to={`/${itemType[props.type as keyof itemType]}/${props.id}`}
@@ -109,7 +62,7 @@ const MainCard = (props: Props) => {
                     />
                 </div>
                 <div className="mx-4 flex justify-between border-b border-gray-600 p-2">
-                    <p className="one-line font-semibold">Calvin Klen Shirt</p>
+                    <p className="one-line font-semibold">{props.name}</p>
                     <span className="flex">
                         <StarIcon className="h-5 w-5 text-amber-400" />
                         <StarIcon className="h-5 w-5 text-amber-400" />
@@ -118,7 +71,9 @@ const MainCard = (props: Props) => {
                     </span>
                 </div>
                 <div className="mx-4 flex items-center justify-between p-2">
-                    <p className="text-2xl font-bold">&#8377; 500</p>
+                    <p className="font-price text-2xl font-bold">
+                        &#8377; {props.price}
+                    </p>
                     {wishlistItems.includes(props.id) && (
                         <Link
                             to="/wishlist"
@@ -132,24 +87,7 @@ const MainCard = (props: Props) => {
                     )}
                 </div>
             </Link>
-            <AnimatePresence>
-                {isVisible && (
-                    <motion.div
-                        variants={cardVariant}
-                        initial="initial"
-                        animate={animationControl}
-                        exit="exit"
-                        style={{
-                            top: yPos,
-                            left: xPos,
-                        }}
-                        className={`w-h-28 absolute z-10 flex h-28 origin-top-left flex-col items-center justify-center gap-1 rounded-full bg-bg-dark p-8 text-xl font-bold text-white outline outline-white`}
-                    >
-                        <ArrowUpRightIcon className="w-h-12 h-12" />
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </motion.li>
+        </li>
     );
 };
 

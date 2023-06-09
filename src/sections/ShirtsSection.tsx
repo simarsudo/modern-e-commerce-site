@@ -19,7 +19,7 @@ const h2Variant = {
 };
 
 const spanVariant = {
-    initial: { translateY: "200%" },
+    initial: { translateY: "100%" },
     animate: { translateY: 0, transition: { duration: 0.8, ease: easeOut } },
 };
 
@@ -36,7 +36,7 @@ const ShirtsSection = (props: Props) => {
         async function getData() {
             var data: item;
             const shirtRef = collection(fireDB, "products");
-            const q = query(shirtRef, where("type", "==", "shirts"), limit(5));
+            const q = query(shirtRef, where("type", "==", "shirts"), limit(6));
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
                 setItems((prevValue) => {
@@ -73,13 +73,14 @@ const ShirtsSection = (props: Props) => {
 
     return (
         <div>
-            <motion.h2
+            {/* <motion.h2
                 ref={ref}
                 variants={h2Variant}
                 initial="initial"
                 animate={animationControl}
-                className="flex overflow-hidden border-b pb-4 text-8xl"
+                className="relative flex max-w-min overflow-hidden pb-4 text-8xl"
             >
+                <div className="absolute bottom-8 left-0 h-1 w-full bg-black"></div>
                 <motion.div
                     className="font-highlight font-bold"
                     variants={spanVariant}
@@ -116,15 +117,17 @@ const ShirtsSection = (props: Props) => {
                 >
                     S
                 </motion.div>
-            </motion.h2>
-            <div className="no-scrollbar flex overflow-x-scroll pb-8">
-                <ul className="grid w-full grid-cols-1 place-content-around gap-12 pt-4 md:grid-cols-4 md:gap-12">
+            </motion.h2> */}
+            <div className="no-scrollbar flex overflow-x-scroll">
+                <ul className="grid w-full grid-cols-1 place-content-around gap-12 py-4 md:grid-cols-4 md:gap-12">
                     {items.map((item) => {
                         return (
                             <MainCard
                                 id={item.id}
                                 imgLink={item.images[0]}
                                 type={item.type}
+                                name={item.name}
+                                price={item.price}
                                 key={item.id}
                             />
                         );
