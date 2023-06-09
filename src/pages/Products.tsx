@@ -70,6 +70,8 @@ const Products = (props: Props) => {
                                 key={item.id}
                                 type={item.type}
                                 id={`${item.id}`}
+                                name={item.name}
+                                price={item.price}
                                 imgLink={item.images[0]}
                             />
                         );
