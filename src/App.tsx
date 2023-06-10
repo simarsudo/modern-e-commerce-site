@@ -46,15 +46,15 @@ function App() {
         }
     };
 
-    useEffect(() => {
-        if (!firstLoad) {
-            setPageTransition(true);
-            setLocationCount((prevValue) => {
-                return prevValue + 1;
-            });
-            // console.log("location Changed");
-        }
-    }, [location]);
+    // useEffect(() => {
+    //     if (!firstLoad) {
+    //         setPageTransition(true);
+    //         setLocationCount((prevValue) => {
+    //             return prevValue + 1;
+    //         });
+    //         // console.log("location Changed");
+    //     }
+    // }, [location]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -63,11 +63,11 @@ function App() {
         }, 4000);
     }, []);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setPageTransition(false);
-        }, 1000);
-    }, [locationCount]);
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         setPageTransition(false);
+    //     }, 1000);
+    // }, [locationCount]);
 
     // wishlist and cart data fetching of the user
     useEffect(() => {
@@ -119,7 +119,7 @@ function App() {
             />
             <AnimatePresence mode="sync">
                 {React.cloneElement(element, { key: location.pathname })}
-                {pageTransition && <PageLoader />}
+                {/* {pageTransition && <PageLoader />} */}
                 {visible && <GlobalLoader key="LoadingScreen" />}
             </AnimatePresence>
         </>
