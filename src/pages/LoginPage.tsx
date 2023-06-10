@@ -50,7 +50,7 @@ const LoginPage = () => {
     }
 
     return (
-        <PageTransitionWrapper className="content-wrapper relative flex items-center justify-center">
+        <PageTransitionWrapper className="content-wrapper relative flex items-center justify-center overflow-hidden">
             <AnimatePresence mode="wait" initial={false}>
                 {Component}
             </AnimatePresence>
