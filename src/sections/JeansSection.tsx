@@ -70,8 +70,11 @@ const JeansSection = (props: Props) => {
 
     return (
         <div>
+            <h1 className="m-2 text-center font-price text-4xl font-bold italic text-bg-dark underline decoration-2 underline-offset-4">
+                Jeans
+            </h1>
             <div className="no-scrollbar flex overflow-x-scroll">
-                <ul className="grid w-full grid-cols-2 gap-4 py-4 md:grid-cols-lg md:gap-10">
+                <ul className="grid w-full grid-cols-2 gap-x-4 gap-y-8 py-4 md:grid-cols-lg md:gap-x-10 md:gap-y-12">
                     {items.map((item) => {
                         return (
                             <MainCard
