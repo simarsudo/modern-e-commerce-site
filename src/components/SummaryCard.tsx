@@ -111,17 +111,31 @@ const SummaryCard = (props: { id: string }) => {
                 </h4>
             </div>
             <div className="col-start-5 col-end-12 row-start-3 row-end-4 mb-2 flex">
-                <select
-                    name="size"
-                    id="size"
-                    className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
-                >
-                    <option value="XS">XS</option>
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                    <option value="Xl">Xl</option>
-                </select>
+                {productDetails.type === "shoes" ? (
+                    <select
+                        name="size"
+                        id="size"
+                        className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
+                    >
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                ) : (
+                    <select
+                        name="size"
+                        id="size"
+                        className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
+                    >
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="Xl">Xl</option>
+                    </select>
+                )}
                 <select
                     name="size"
                     id="size"

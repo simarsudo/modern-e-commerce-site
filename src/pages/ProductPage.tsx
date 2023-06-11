@@ -129,7 +129,7 @@ const ProductPage = (props: Props) => {
                                 </h4>
                             </div>
                             <div className="flex flex-col gap-6 border-b-2 py-4 pb-8">
-                                <ShoeSize />
+                                <ShoeSize type={item?.type} />
                                 <p className="font-semibold text-neutral-500">
                                     Size are based on UK/India
                                 </p>
