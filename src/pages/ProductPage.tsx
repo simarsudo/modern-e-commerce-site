@@ -21,6 +21,7 @@ const ProductPage = (props: Props) => {
     const [itemNotFound, setItemNotFound] = useState(false);
     const [wishlistLoading, setWishlistLoading] = useState(false);
     const [cartlistLoading, setCartlistLoading] = useState(false);
+    const [size, setSize] = useState<string | number>("");
     const currentUser = useAppSelector((state) => state.user);
     const cartItems = useAppSelector((state) => state.cart.cartItems);
     const wishlistItems = useAppSelector(
@@ -73,7 +74,7 @@ const ProductPage = (props: Props) => {
                 } else if (option === "cart") {
                     setCartlistLoading(true);
                     await updateDoc(docRef, {
-                        cart: arrayUnion(itemId),
+                        cart: { [itemId]: size },
                     });
                     dispatch(addToCart(itemId));
                 }
@@ -129,10 +130,14 @@ const ProductPage = (props: Props) => {
                                 </h4>
                             </div>
                             <div className="flex flex-col gap-6 border-b-2 py-4 pb-8">
-                                <ShoeSize type={item?.type} />
                                 <p className="font-semibold text-neutral-500">
                                     Size are based on UK/India
                                 </p>
+                                <ShoeSize
+                                    type={item?.type}
+                                    setSize={setSize}
+                                    size={size}
+                                />
                                 {currentUser.isAuthenticated ? (
                                     <div className="flex gap-4">
                                         {!wishlistItems.includes(itemId) ? (
@@ -153,7 +158,7 @@ const ProductPage = (props: Props) => {
                                                 Added to wishlist
                                             </Link>
                                         )}
-                                        {!cartItems.includes(itemId) ? (
+                                        {!(itemId in cartItems) ? (
                                             <button
                                                 onClick={() =>
                                                     btnHandlers("cart")

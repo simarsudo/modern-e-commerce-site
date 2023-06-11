@@ -117,11 +117,11 @@ const SummaryCard = (props: { id: string }) => {
                         id="size"
                         className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
                     >
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
+                        <option value="6">Size: 6</option>
+                        <option value="7">Size: 7</option>
+                        <option value="8">Size: 8</option>
+                        <option value="9">Size: 9</option>
+                        <option value="10">Size: 10</option>
                     </select>
                 ) : (
                     <select
@@ -137,8 +137,8 @@ const SummaryCard = (props: { id: string }) => {
                     </select>
                 )}
                 <select
-                    name="size"
-                    id="size"
+                    name="Quantity"
+                    id="Quantity"
                     className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
                 >
                     <option value="1">1</option>

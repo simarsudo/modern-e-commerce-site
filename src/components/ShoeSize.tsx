@@ -1,111 +1,66 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 type Props = {
     type: string | undefined;
+    size: string | number;
+    setSize: React.Dispatch<React.SetStateAction<string | number>>;
 };
 
 const ShoeSize = (props: Props) => {
+    const shoeSelectRef = useRef<HTMLSelectElement>(null);
+    const otherProductsSelectRef = useRef<HTMLSelectElement>(null);
+
+    useEffect(() => {
+        if (props.type === "shoes") {
+            props.setSize(6);
+        } else {
+            props.setSize("XS");
+        }
+    }, []);
+
+    function onSizeChange(
+        e: React.ChangeEvent<HTMLSelectElement>,
+        event: "shoe" | "other"
+    ) {
+        if (event === "shoe") {
+            const value = parseInt(e.target.value);
+            props.setSize(value);
+            return;
+        }
+        props.setSize(e.target.value);
+    }
+
     return props.type === "shoes" ? (
         <div className="flex flex-col gap-4">
-            <div className="text-lg font-bold text-neutral-700">Size</div>
-            <div className="flex items-center gap-4 text-neutral-700">
-                <div className="flex items-center gap-2">
-                    <input
-                        className="border-2 border-sky-600 text-sky-600 focus:outline-sky-600"
-                        type="radio"
-                        name="shoeSize"
-                        id="6"
-                    />
-                    <span className="font-price">6</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <input
-                        className="border-2 border-sky-600 text-sky-600 focus:outline-sky-600"
-                        type="radio"
-                        name="shoeSize"
-                        id="7"
-                    />
-                    <span className="font-price">7</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <input
-                        className="border-2 border-sky-600 text-sky-600 focus:outline-sky-600"
-                        type="radio"
-                        name="shoeSize"
-                        id="8"
-                    />
-                    <span className="font-price">8</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <input
-                        className="border-2 border-sky-600 text-sky-600 focus:outline-sky-600"
-                        type="radio"
-                        name="shoeSize"
-                        id="9"
-                    />
-                    <span className="font-price">9</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <input
-                        className="border-2 border-sky-600 text-sky-600 focus:outline-sky-600"
-                        type="radio"
-                        name="shoeSize"
-                        id="10"
-                    />
-                    <span className="font-price">10</span>
-                </div>
-            </div>
+            <select
+                name="size"
+                id="size"
+                ref={shoeSelectRef}
+                onChange={(e) => onSizeChange(e, "shoe")}
+                className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
+            >
+                <option value="6">Size: 6</option>
+                <option value="7">Size: 7</option>
+                <option value="8">Size: 8</option>
+                <option value="9">Size: 9</option>
+                <option value="10">Size: 10</option>
+            </select>
         </div>
     ) : (
         <div className="flex flex-col gap-4">
-            <div className="text-lg font-bold text-neutral-700">Size</div>
-            <div className="flex items-center gap-4 text-neutral-700">
-                <div className="flex items-center gap-2">
-                    <input
-                        className="border-2 border-sky-600 text-sky-600 focus:outline-sky-600"
-                        type="radio"
-                        name="shoeSize"
-                        id="XS"
-                    />
-                    <span className="font-price">XS</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <input
-                        className="border-2 border-sky-600 text-sky-600 focus:outline-sky-600"
-                        type="radio"
-                        name="shoeSize"
-                        id="S"
-                    />
-                    <span className="font-price">S</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <input
-                        className="border-2 border-sky-600 text-sky-600 focus:outline-sky-600"
-                        type="radio"
-                        name="shoeSize"
-                        id="M"
-                    />
-                    <span className="font-price">M</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <input
-                        className="border-2 border-sky-600 text-sky-600 focus:outline-sky-600"
-                        type="radio"
-                        name="shoeSize"
-                        id="L"
-                    />
-                    <span className="font-price">L</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <input
-                        className="border-2 border-sky-600 text-sky-600 focus:outline-sky-600"
-                        type="radio"
-                        name="shoeSize"
-                        id="XL"
-                    />
-                    <span className="font-price">XL</span>
-                </div>
-            </div>
+            <select
+                name="size"
+                id="size"
+                ref={otherProductsSelectRef}
+                onChange={(e) => onSizeChange(e, "other")}
+                className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
+            >
+                <option value="XS">Size: XS</option>
+                <option value="S">Size: S</option>
+                <option value="M">Size: M</option>
+                <option value="L">Size: L</option>
+                <option value="Xl">Size: Xl</option>
+            </select>
         </div>
     );
 };

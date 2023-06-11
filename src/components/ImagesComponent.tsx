@@ -30,11 +30,13 @@ const ImagesComponent = (props: Props) => {
     return (
         <div className="flex min-h-full">
             <swiper-container navigation={true} pagination={true}>
-                {props.imgs.map((imgLink, key) => {
+                {props.imgs.map((imgLink) => {
                     return (
-                        <swiper-slide className="flex items-center justify-center">
+                        <swiper-slide
+                            key={imgLink}
+                            className="flex items-center justify-center"
+                        >
                             <img
-                                key={key}
                                 src={imgLink}
                                 alt="product image"
                                 className="mx-auto h-[50vh] w-auto md:h-[80vh]"
