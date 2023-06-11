@@ -8,6 +8,7 @@ import { query, limit, collection, getDocs, where } from "firebase/firestore";
 import MainCard from "../components/MainCard";
 import ErrorComponent from "../components/ErrorComponent";
 import Loader from "../components/Loader";
+import Footer from "../components/Footer";
 
 type Props = {};
 
@@ -71,20 +72,23 @@ const Products = (props: Props) => {
                     <Loader />
                 </div>
             ) : !error ? (
-                <ul className="grid w-full grid-cols-2 gap-4 p-4 md:grid-cols-lg md:gap-10">
-                    {items.map((item) => {
-                        return (
-                            <MainCard
-                                key={item.id}
-                                type={item.type}
-                                id={`${item.id}`}
-                                name={item.name}
-                                price={item.price}
-                                imgLink={item.images[0]}
-                            />
-                        );
-                    })}
-                </ul>
+                <>
+                    <ul className="mb-10 grid w-full grid-cols-2 gap-4 p-4 md:grid-cols-lg md:gap-10">
+                        {items.map((item) => {
+                            return (
+                                <MainCard
+                                    key={item.id}
+                                    type={item.type}
+                                    id={`${item.id}`}
+                                    name={item.name}
+                                    price={item.price}
+                                    imgLink={item.images[0]}
+                                />
+                            );
+                        })}
+                    </ul>
+                    <Footer />
+                </>
             ) : (
                 <ErrorComponent />
             )}

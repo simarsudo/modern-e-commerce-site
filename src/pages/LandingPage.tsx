@@ -7,6 +7,7 @@ import ShirtsSection from "../sections/ShirtsSection";
 import JeansSection from "../sections/JeansSection";
 import Loader from "../components/Loader";
 import ImageCarousel from "../components/ImageCarousel";
+import Footer from "../components/Footer";
 
 type Props = {};
 
@@ -35,6 +36,7 @@ const LandingPage = (props: Props) => {
                     <JeansSection setJeansLoading={setJeansLoading} />
                 </div>
             )}
+            <Footer />
         </PageTransitionWrapper>
     );
 };
