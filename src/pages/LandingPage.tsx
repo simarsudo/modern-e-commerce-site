@@ -6,6 +6,7 @@ import ShoesSection from "../sections/ShoesSection";
 import ShirtsSection from "../sections/ShirtsSection";
 import JeansSection from "../sections/JeansSection";
 import Loader from "../components/Loader";
+import ImageCarousel from "../components/ImageCarousel";
 
 type Props = {};
 
@@ -28,6 +29,7 @@ const LandingPage = (props: Props) => {
                 <Loader />
             ) : (
                 <div className="flex flex-col gap-2 divide-y-2 p-6 md:p-8 md:py-2">
+                    <ImageCarousel />
                     <ShoesSection setShoesLoading={setShoesLoading} />
                     <ShirtsSection setShirtsLoading={setShirtsLoading} />
                     <JeansSection setJeansLoading={setJeansLoading} />
