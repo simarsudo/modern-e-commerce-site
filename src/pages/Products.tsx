@@ -7,6 +7,7 @@ import { fireDB } from "../Firebase";
 import { query, limit, collection, getDocs, where } from "firebase/firestore";
 import MainCard from "../components/MainCard";
 import ErrorComponent from "../components/ErrorComponent";
+import Loader from "../components/Loader";
 
 type Props = {};
 
@@ -17,6 +18,7 @@ const pagevariants = {
 const Products = (props: Props) => {
     const [items, setItems] = useState<item[]>([]);
     const [firstLoad, setFirstLoad] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const location = useLocation();
     const itemData = location.pathname.split("/");
@@ -26,6 +28,7 @@ const Products = (props: Props) => {
     useEffect(() => {
         async function getData(currentPath: string) {
             var data: item;
+            setLoading(true);
             const shirtRef = collection(fireDB, "products");
             const q = query(shirtRef, limit(3), where("type", "==", itemType));
             const querySnapshot = await getDocs(q);
@@ -42,6 +45,7 @@ const Products = (props: Props) => {
                     return [...prevValue, data];
                 });
             });
+            setLoading(false);
             return;
         }
 
@@ -62,7 +66,11 @@ const Products = (props: Props) => {
                 error && "flex items-center justify-center"
             }`}
         >
-            {!error ? (
+            {loading ? (
+                <div className="flex h-[70vh] w-full flex-grow items-center justify-center">
+                    <Loader />
+                </div>
+            ) : !error ? (
                 <ul className="grid grid-cols-md justify-items-start gap-8 bg-white p-4 md:p-10 2xl:grid-cols-lg">
                     {items.map((item) => {
                         return (

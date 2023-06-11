@@ -6,7 +6,9 @@ import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import { item } from "../typeModels/models";
 import { fireDB } from "../Firebase";
 
-type Props = {};
+type Props = {
+    setShirtsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 const ShirtsSection = (props: Props) => {
     const [items, setItems] = useState<item[]>([]);
@@ -20,6 +22,7 @@ const ShirtsSection = (props: Props) => {
     useEffect(() => {
         async function getData() {
             var data: item;
+            props.setShirtsLoading(true);
             const shirtRef = collection(fireDB, "products");
             const q = query(shirtRef, where("type", "==", "shirts"), limit(6));
             const querySnapshot = await getDocs(q);
@@ -36,6 +39,7 @@ const ShirtsSection = (props: Props) => {
                     return [...prevValue, data];
                 });
             });
+            props.setShirtsLoading(false);
             return;
         }
 

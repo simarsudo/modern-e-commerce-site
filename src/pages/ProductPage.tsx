@@ -9,11 +9,13 @@ import { item } from "../typeModels/models";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { addToCart } from "../store/cartSlice";
 import { addToWishlist } from "../store/wishlistSlice";
+import Loader from "../components/Loader";
 
 type Props = {};
 
 const ProductPage = (props: Props) => {
     const [firstLoad, setFirstLoad] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [item, setItem] = useState<item>();
     const [itemNotFound, setItemNotFound] = useState(false);
     const [wishlistLoading, setWishlistLoading] = useState(false);
@@ -32,6 +34,7 @@ const ProductPage = (props: Props) => {
     useEffect(() => {
         const getItemDetails = async () => {
             console.log(itemId);
+            setLoading(true);
             const docRef = doc(fireDB, "products", itemId);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
@@ -47,6 +50,7 @@ const ProductPage = (props: Props) => {
             } else {
                 setItemNotFound(true);
             }
+            setLoading(false);
         };
 
         if (!firstLoad) {
@@ -84,10 +88,15 @@ const ProductPage = (props: Props) => {
     return (
         <PageTransitionWrapper
             className={`content-wrapper ${
-                itemNotFound && "flex items-center justify-center"
+                (itemNotFound || loading) &&
+                "flex flex-grow items-center justify-center"
             }`}
         >
-            {itemNotFound ? (
+            {loading ? (
+                <div className="absolute inset-1/2">
+                    <Loader />
+                </div>
+            ) : itemNotFound ? (
                 <div className="flex flex-col items-center gap-4 text-3xl font-bold text-neutral-700">
                     <p>Product not found ;-;</p>
                     <p>

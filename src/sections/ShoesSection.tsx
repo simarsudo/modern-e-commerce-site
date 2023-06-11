@@ -7,7 +7,9 @@ import { item } from "../typeModels/models";
 import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import { fireDB } from "../Firebase";
 
-type Props = {};
+type Props = {
+    setShoesLoading: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 const ShoesSection = (props: Props) => {
     const [items, setItems] = useState<item[]>([]);
@@ -18,6 +20,7 @@ const ShoesSection = (props: Props) => {
     useEffect(() => {
         async function getData() {
             var data: item;
+            props.setShoesLoading(true);
             const shirtRef = collection(fireDB, "products");
             const q = query(shirtRef, where("type", "==", "shoes"), limit(6));
             const querySnapshot = await getDocs(q);
@@ -34,6 +37,7 @@ const ShoesSection = (props: Props) => {
                     return [...prevValue, data];
                 });
             });
+            props.setShoesLoading(false);
             return;
         }
 
