@@ -71,7 +71,7 @@ const JeansSection = (props: Props) => {
     return (
         <div>
             <div className="no-scrollbar flex overflow-x-scroll">
-                <ul className="grid w-full grid-cols-1 place-content-around gap-12 py-4 md:grid-cols-4 md:gap-12">
+                <ul className="grid w-full grid-cols-2 gap-4 py-4 md:grid-cols-lg md:gap-10">
                     {items.map((item) => {
                         return (
                             <MainCard

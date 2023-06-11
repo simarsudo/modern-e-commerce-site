@@ -71,7 +71,7 @@ const Products = (props: Props) => {
                     <Loader />
                 </div>
             ) : !error ? (
-                <ul className="grid grid-cols-md justify-items-start gap-8 bg-white p-4 md:p-10 2xl:grid-cols-lg">
+                <ul className="grid w-full grid-cols-2 gap-4 p-4 md:grid-cols-lg md:gap-10">
                     {items.map((item) => {
                         return (
                             <MainCard

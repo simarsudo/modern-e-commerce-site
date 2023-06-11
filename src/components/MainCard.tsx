@@ -61,30 +61,30 @@ const MainCard = (props: product) => {
                         className="w-full object-cover"
                     />
                 </div>
-                <div className="mx-4 flex justify-between border-b border-gray-600 p-2">
+                <div className="mx-4 flex justify-between border-b border-gray-600 py-2">
                     <p className="one-line font-semibold">{props.name}</p>
+                </div>
+                {wishlistItems.includes(props.id) && (
+                    <Link
+                        to="/wishlist"
+                        className="h-8 w-8 transition-all hover:scale-125"
+                    >
+                        <HeartIcon
+                            title="In your wishlist"
+                            className="h-8 w-8 text-rose-500"
+                        />
+                    </Link>
+                )}
+                <div className="mx-4 flex items-center justify-between py-2">
+                    <p className="font-price text-lg font-bold md:text-2xl">
+                        &#8377; {props.price}
+                    </p>
                     <span className="flex">
                         <StarIcon className="h-5 w-5 text-amber-400" />
                         <StarIcon className="h-5 w-5 text-amber-400" />
                         <StarIcon className="h-5 w-5 text-amber-400" />
                         <StarIcon className="h-5 w-5 text-amber-400" />
                     </span>
-                </div>
-                <div className="mx-4 flex items-center justify-between p-2">
-                    <p className="font-price text-2xl font-bold">
-                        &#8377; {props.price}
-                    </p>
-                    {wishlistItems.includes(props.id) && (
-                        <Link
-                            to="/wishlist"
-                            className="h-8 w-8 transition-all hover:scale-125"
-                        >
-                            <HeartIcon
-                                title="In your wishlist"
-                                className="h-8 w-8 text-rose-500"
-                            />
-                        </Link>
-                    )}
                 </div>
             </Link>
         </li>
