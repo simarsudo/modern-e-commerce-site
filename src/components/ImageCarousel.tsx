@@ -1,6 +1,7 @@
 import { collection, doc, getDoc, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { fireDB } from "../Firebase";
+import { Link } from "react-router-dom";
 
 type Props = {};
 
@@ -13,6 +14,8 @@ const ImageCarousel = (props: Props) => {
     const [firstLoad, setFirstLoad] = useState(false);
     const [Error, setError] = useState(false);
     const [images, setImages] = useState<images>();
+    const links = ["jeans", "shirts", "shoes"];
+    let no = 0;
 
     useEffect(() => {
         async function getData() {
@@ -41,17 +44,22 @@ const ImageCarousel = (props: Props) => {
 
     return (
         <div className="my-1 flex min-h-full">
-            <swiper-container navigation={true} pagination={true}>
+            <swiper-container
+                navigation={true}
+                pagination={true}
+                autoplay={true}
+            >
                 {images?.images.map((imgLink, key) => {
-                    console.log(images, "brrrr");
                     return (
                         <swiper-slide className="flex min-h-full items-center justify-center">
-                            <img
-                                key={key}
-                                src={imgLink}
-                                alt="product image"
-                                className="m-auto h-full lg:h-96 lg:w-auto"
-                            />
+                            <Link to={links[no]}>
+                                <img
+                                    key={key}
+                                    src={imgLink}
+                                    alt={`${no++}`}
+                                    className="m-auto h-full lg:h-96 lg:w-auto"
+                                />
+                            </Link>
                         </swiper-slide>
                     );
                 })}
