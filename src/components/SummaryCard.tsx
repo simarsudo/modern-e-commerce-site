@@ -12,8 +12,9 @@ import { item, product } from "../typeModels/models";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { removeFromCart } from "../store/cartSlice";
 import { addToWishlist } from "../store/wishlistSlice";
+import SelectComponent from "./SelectComponent";
 
-const SummaryCard = (props: { id: string }) => {
+const SummaryCard = (props: { id: string; size: string | number }) => {
     const [productDetails, setProductDetails] = useState<product>({
         name: "default",
         id: "default",
@@ -73,7 +74,6 @@ const SummaryCard = (props: { id: string }) => {
         const docRef = doc(fireDB, "products", props.id);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            // console.log(docSnap.data());
             const data = docSnap.data() as item;
             setProductDetails({
                 id: props.id,
@@ -112,41 +112,48 @@ const SummaryCard = (props: { id: string }) => {
             </div>
             <div className="col-start-5 col-end-12 row-start-3 row-end-4 mb-2 flex">
                 {productDetails.type === "shoes" ? (
-                    <select
-                        name="size"
-                        id="size"
-                        className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
-                    >
-                        <option value="6">Size: 6</option>
-                        <option value="7">Size: 7</option>
-                        <option value="8">Size: 8</option>
-                        <option value="9">Size: 9</option>
-                        <option value="10">Size: 10</option>
-                    </select>
+                    <div>
+                        <SelectComponent
+                            defaultValue={props.size}
+                            name="shoes"
+                            className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
+                            options={[
+                                { label: "Size: 6", value: "6" },
+                                { label: "Size: 7", value: "7" },
+                                { label: "Size: 8", value: "8" },
+                                { label: "Size: 9", value: "9" },
+                                { label: "Size: 10", value: "10" },
+                            ]}
+                        />
+                    </div>
                 ) : (
-                    <select
-                        name="size"
-                        id="size"
-                        className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
-                    >
-                        <option value="XS">XS</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="Xl">Xl</option>
-                    </select>
+                    <div>
+                        <SelectComponent
+                            defaultValue={props.size}
+                            name="others"
+                            className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
+                            options={[
+                                { label: "XS", value: "XS" },
+                                { label: "S", value: "S" },
+                                { label: "M", value: "M" },
+                                { label: "L", value: "L" },
+                                { label: "XL", value: "XL" },
+                            ]}
+                        />
+                    </div>
                 )}
-                <select
-                    name="Quantity"
-                    id="Quantity"
+                <SelectComponent
+                    defaultValue={4}
+                    name="others"
                     className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
-                >
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
+                    options={[
+                        { label: "1", value: "1" },
+                        { label: "2", value: "2" },
+                        { label: "3", value: "3" },
+                        { label: "4", value: "4" },
+                        { label: "5", value: "5" },
+                    ]}
+                />
             </div>
             <div className="col-start-5 col-end-13 row-start-4 row-end-6 flex flex-wrap items-end">
                 <button
@@ -169,54 +176,3 @@ const SummaryCard = (props: { id: string }) => {
 };
 
 export default SummaryCard;
-
-// <div className="mr-1 h-auto w-36">
-// 				<img
-// 					className="object-cover"
-// 					src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1680943740_3715930.jpg?format=webp&w=300&dpr=2"
-// 					alt="summary img"
-// 				/>
-// 			</div>
-// 			<div className="flex w-1/2 flex-col justify-between">
-// 				<div className="mr-1 flex flex-col">
-// 					<h4 className="text-xl font-bold text-neutral-800">Product Name</h4>
-// 					<h5 className="text-lg text-neutral-700">Shirt</h5>
-// 				</div>
-// 				<div className="mb-2 flex gap-4">
-// 					<select
-// 						name="size"
-// 						id="size"
-// 						className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
-// 					>
-// 						<option value="XS">XS</option>
-// 						<option value="S">S</option>
-// 						<option value="M">M</option>
-// 						<option value="L">L</option>
-// 						<option value="Xl">Xl</option>
-// 					</select>
-// 					<select
-// 						name="size"
-// 						id="size"
-// 						className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
-// 					>
-// 						<option value="1">1</option>
-// 						<option value="2">2</option>
-// 						<option value="3">3</option>
-// 						<option value="4">4</option>
-// 						<option value="5">5</option>
-// 					</select>
-// 				</div>
-// 			</div>
-// 			<div className="flex w-60 flex-col justify-between">
-// 				<h4 className="flex justify-end font-price text-lg font-semibold text-neutral-900">
-// 					&#8377; 500/-
-// 				</h4>
-// 				<div className="flex items-end justify-end">
-// 					<button className="filter-btn btn-click mx-1 max-w-min rounded bg-rose-600 text-base font-semibold hover:bg-rose-500 ">
-// 						Remove
-// 					</button>
-// 					<button className="filter-btn btn-click mx-1 max-w-min whitespace-nowrap rounded bg-sky-600 text-base font-semibold hover:bg-sky-500">
-// 						Move to Wishlist
-// 					</button>
-// 				</div>
-// 			</div>

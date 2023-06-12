@@ -40,8 +40,14 @@ const CartPage = (props: Props) => {
                         <h2 className=" w-min whitespace-nowrap font-highlight text-3xl font-bold text-neutral-800 underline">
                             Products Details
                         </h2>
-                        {cartItems.map((cartItem) => {
-                            return <SummaryCard key={cartItem} id={cartItem} />;
+                        {Object.keys(cartItems).map((item) => {
+                            return (
+                                <SummaryCard
+                                    key={item}
+                                    id={item}
+                                    size={cartItems[item]}
+                                />
+                            );
                         })}
                     </div>
                     <div className="container flex h-full flex-grow flex-col justify-between rounded border-2 border-bg-dark p-2 px-0 md:w-1/3">
