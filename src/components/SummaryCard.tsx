@@ -61,7 +61,6 @@ const SummaryCard = (props: { id: string; size: string | number }) => {
                 });
                 dispatch(addToWishlist(props.id));
                 dispatch(removeFromCart(props.id));
-                console.log();
             });
         } catch (e) {
             console.log(e);
@@ -110,38 +109,10 @@ const SummaryCard = (props: { id: string; size: string | number }) => {
                     &#8377; {productDetails.price}
                 </h4>
             </div>
-            <div className="col-start-5 col-end-12 row-start-3 row-end-4 mb-2 flex">
-                {productDetails.type === "shoes" ? (
-                    <div>
-                        <SelectComponent
-                            defaultValue={props.size}
-                            name="shoes"
-                            className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
-                            options={[
-                                { label: "Size: 6", value: "6" },
-                                { label: "Size: 7", value: "7" },
-                                { label: "Size: 8", value: "8" },
-                                { label: "Size: 9", value: "9" },
-                                { label: "Size: 10", value: "10" },
-                            ]}
-                        />
-                    </div>
-                ) : (
-                    <div>
-                        <SelectComponent
-                            defaultValue={props.size}
-                            name="others"
-                            className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
-                            options={[
-                                { label: "XS", value: "XS" },
-                                { label: "S", value: "S" },
-                                { label: "M", value: "M" },
-                                { label: "L", value: "L" },
-                                { label: "XL", value: "XL" },
-                            ]}
-                        />
-                    </div>
-                )}
+            <div className="col-start-5 col-end-12 row-start-3 row-end-4 mb-2 flex gap-4">
+                <div className="flex h-10 w-24 items-center justify-center rounded border border-neutral-400 px-2">
+                    Size: {props.size}
+                </div>
                 <SelectComponent
                     defaultValue={4}
                     name="others"

@@ -22,21 +22,17 @@ const SelectComponent = React.forwardRef(
         });
 
         return (
-            <>
-                {typeof defaultValue + defaultValue}
-
-                <select
-                    name={name}
-                    id={name}
-                    ref={ref}
-                    className={className}
-                    defaultValue={sizeString}
-                >
-                    {selectOptions}
-                </select>
-            </>
+            <select
+                name={name}
+                id={name}
+                ref={ref}
+                className={className}
+                defaultValue={sizeString}
+            >
+                {selectOptions}
+            </select>
         );
     }
 );
 
-export default React.memo(SelectComponent);
+export default SelectComponent;

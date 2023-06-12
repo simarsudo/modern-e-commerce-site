@@ -59,7 +59,7 @@ const ShoeSize = (props: Props) => {
                 <option value="S">Size: S</option>
                 <option value="M">Size: M</option>
                 <option value="L">Size: L</option>
-                <option value="Xl">Size: Xl</option>
+                <option value="XL">Size: XL</option>
             </select>
         </div>
     );
