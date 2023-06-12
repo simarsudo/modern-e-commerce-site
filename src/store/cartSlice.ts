@@ -4,29 +4,36 @@ import type { RootState } from "./store";
 import { item } from "../typeModels/models";
 
 type cartType = {
-    cartItems: string[];
+    cartItems: {
+        [key: string]: number | string;
+    };
 };
 
 const initialState: cartType = {
-    cartItems: [],
+    cartItems: {},
 };
 
 export const cartSlice = createSlice({
     name: "cart",
     initialState,
     reducers: {
-        addToCart: (state, action: PayloadAction<string>) => {
-            state.cartItems.push(action.payload);
+        addToCart: (
+            state,
+            action: PayloadAction<{ [key: string]: number | string }>
+        ) => {
+            state.cartItems[action.payload.id] = action.payload.size;
         },
         removeFromCart: (state, action: PayloadAction<string>) => {
-            const index = state.cartItems.indexOf(action.payload);
-            state.cartItems.splice(index, 1);
+            delete state.cartItems[action.payload];
         },
-        createNewCart: (state, action: PayloadAction<string[]>) => {
+        createNewCart: (
+            state,
+            action: PayloadAction<{ [key: string]: number | string }>
+        ) => {
             state.cartItems = action.payload;
         },
         emptyUserCart: (state) => {
-            state.cartItems = [];
+            state.cartItems = {};
         },
     },
 });

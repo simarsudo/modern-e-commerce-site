@@ -4,7 +4,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import ImagesComponent from "../components/ImagesComponent";
 import ShoeSize from "../components/ShoeSize";
 import { fireDB } from "../Firebase";
-import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { doc, getDoc, updateDoc, arrayUnion, setDoc } from "firebase/firestore";
 import { item } from "../typeModels/models";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { addToCart } from "../store/cartSlice";
@@ -73,10 +73,14 @@ const ProductPage = (props: Props) => {
                     dispatch(addToWishlist(itemId));
                 } else if (option === "cart") {
                     setCartlistLoading(true);
-                    await updateDoc(docRef, {
-                        cart: { [itemId]: size },
-                    });
-                    dispatch(addToCart(itemId));
+                    await setDoc(
+                        docRef,
+                        {
+                            cart: { [itemId]: size },
+                        },
+                        { merge: true }
+                    );
+                    dispatch(addToCart({ [itemId]: size }));
                 }
             } catch (error) {
                 console.log(error);
