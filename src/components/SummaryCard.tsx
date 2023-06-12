@@ -21,6 +21,7 @@ const SummaryCard = (props: { id: string; size: string | number }) => {
         price: 100,
         type: "idk",
     });
+    const [firstLoad, setFirstLoad] = useState(false);
     const currentUser = useAppSelector((state) => state.user);
     const userWishlist = useAppSelector(
         (state) => state.wishlist.wishlistItems
@@ -83,6 +84,7 @@ const SummaryCard = (props: { id: string; size: string | number }) => {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
             const data = docSnap.data() as item;
+            console.log("dispatched request");
             setProductDetails({
                 id: props.id,
                 imgLink: data.images[0],
@@ -90,16 +92,19 @@ const SummaryCard = (props: { id: string; size: string | number }) => {
                 price: data.price,
                 type: data.type,
             });
+            setFirstLoad(true);
         } else {
+            console.log(docSnap.data());
             console.log("iuuuuffff");
         }
     };
 
     useEffect(() => {
-        if (currentUser.isAuthenticated) {
+        if (!firstLoad) {
+            console.log("request Data");
             fetchProductDetails();
         }
-    }, [currentUser]);
+    }, []);
 
     return (
         <div className="grid h-60 max-h-min grid-cols-summaryCard grid-rows-summaryCard gap-1 border-b-2 pb-2">
