@@ -14,8 +14,7 @@ type Props = {};
 
 const CartPage = (props: Props) => {
     const cartItems = useAppSelector((state) => state.cart.cartItems);
-
-    useEffect(() => {}, [cartItems]);
+    console.log(Object.keys(cartItems));
 
     return (
         <PageTransitionWrapper className="content-wrapper flex h-full items-stretch justify-center">
@@ -29,11 +28,14 @@ const CartPage = (props: Props) => {
                         </h2>
                         {Object.keys(cartItems).map((item) => {
                             return (
-                                <SummaryCard
-                                    key={item}
-                                    id={item}
-                                    size={cartItems[item]}
-                                />
+                                <>
+                                    {/* {cartItems} */}
+                                    <SummaryCard
+                                        key={item}
+                                        id={item}
+                                        size={cartItems[item]}
+                                    />
+                                </>
                             );
                         })}
                     </div>

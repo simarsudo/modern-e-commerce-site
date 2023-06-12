@@ -19,9 +19,10 @@ export const cartSlice = createSlice({
     reducers: {
         addToCart: (
             state,
-            action: PayloadAction<{ [key: string]: number | string }>
+            action: PayloadAction<[string, string | number]>
         ) => {
-            state.cartItems[action.payload.id] = action.payload.size;
+            console.log(action);
+            state.cartItems[action.payload[0]] = action.payload[1];
         },
         removeFromCart: (state, action: PayloadAction<string>) => {
             delete state.cartItems[action.payload];

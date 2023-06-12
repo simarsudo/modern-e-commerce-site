@@ -80,7 +80,7 @@ const ProductPage = (props: Props) => {
                         },
                         { merge: true }
                     );
-                    dispatch(addToCart({ [itemId]: size }));
+                    dispatch(addToCart([itemId, size]));
                 }
             } catch (error) {
                 console.log(error);
