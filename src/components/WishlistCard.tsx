@@ -13,6 +13,7 @@ import { product, item } from "../typeModels/models";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { removeFromWishlist } from "../store/wishlistSlice";
 import { addToCart } from "../store/cartSlice";
+import { Link } from "react-router-dom";
 
 type Props = {
     id: string;
@@ -27,6 +28,7 @@ const WishlistCard = (props: Props) => {
         type: "idk",
     });
     const currentUser = useAppSelector((state) => state.user);
+    const userCart = useAppSelector((state) => state.cart.cartItems);
     const dispatch = useAppDispatch();
     const [loadingDelete, setLoadingDelete] = useState(false);
     const [movingToCart, setMovingToCart] = useState(false);
@@ -44,33 +46,6 @@ const WishlistCard = (props: Props) => {
             console.log(e);
         } finally {
             setLoadingDelete(false);
-        }
-    };
-
-    const moveToCart = async () => {
-        const qRef = doc(fireDB, "users", currentUser.uid);
-        setMovingToCart(true);
-        try {
-            await runTransaction(fireDB, async (transaction) => {
-                const qDoc = await transaction.get(qRef);
-                if (!qDoc.exists()) {
-                    throw "Document not Exist";
-                }
-                // console.log(qDoc.data());
-                transaction.update(qRef, {
-                    wishlist: arrayRemove(props.id),
-                });
-                transaction.update(qRef, {
-                    cart: arrayUnion(props.id),
-                });
-                dispatch(removeFromWishlist(props.id));
-                dispatch(addToCart(props.id));
-                console.log();
-            });
-        } catch (e) {
-            console.log(e);
-        } finally {
-            setMovingToCart(false);
         }
     };
 
@@ -98,7 +73,10 @@ const WishlistCard = (props: Props) => {
     }, [currentUser]);
 
     return (
-        <div className="col-span-1 overflow-hidden rounded-xl bg-bg-dark text-white shadow-lg">
+        <Link
+            to={`/${productDetails.type}/${productDetails.id}`}
+            className="col-span-1 overflow-hidden rounded-xl bg-bg-dark text-white shadow-lg shadow-neutral-700 transition-transform hover:-translate-y-1"
+        >
             <div className="overflow-hidden">
                 <img
                     className="object-cover"
@@ -117,14 +95,6 @@ const WishlistCard = (props: Props) => {
                 </div>
                 <div className="flex items-center gap-2">
                     <button
-                        title="Move to cart"
-                        disabled={movingToCart}
-                        onClick={moveToCart}
-                        className="filter-btn flex items-center justify-center rounded-md bg-teal-500 hover:-translate-y-1 hover:bg-teal-400 disabled:bg-rose-500"
-                    >
-                        <ShoppingCartIcon className="h-5 w-5" />
-                    </button>
-                    <button
                         title="Remove from Wishlist"
                         disabled={loadingDelete}
                         onClick={deleteHandler}
@@ -134,7 +104,7 @@ const WishlistCard = (props: Props) => {
                     </button>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
