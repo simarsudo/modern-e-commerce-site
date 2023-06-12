@@ -1,5 +1,4 @@
 import {
-    arrayRemove,
     arrayUnion,
     doc,
     getDoc,
@@ -23,6 +22,10 @@ const SummaryCard = (props: { id: string; size: string | number }) => {
         type: "idk",
     });
     const currentUser = useAppSelector((state) => state.user);
+    const userWishlist = useAppSelector(
+        (state) => state.wishlist.wishlistItems
+    );
+    const userCart = useAppSelector((state) => state.cart.cartItems);
     const dispatch = useAppDispatch();
     const [loadingDelete, setLoadingDelete] = useState(false);
     const [movingToWishlist, setMovingToWishlist] = useState(false);
@@ -30,15 +33,18 @@ const SummaryCard = (props: { id: string; size: string | number }) => {
     const deleteHandler = async () => {
         const q = doc(fireDB, "users", currentUser.uid);
         setLoadingDelete(true);
+        let temp = { ...userCart };
+        delete temp[props.id];
+        console.log(temp);
         try {
-            console.log("deleting data");
             await updateDoc(q, {
-                cart: arrayRemove(props.id),
+                cart: { ...temp },
             });
-            dispatch(removeFromCart(props.id));
+            console.log("deleting data");
         } catch (e) {
             console.log(e);
         } finally {
+            dispatch(removeFromCart(props.id));
             setLoadingDelete(false);
         }
     };
@@ -46,6 +52,9 @@ const SummaryCard = (props: { id: string; size: string | number }) => {
     const moveToWishlist = async () => {
         const qRef = doc(fireDB, "users", currentUser.uid);
         setMovingToWishlist(true);
+        let tempUserCart = { ...userCart };
+
+        delete tempUserCart[props.id];
         try {
             await runTransaction(fireDB, async (transaction) => {
                 const qDoc = await transaction.get(qRef);
@@ -57,15 +66,15 @@ const SummaryCard = (props: { id: string; size: string | number }) => {
                     wishlist: arrayUnion(props.id),
                 });
                 transaction.update(qRef, {
-                    cart: arrayRemove(props.id),
+                    cart: { ...tempUserCart },
                 });
-                dispatch(addToWishlist(props.id));
-                dispatch(removeFromCart(props.id));
             });
         } catch (e) {
             console.log(e);
         } finally {
             setMovingToWishlist(false);
+            dispatch(addToWishlist(props.id));
+            dispatch(removeFromCart(props.id));
         }
     };
 
