@@ -4,13 +4,21 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import ImagesComponent from "../components/ImagesComponent";
 import ShoeSize from "../components/ShoeSize";
 import { fireDB } from "../Firebase";
-import { doc, getDoc, updateDoc, arrayUnion, setDoc } from "firebase/firestore";
+import {
+    doc,
+    getDoc,
+    updateDoc,
+    arrayUnion,
+    setDoc,
+    collection,
+} from "firebase/firestore";
 import { item } from "../typeModels/models";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { addToCart } from "../store/cartSlice";
 import { addToWishlist } from "../store/wishlistSlice";
 import Loader from "../components/Loader";
 import Footer from "../components/Footer";
+import { product } from "../typeModels/models";
 
 type Props = {};
 
@@ -63,6 +71,7 @@ const ProductPage = (props: Props) => {
     // add to user card or wishlist
     const btnHandlers = async (option: "cart" | "wishlist") => {
         if (!wishlistLoading || !cartlistLoading) {
+            const productRef = doc(fireDB, "products", itemId);
             const docRef = doc(fireDB, "users", currentUser.uid);
             try {
                 if (option === "wishlist") {

@@ -17,21 +17,16 @@ import { Link } from "react-router-dom";
 
 type Props = {
     id: string;
+    name: string;
+    type: string;
+    price: number;
+    imgLink: string;
 };
 
 const WishlistCard = (props: Props) => {
-    const [productDetails, setProductDetails] = useState<product>({
-        name: "default",
-        id: "default",
-        imgLink: "default",
-        price: 100,
-        type: "idk",
-    });
     const currentUser = useAppSelector((state) => state.user);
-    const userCart = useAppSelector((state) => state.cart.cartItems);
     const dispatch = useAppDispatch();
     const [loadingDelete, setLoadingDelete] = useState(false);
-    const [movingToCart, setMovingToCart] = useState(false);
 
     // delete item from cart
     const deleteHandler = async () => {
@@ -49,48 +44,21 @@ const WishlistCard = (props: Props) => {
         }
     };
 
-    const fetchProductDetails = async () => {
-        const docRef = doc(fireDB, "products", props.id);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            const data = docSnap.data() as item;
-            setProductDetails({
-                id: props.id,
-                imgLink: data.images[0],
-                name: data.name,
-                price: data.price,
-                type: data.type,
-            });
-        } else {
-            console.log("iuuuuffff");
-        }
-    };
-
-    useEffect(() => {
-        if (currentUser.isAuthenticated) {
-            fetchProductDetails();
-        }
-    }, [currentUser]);
-
     return (
         <Link
-            to={`/${productDetails.type}/${productDetails.id}`}
+            to={`/${props.type}/${props.id}`}
             className="col-span-1 overflow-hidden rounded-xl bg-bg-dark text-white shadow-lg shadow-neutral-700 transition-transform hover:-translate-y-1"
         >
             <div className="overflow-hidden">
-                <img
-                    className="object-cover"
-                    src={productDetails.imgLink}
-                    alt=""
-                />
+                <img className="object-cover" src={props.imgLink} alt="" />
             </div>
             <div className="flex flex-col justify-evenly gap-2 p-2">
                 <div className="flex items-center justify-between font-bold">
                     <h3 className="one-line w-2/3 overflow-hidden text-ellipsis px-1 text-lg font-bold">
-                        {productDetails.name}
+                        {props.name}
                     </h3>
                     <h4 className="w-1/3 min-w-min text-ellipsis whitespace-nowrap px-1 text-end text-base font-light capitalize">
-                        {productDetails.type}
+                        {props.type}
                     </h4>
                 </div>
                 <div className="flex items-center gap-2">

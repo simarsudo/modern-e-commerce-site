@@ -9,23 +9,31 @@ import React, { useEffect, useState } from "react";
 import { fireDB } from "../Firebase";
 import { item, product } from "../typeModels/models";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { removeFromCart } from "../store/cartSlice";
+import {
+    removeFromCart,
+    addToTotalPrice,
+    reduceFromTotalPrice,
+    resetTotalPrice,
+} from "../store/cartSlice";
 import { addToWishlist } from "../store/wishlistSlice";
 import SelectComponent from "./SelectComponent";
 
-const SummaryCard = (props: { id: string; size: string | number }) => {
-    const [productDetails, setProductDetails] = useState<product>({
-        name: "default",
-        id: "default",
-        imgLink: "default",
-        price: 100,
-        type: "idk",
-    });
-    const [firstLoad, setFirstLoad] = useState(false);
+type Props = {
+    id: string;
+    size: string | number;
+    name: string;
+    type: string;
+    price: number;
+    imgLink: string;
+};
+
+const SummaryCard = (props: Props) => {
     const currentUser = useAppSelector((state) => state.user);
     const userWishlist = useAppSelector(
         (state) => state.wishlist.wishlistItems
     );
+    const cartTotalPrice = useAppSelector((state) => state.cart.cartTotalPrice);
+    const [totalCalculated, setTotalcalculated] = useState(false);
     const userCart = useAppSelector((state) => state.cart.cartItems);
     const dispatch = useAppDispatch();
     const [loadingDelete, setLoadingDelete] = useState(false);
@@ -47,6 +55,7 @@ const SummaryCard = (props: { id: string; size: string | number }) => {
         } finally {
             dispatch(removeFromCart(props.id));
             setLoadingDelete(false);
+            dispatch(resetTotalPrice());
         }
     };
 
@@ -79,48 +88,21 @@ const SummaryCard = (props: { id: string; size: string | number }) => {
         }
     };
 
-    const fetchProductDetails = async () => {
-        const docRef = doc(fireDB, "products", props.id);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            const data = docSnap.data() as item;
-            console.log("dispatched request");
-            setProductDetails({
-                id: props.id,
-                imgLink: data.images[0],
-                name: data.name,
-                price: data.price,
-                type: data.type,
-            });
-            setFirstLoad(true);
-        } else {
-            console.log(docSnap.data());
-            console.log("iuuuuffff");
-        }
-    };
-
-    useEffect(() => {
-        if (!firstLoad) {
-            console.log("request Data");
-            fetchProductDetails();
-        }
-    }, []);
-
     return (
         <div className="grid h-60 max-h-min grid-cols-summaryCard grid-rows-summaryCard gap-1 border-b-2 pb-2">
             <div className="col-start-1 col-end-5 row-span-full mr-1 h-full w-auto object-cover">
                 <img
                     className="h-full w-auto object-cover"
-                    src={productDetails.imgLink}
+                    src={props.imgLink}
                     alt="summary img"
                 />
             </div>
             <div className="col-start-5 col-end-13 row-start-1 row-end-3 flex h-min flex-wrap justify-between">
                 <h4 className="mr-1 mb-1 h-min min-w-min whitespace-nowrap text-xl font-bold text-neutral-800">
-                    {productDetails.name}
+                    {props.name}
                 </h4>
                 <h4 className="h-min whitespace-nowrap font-price text-lg font-semibold text-neutral-700">
-                    &#8377; {productDetails.price}
+                    &#8377; {props.price}
                 </h4>
             </div>
             <div className="col-start-5 col-end-12 row-start-3 row-end-4 mb-2 flex gap-4">
@@ -128,7 +110,7 @@ const SummaryCard = (props: { id: string; size: string | number }) => {
                     Size: {props.size}
                 </div>
                 <SelectComponent
-                    defaultValue={4}
+                    defaultValue={1}
                     name="others"
                     className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
                     options={[

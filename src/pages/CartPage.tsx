@@ -4,17 +4,74 @@ import SummaryCard from "../components/SummaryCard";
 import PaymentPriceCard from "../components/PaymentPriceCard";
 import { Link } from "react-router-dom";
 import SVGBackground from "../components/SVGBackground";
-import { useAppSelector } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { item, product } from "../typeModels/models";
-import { doc } from "firebase/firestore";
+import {
+    collection,
+    doc,
+    documentId,
+    getDocs,
+    query,
+    where,
+} from "firebase/firestore";
 import { fireDB } from "../Firebase";
 import EmptyCartSection from "../sections/EmptyCartSection";
+import { resetTotalPrice } from "../store/cartSlice";
+
+interface products extends product {
+    id: string;
+}
 
 type Props = {};
 
 const CartPage = (props: Props) => {
     const cartItems = useAppSelector((state) => state.cart.cartItems);
-    console.log(Object.keys(cartItems));
+    const cartTotal = useAppSelector((state) => state.cart.cartTotalPrice);
+    const [products, setProducts] = useState<products[]>([]);
+    const [firstLoad, setFirstLoad] = useState(false);
+    const dispatch = useAppDispatch();
+
+    const getWishlistData = async () => {
+        const tempCartItems = { ...cartItems };
+        try {
+            const q = query(
+                collection(fireDB, "products"),
+                where(documentId(), "in", Object.keys(tempCartItems))
+            );
+            const productSnaps = await getDocs(q);
+
+            productSnaps.forEach((doc) => {
+                console.log(doc.data());
+                setProducts((prev) => {
+                    const temp = { ...doc.data() };
+                    const data: products = {
+                        id: doc.id,
+                        imgLink: temp.images,
+                        name: temp.name,
+                        price: temp.price,
+                        type: temp.type,
+                    };
+                    prev.push(data);
+                    return prev;
+                });
+            });
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setFirstLoad(true);
+        }
+    };
+
+    useEffect(() => {
+        if (!firstLoad) {
+            console.log("fetching data");
+            getWishlistData();
+        }
+    }, []);
+
+    // useEffect(() => {
+    //     dispatch(resetTotalPrice());
+    // }, []);
 
     return (
         <PageTransitionWrapper className="content-wrapper flex h-full items-stretch justify-center">
@@ -26,14 +83,17 @@ const CartPage = (props: Props) => {
                         <h2 className=" w-min whitespace-nowrap font-highlight text-3xl font-bold text-neutral-800 underline">
                             Products Details
                         </h2>
-                        {Object.keys(cartItems).map((item) => {
+                        {products.map((product) => {
                             return (
                                 <>
-                                    {/* {cartItems} */}
                                     <SummaryCard
-                                        key={item}
-                                        id={item}
-                                        size={cartItems[item]}
+                                        key={product.id}
+                                        id={product.id}
+                                        size={cartItems[product.id]}
+                                        imgLink={product.imgLink}
+                                        name={product.name}
+                                        price={product.price}
+                                        type={product.type}
                                     />
                                 </>
                             );
@@ -44,9 +104,15 @@ const CartPage = (props: Props) => {
                             <h2 className="mx-6 w-min whitespace-nowrap font-highlight text-3xl font-bold text-neutral-800 underline">
                                 Payment Details
                             </h2>
-                            <PaymentPriceCard name="Cart Total" price={500} />
-                            <PaymentPriceCard name="Discount" price={100} />
-                            <PaymentPriceCard name="GST" price={50} />
+                            <PaymentPriceCard
+                                name="Cart Total"
+                                price={cartTotal}
+                            />
+                            <PaymentPriceCard name="Discount" price={0} />
+                            <PaymentPriceCard
+                                name="GST"
+                                price={Math.round((cartTotal * 18) / 100)}
+                            />
                             <PaymentPriceCard
                                 name="Shipping Charges"
                                 price={50}
@@ -57,7 +123,8 @@ const CartPage = (props: Props) => {
                                 Total
                             </p>
                             <p className="whitespace-nowrap font-price">
-                                &#8377; 700/-
+                                &#8377;{" "}
+                                {Math.round((cartTotal * 18) / 100) + cartTotal}
                             </p>
                         </div>
                         <div className="px-2">
