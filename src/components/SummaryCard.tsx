@@ -13,7 +13,6 @@ import {
     removeFromCart,
     addToTotalPrice,
     reduceFromTotalPrice,
-    resetTotalPrice,
 } from "../store/cartSlice";
 import { addToWishlist } from "../store/wishlistSlice";
 import SelectComponent from "./SelectComponent";
@@ -35,6 +34,7 @@ const SummaryCard = (props: Props) => {
     );
     const cartTotalPrice = useAppSelector((state) => state.cart.cartTotalPrice);
     const [totalCalculated, setTotalcalculated] = useState(false);
+    const [inputQuantity, setInputQuantity] = useState(1);
     const userCart = useAppSelector((state) => state.cart.cartItems);
     const dispatch = useAppDispatch();
     const [loadingDelete, setLoadingDelete] = useState(false);
@@ -50,13 +50,23 @@ const SummaryCard = (props: Props) => {
             await updateDoc(q, {
                 cart: { ...temp },
             });
-            console.log("deleting data");
+            props.setProducts((prev) => {
+                let index = 0;
+                prev.forEach((product) => {
+                    if (product.id === props.id) {
+                        prev.splice(index, 1);
+                    } else {
+                        index++;
+                    }
+                });
+                return prev;
+            });
+            dispatch(reduceFromTotalPrice(props.id));
+            dispatch(removeFromCart(props.id));
         } catch (e) {
             console.log(e);
         } finally {
-            dispatch(removeFromCart(props.id));
             setLoadingDelete(false);
-            dispatch(resetTotalPrice());
         }
     };
 
@@ -80,10 +90,7 @@ const SummaryCard = (props: Props) => {
                     cart: { ...tempUserCart },
                 });
             });
-        } catch (e) {
-            console.log(e);
-        } finally {
-            setMovingToWishlist(false);
+            dispatch(reduceFromTotalPrice(props.id));
             props.setProducts((prev) => {
                 let index = 0;
                 prev.forEach((product) => {
@@ -97,8 +104,16 @@ const SummaryCard = (props: Props) => {
             });
             dispatch(addToWishlist(props.id));
             dispatch(removeFromCart(props.id));
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setMovingToWishlist(false);
         }
     };
+
+    useEffect(() => {
+        dispatch(addToTotalPrice([props.id, props.price * inputQuantity]));
+    }, [inputQuantity]);
 
     return (
         <div className="grid h-60 max-h-min grid-cols-summaryCard grid-rows-summaryCard gap-1 border-b-2 pb-2">

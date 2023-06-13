@@ -8,8 +8,8 @@ type cartType = {
     cartItems: {
         [key: string]: number | string;
     };
-    cartItemsDetails: {
-        [id: string]: product;
+    priceOfItems: {
+        [id: string]: number;
     };
     cartTotalPrice: number;
 };
@@ -17,7 +17,7 @@ type cartType = {
 const initialState: cartType = {
     cartItems: {},
     cartTotalPrice: 0,
-    cartItemsDetails: {},
+    priceOfItems: {},
 };
 
 export const cartSlice = createSlice({
@@ -32,7 +32,6 @@ export const cartSlice = createSlice({
         },
         removeFromCart: (state, action: PayloadAction<string>) => {
             delete state.cartItems[action.payload];
-            delete state.cartItemsDetails[action.payload];
         },
         createNewCart: (
             state,
@@ -43,17 +42,24 @@ export const cartSlice = createSlice({
         emptyUserCart: (state) => {
             state.cartItems = {};
         },
-        addToTotalPrice: (state, action: PayloadAction<number>) => {
-            console.log(
-                "total " + state.cartTotalPrice + " adding " + action.payload
-            );
-            state.cartTotalPrice += action.payload;
-        },
-        reduceFromTotalPrice: (state, action: PayloadAction<number>) => {
-            state.cartTotalPrice -= action.payload;
-        },
-        resetTotalPrice: (state) => {
+        addToTotalPrice: (
+            state,
+            action: PayloadAction<[id: string, price: number]>
+        ) => {
+            state.priceOfItems[action.payload[0]] = action.payload[1];
             state.cartTotalPrice = 0;
+            const tempItems = { ...state.priceOfItems };
+            Object.keys(tempItems).map((item) => {
+                state.cartTotalPrice += state.priceOfItems[item];
+            });
+        },
+        reduceFromTotalPrice: (state, action: PayloadAction<string>) => {
+            delete state.priceOfItems[action.payload];
+            state.cartTotalPrice = 0;
+            const tempItems = { ...state.priceOfItems };
+            Object.keys(tempItems).map((item) => {
+                state.cartTotalPrice += state.priceOfItems[item];
+            });
         },
     },
 });
@@ -65,7 +71,6 @@ export const {
     emptyUserCart,
     addToTotalPrice,
     reduceFromTotalPrice,
-    resetTotalPrice,
 } = cartSlice.actions;
 export const SelectUser = (state: RootState) => state.cart;
 export default cartSlice.reducer;

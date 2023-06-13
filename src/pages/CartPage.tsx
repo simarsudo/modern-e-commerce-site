@@ -16,7 +16,6 @@ import {
 } from "firebase/firestore";
 import { fireDB } from "../Firebase";
 import EmptyCartSection from "../sections/EmptyCartSection";
-import { resetTotalPrice } from "../store/cartSlice";
 
 interface products extends product {
     id: string;
@@ -63,15 +62,11 @@ const CartPage = (props: Props) => {
     };
 
     useEffect(() => {
-        if (!firstLoad) {
+        if (!firstLoad && Object.keys(cartItems).length > 0) {
             console.log("fetching data");
             getWishlistData();
         }
-    }, []);
-
-    // useEffect(() => {
-    //     dispatch(resetTotalPrice());
-    // }, []);
+    }, [cartItems]);
 
     return (
         <PageTransitionWrapper className="content-wrapper flex h-full items-stretch justify-center">
