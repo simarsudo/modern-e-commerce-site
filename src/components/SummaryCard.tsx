@@ -25,6 +25,7 @@ type Props = {
     type: string;
     price: number;
     imgLink: string;
+    setProducts: React.Dispatch<React.SetStateAction<product[]>>;
 };
 
 const SummaryCard = (props: Props) => {
@@ -83,6 +84,17 @@ const SummaryCard = (props: Props) => {
             console.log(e);
         } finally {
             setMovingToWishlist(false);
+            props.setProducts((prev) => {
+                let index = 0;
+                prev.forEach((product) => {
+                    if (product.id === props.id) {
+                        prev.splice(index, 1);
+                    } else {
+                        index++;
+                    }
+                });
+                return prev;
+            });
             dispatch(addToWishlist(props.id));
             dispatch(removeFromCart(props.id));
         }

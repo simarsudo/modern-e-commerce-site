@@ -94,6 +94,7 @@ const CartPage = (props: Props) => {
                                         name={product.name}
                                         price={product.price}
                                         type={product.type}
+                                        setProducts={setProducts}
                                     />
                                 </>
                             );
