@@ -61,6 +61,11 @@ export const cartSlice = createSlice({
                 state.cartTotalPrice += state.priceOfItems[item];
             });
         },
+        placeOrderReset: (state) => {
+            state.cartItems = {};
+            state.cartTotalPrice = 0;
+            state.priceOfItems = {};
+        },
     },
 });
 
@@ -71,6 +76,7 @@ export const {
     emptyUserCart,
     addToTotalPrice,
     reduceFromTotalPrice,
+    placeOrderReset,
 } = cartSlice.actions;
 export const SelectUser = (state: RootState) => state.cart;
 export default cartSlice.reducer;

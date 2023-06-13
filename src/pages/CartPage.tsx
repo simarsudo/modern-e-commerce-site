@@ -12,10 +12,13 @@ import {
     documentId,
     getDocs,
     query,
+    setDoc,
     where,
 } from "firebase/firestore";
 import { fireDB } from "../Firebase";
 import EmptyCartSection from "../sections/EmptyCartSection";
+import OrderedPlacedSection from "../sections/OrderedPlacedSection";
+import { placeOrderReset } from "../store/cartSlice";
 
 interface products extends product {
     id: string;
@@ -28,7 +31,10 @@ const CartPage = (props: Props) => {
     const cartTotal = useAppSelector((state) => state.cart.cartTotalPrice);
     const [products, setProducts] = useState<products[]>([]);
     const [firstLoad, setFirstLoad] = useState(false);
+    const [orderPlaced, setOrderPlaced] = useState(false);
+    const currentUser = useAppSelector((state) => state.user);
     const dispatch = useAppDispatch();
+    const [loading, setLoading] = useState(false);
 
     const getWishlistData = async () => {
         const tempCartItems = { ...cartItems };
@@ -67,6 +73,32 @@ const CartPage = (props: Props) => {
             getWishlistData();
         }
     }, [cartItems]);
+
+    const placeOrderHandler = async () => {
+        if (!loading) {
+            try {
+                setLoading(true);
+                const docRef = doc(fireDB, "users", currentUser.uid);
+                await setDoc(
+                    docRef,
+                    {
+                        cart: {},
+                    },
+                    { merge: true }
+                );
+                dispatch(placeOrderReset());
+                setOrderPlaced(true);
+            } catch (e) {
+                console.log(e);
+            } finally {
+                setLoading(false);
+            }
+        }
+    };
+
+    if (orderPlaced) {
+        return <OrderedPlacedSection />;
+    }
 
     return (
         <PageTransitionWrapper className="content-wrapper flex h-full items-stretch justify-center">
@@ -124,7 +156,11 @@ const CartPage = (props: Props) => {
                             </p>
                         </div>
                         <div className="px-2">
-                            <button className="filter-btn btn-click bg-sky-600 hover:bg-sky-500">
+                            <button
+                                onClick={placeOrderHandler}
+                                disabled={loading}
+                                className="filter-btn btn-click bg-sky-600 hover:bg-sky-500 disabled:bg-rose-500"
+                            >
                                 Place Order
                             </button>
                         </div>
