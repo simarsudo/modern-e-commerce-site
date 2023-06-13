@@ -140,6 +140,8 @@ const SummaryCard = (props: Props) => {
                     defaultValue={1}
                     name="others"
                     className="mr-1 h-10 w-min bg-white shadow-none hover:cursor-pointer focus:border-bg-dark focus:shadow-none"
+                    itemId={props.id}
+                    itemPrice={props.price}
                     options={[
                         { label: "1", value: "1" },
                         { label: "2", value: "2" },
